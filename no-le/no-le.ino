@@ -19,7 +19,9 @@ int kpr_nole = 0, krl_nole = 0;
 float brnon, brnoff, brnon2, brnoff2, brnon3, brnoff3, brn_ao;
 /* ---------------------------------------------------------------------------------------------------- */ 
 int led_1 = 13, led_2 = 12, led_3 = 11, led_4 = 10, led_5 = 9, led_6 = 8;
-int fa1 = 1,    fa2 = 1,    fa3 = 1,    fa4 = 1,    fa5 = 1,   fa6 = 1;
+int fa1 = 1,     fa2 = 1,     fa3 = 1,     fa4 = 1,     fa5 = 1,    fa6 = 1;
+int fa1b = 1,    fa2b = 1,    fa3b = 1,    fa4b = 1,    fa5b = 1,   fa6b = 1;
+int fa1c = 1,    fa2c = 1,    fa3c = 1,    fa4c = 1,    fa5c = 1,   fa6c = 1;
 int fa_ao_1 = 1,fa_ao_2 = 1,fa_ao_3 = 1;
 /* ---------------------------------------------------------------------------------------------------- */
 float brn1 = 0,    brn2 = 0,    brn3 = 0,    brn4 = 0,    brn5 = 0,    brn6 = 0;
@@ -592,9 +594,10 @@ void effect_cac() {
     if ( ctn1b == 1 ) {
       if(jikan - tg_ht1 >= tanso1) {
         tg_ht1 = millis();
-        brn1 -= fa_t_cl_1;
-        if ( brn1 <= 0 ) { brn1 = 0; ctn1b = 0;}
-        if (tanso1 >= 21) {
+        if ( brn1 <= brnon && fa1 == 1 ) { brn1 = brn1 + (fa_c_cl_1 * 5); if ( brn1 >= brnon ) fa1 = 2; }
+        if ( fa1 == 2) { brn1 = brn1 - fa_t_cl_1; }
+        if ( brn1 <= 0 ) {brn1 = 0; ctn1b = 0; kpr = 0; krl = 0;}
+        if ( tanso1 >= 21) {
           if ( stt_ts1 == 0 ){stt_ts1 = 1; analogWrite(led_1, brn1);}
           else {analogWrite(led_1, LOW); stt_ts1 = 0;}
         }
@@ -606,9 +609,10 @@ void effect_cac() {
     if ( ctn2b == 1 ) {
       if(jikan - tg_ht2 >= tanso2) {
         tg_ht2 = millis();
-        brn2 -= fa_t_cl_2;
-        if ( brn2 <= 0 ) { brn2 = 0; ctn2b = 0;}
-        if (tanso2 >= 21) {
+        if ( brn2 <= brnon && fa2 == 1 ) { brn2 = brn2 + (fa_c_cl_2 * 5); if ( brn2 >= brnon ) fa2 = 2; }
+        if ( fa2 == 2) { brn2 = brn2 - fa_t_cl_2; }
+        if ( brn2 <= 0 ) {brn2 = 0; ctn2b = 0; kpr = 0; krl = 0;}
+        if ( tanso2 >= 21) {
           if ( stt_ts2 == 0 ){stt_ts2 = 1; analogWrite(led_2, brn2);}
           else {analogWrite(led_2, LOW); stt_ts2 = 0;}
         }
@@ -620,9 +624,10 @@ void effect_cac() {
     if ( ctn3b == 1 ) {
       if(jikan - tg_ht3 >= tanso3) {
         tg_ht3 = millis();
-        brn3 -= fa_t_cl_3;
-        if ( brn3 <= 0 ) { brn3 = 0; ctn3b = 0;}
-        if (tanso3 >= 21) {
+        if ( brn3 <= brnon && fa3 == 1 ) { brn3 = brn3 + (fa_c_cl_3 * 5); if ( brn3 >= brnon ) fa3 = 2; }
+        if ( fa3 == 2) { brn3 = brn3 - fa_t_cl_3; }
+        if ( brn3 <= 0 ) {brn3 = 0; ctn3b = 0; kpr = 0; krl = 0;}
+        if ( tanso3 >= 21) {
           if ( stt_ts3 == 0 ){stt_ts3 = 1; analogWrite(led_3, brn3);}
           else {analogWrite(led_3, LOW); stt_ts3 = 0;}
         }
@@ -634,9 +639,10 @@ void effect_cac() {
     if ( ctn4b == 1 ) {
       if(jikan - tg_ht4 >= tanso4) {
         tg_ht4 = millis();
-        brn4 -= fa_t_cl_4;
-        if ( brn4 <= 0 ) { brn4 = 0; ctn4b = 0;}
-        if (tanso4 >= 21) {
+        if ( brn4 <= brnon && fa3 == 1 ) { brn4 = brn4 + (fa_c_cl_4 * 5); if ( brn4 >= brnon ) fa4 = 2; }
+        if ( fa4 == 2) { brn4 = brn4 - fa_t_cl_4; }
+        if ( brn4 <= 0 ) {brn4 = 0; ctn4b = 0; kpr = 0; krl = 0;}
+        if ( tanso4 >= 21) {
           if ( stt_ts4 == 0 ){stt_ts4 = 1; analogWrite(led_4, brn4);}
           else {analogWrite(led_4, LOW); stt_ts4 = 0;}
         }
@@ -648,9 +654,10 @@ void effect_cac() {
     if ( ctn5b == 1 ) {
       if(jikan - tg_ht5 >= tanso5) {
         tg_ht5 = millis();
-        brn5 -= fa_t_cl_5;
-        if ( brn5 <= 0 ) { brn5 = 0; ctn5b = 0;}
-        if (tanso5 >= 21) {
+        if ( brn5 <= brnon && fa5 == 1 ) { brn5 = brn5 + (fa_c_cl_5 * 5); if ( brn5 >= brnon ) fa5 = 2; }
+        if ( fa5 == 2) { brn5 = brn5 - fa_t_cl_5; }
+        if ( brn5 <= 0 ) {brn5 = 0; ctn5b = 0; kpr = 0; krl = 0;}
+        if ( tanso5 >= 21) {
           if ( stt_ts5 == 0 ){stt_ts5 = 1; analogWrite(led_5, brn5);}
           else {analogWrite(led_5, LOW); stt_ts5 = 0;}
         }
@@ -662,9 +669,10 @@ void effect_cac() {
     if ( ctn6b == 1 ) {
       if(jikan - tg_ht6 >= tanso6) {
         tg_ht6 = millis();
-        brn6 -= fa_t_cl_6;
-        if ( brn6 <= 0 ) { brn6 = 0; ctn6b = 0;}
-        if (tanso6 >= 21) {
+        if ( brn6 <= brnon && fa6 == 1 ) { brn6 = brn6 + (fa_c_cl_6 * 5); if ( brn6 >= brnon ) fa6 = 2; }
+        if ( fa6 == 2) { brn6 = brn6 - fa_t_cl_6; }
+        if ( brn6 <= 0 ) {brn6 = 0; ctn6b = 0; kpr = 0; krl = 0;}
+        if ( tanso6 >= 21) {
           if ( stt_ts6 == 0 ){stt_ts6 = 1; analogWrite(led_6, brn6);}
           else {analogWrite(led_6, LOW); stt_ts6 = 0;}
         }
@@ -981,9 +989,10 @@ void effect_cac() {
     if ( ctn1b_2 == 1 ) {
       if(jikan - tg_ht1 >= tanso1_2) {
         tg_ht1 = millis();
-        brn1 -= fa_t_cl_1_2;
-        if ( brn1 <= 0 ) { brn1 = 0; ctn1b_2 = 0;}
-        if (tanso1_2 >= 21) {
+        if ( brn1 <= brnon2 && fa1b == 1 ) { brn1 = brn1 + (fa_c_cl_1_2 * 5); if ( brn1 >= brnon2 ) fa1b = 2; }
+        if ( fa1b == 2) { brn1 = brn1 - fa_t_cl_1_2; }
+        if ( brn1 <= 0 ) {brn1 = 0; ctn1b_2 = 0; kpr = 0; krl = 0;}
+        if ( tanso1_2 >= 21) {
           if ( stt_ts1 == 0 ){stt_ts1 = 1; analogWrite(led_1, brn1);}
           else {analogWrite(led_1, LOW); stt_ts1 = 0;}
         }
@@ -995,9 +1004,10 @@ void effect_cac() {
     if ( ctn2b_2 == 1 ) {
       if(jikan - tg_ht2 >= tanso2_2) {
         tg_ht2 = millis();
-        brn2 -= fa_t_cl_2_2;
-        if ( brn2 <= 0 ) { brn2 = 0; ctn2b_2 = 0;}
-        if (tanso2_2 >= 21) {
+        if ( brn2 <= brnon2 && fa2b == 1 ) { brn2 = brn2 + (fa_c_cl_2_2 * 5); if ( brn2 >= brnon2 ) fa2b = 2; }
+        if ( fa2b == 2) { brn2 = brn2 - fa_t_cl_2_2; }
+        if ( brn2 <= 0 ) {brn2 = 0; ctn2b_2 = 0; kpr = 0; krl = 0;}
+        if ( tanso2_2 >= 21) {
           if ( stt_ts2 == 0 ){stt_ts2 = 1; analogWrite(led_2, brn2);}
           else {analogWrite(led_2, LOW); stt_ts2 = 0;}
         }
@@ -1009,9 +1019,10 @@ void effect_cac() {
     if ( ctn3b_2 == 1 ) {
       if(jikan - tg_ht3 >= tanso3_2) {
         tg_ht3 = millis();
-        brn3 -= fa_t_cl_3_2;
-        if ( brn3 <= 0 ) { brn3 = 0; ctn3b_2 = 0;}
-        if (tanso3_2 >= 21) {
+        if ( brn3 <= brnon2 && fa3b == 1 ) { brn3 = brn3 + (fa_c_cl_3_2 * 5); if ( brn3 >= brnon2 ) fa3b = 2; }
+        if ( fa3b == 2) { brn3 = brn3 - fa_t_cl_3_2; }
+        if ( brn3 <= 0 ) {brn3 = 0; ctn3b_2 = 0; kpr = 0; krl = 0;}
+        if ( tanso3_2 >= 21) {
           if ( stt_ts3 == 0 ){stt_ts3 = 1; analogWrite(led_3, brn3);}
           else {analogWrite(led_3, LOW); stt_ts3 = 0;}
         }
@@ -1023,9 +1034,10 @@ void effect_cac() {
     if ( ctn4b_2 == 1 ) {
       if(jikan - tg_ht4 >= tanso4_2) {
         tg_ht4 = millis();
-        brn4 -= fa_t_cl_4_2;
-        if ( brn4 <= 0 ) { brn4 = 0; ctn4b_2 = 0;}
-        if (tanso4_2 >= 21) {
+        if ( brn4 <= brnon2 && fa4b == 1 ) { brn4 = brn4 + (fa_c_cl_4_2 * 5); if ( brn4 >= brnon2 ) fa4b = 2; }
+        if ( fa4b == 2) { brn4 = brn4 - fa_t_cl_4_2; }
+        if ( brn4 <= 0 ) {brn4 = 0; ctn4b_2 = 0; kpr = 0; krl = 0;}
+        if ( tanso4_2 >= 21) {
           if ( stt_ts4 == 0 ){stt_ts4 = 1; analogWrite(led_4, brn4);}
           else {analogWrite(led_4, LOW); stt_ts4 = 0;}
         }
@@ -1037,9 +1049,10 @@ void effect_cac() {
     if ( ctn5b_2 == 1 ) {
       if(jikan - tg_ht5 >= tanso5_2) {
         tg_ht5 = millis();
-        brn5 -= fa_t_cl_5_2;
-        if ( brn5 <= 0 ) { brn5 = 0; ctn5b_2 = 0;}
-        if (tanso5_2 >= 21) {
+        if ( brn5 <= brnon2 && fa5b == 1 ) { brn5 = brn5 + (fa_c_cl_5_2 * 5); if ( brn5 >= brnon2 ) fa5b = 2; }
+        if ( fa5b == 2) { brn5 = brn5 - fa_t_cl_5_2; }
+        if ( brn5 <= 0 ) {brn5 = 0; ctn5b_2 = 0; kpr = 0; krl = 0;}
+        if ( tanso5_2 >= 21) {
           if ( stt_ts5 == 0 ){stt_ts5 = 1; analogWrite(led_5, brn5);}
           else {analogWrite(led_5, LOW); stt_ts5 = 0;}
         }
@@ -1051,9 +1064,10 @@ void effect_cac() {
     if ( ctn6b_2 == 1 ) {
       if(jikan - tg_ht6 >= tanso6_2) {
         tg_ht6 = millis();
-        brn6 -= fa_t_cl_6_2;
-        if ( brn6 <= 0 ) { brn6 = 0; ctn6b_2 = 0;}
-        if (tanso6_2 >= 21) {
+        if ( brn6 <= brnon2 && fa6b == 1 ) { brn6 = brn6 + (fa_c_cl_6_2 * 5); if ( brn6 >= brnon2 ) fa6b = 2; }
+        if ( fa6b == 2) { brn6 = brn6 - fa_t_cl_6_2; }
+        if ( brn6 <= 0 ) {brn6 = 0; ctn6b_2 = 0; kpr = 0; krl = 0;}
+        if ( tanso6_2 >= 21) {
           if ( stt_ts6 == 0 ){stt_ts6 = 1; analogWrite(led_6, brn6);}
           else {analogWrite(led_6, LOW); stt_ts6 = 0;}
         }
@@ -1370,9 +1384,10 @@ void effect_cac() {
     if ( ctn1b_3 == 1 ) {
       if(jikan - tg_ht1 >= tanso1_3) {
         tg_ht1 = millis();
-        brn1 -= fa_t_cl_1_3;
-        if ( brn1 <= 0 ) { brn1 = 0; ctn1b_3 = 0;}
-        if (tanso1_3 >= 21) {
+        if ( brn1 <= brnon3 && fa1c == 1 ) { brn1 = brn1 + (fa_c_cl_1_3 * 5); if ( brn1 >= brnon3 ) fa1c = 2; }
+        if ( fa1c == 2) { brn1 = brn1 - fa_t_cl_1_3; }
+        if ( brn1 <= 0 ) {brn1 = 0; ctn1b_3 = 0; kpr = 0; krl = 0;}
+        if ( tanso1_3 >= 21) {
           if ( stt_ts1 == 0 ){stt_ts1 = 1; analogWrite(led_1, brn1);}
           else {analogWrite(led_1, LOW); stt_ts1 = 0;}
         }
@@ -1384,9 +1399,10 @@ void effect_cac() {
     if ( ctn2b_3 == 1 ) {
       if(jikan - tg_ht2 >= tanso2_3) {
         tg_ht2 = millis();
-        brn2 -= fa_t_cl_2_3;
-        if ( brn2 <= 0 ) { brn2 = 0; ctn2b_3 = 0;}
-        if (tanso2_3 >= 21) {
+        if ( brn2 <= brnon3 && fa2c == 1 ) { brn2 = brn2 + (fa_c_cl_2_3 * 5); if ( brn2 >= brnon3 ) fa2c = 2; }
+        if ( fa2c == 2) { brn2 = brn2 - fa_t_cl_2_3; }
+        if ( brn2 <= 0 ) {brn2 = 0; ctn2b_3 = 0; kpr = 0; krl = 0;}
+        if ( tanso2_3 >= 21) {
           if ( stt_ts2 == 0 ){stt_ts2 = 1; analogWrite(led_2, brn2);}
           else {analogWrite(led_2, LOW); stt_ts2 = 0;}
         }
@@ -1398,9 +1414,10 @@ void effect_cac() {
     if ( ctn3b_3 == 1 ) {
       if(jikan - tg_ht3 >= tanso3_3) {
         tg_ht3 = millis();
-        brn3 -= fa_t_cl_3_3;
-        if ( brn3 <= 0 ) { brn3 = 0; ctn3b_3 = 0;}
-        if (tanso3_3 >= 21) {
+        if ( brn3 <= brnon3 && fa3c == 1 ) { brn3 = brn3 + (fa_c_cl_3_3 * 5); if ( brn3 >= brnon3 ) fa3c = 2; }
+        if ( fa3c == 2) { brn3 = brn3 - fa_t_cl_3_3; }
+        if ( brn3 <= 0 ) {brn3 = 0; ctn3b_3 = 0; kpr = 0; krl = 0;}
+        if ( tanso3_3 >= 21) {
           if ( stt_ts3 == 0 ){stt_ts3 = 1; analogWrite(led_3, brn3);}
           else {analogWrite(led_3, LOW); stt_ts3 = 0;}
         }
@@ -1412,9 +1429,10 @@ void effect_cac() {
     if ( ctn4b_3 == 1 ) {
       if(jikan - tg_ht4 >= tanso4_3) {
         tg_ht4 = millis();
-        brn4 -= fa_t_cl_4_3;
-        if ( brn4 <= 0 ) { brn4 = 0; ctn4b_3 = 0;}
-        if (tanso4_3 >= 21) {
+        if ( brn4 <= brnon3 && fa4c == 1 ) { brn4 = brn4 + (fa_c_cl_4_3 * 5); if ( brn4 >= brnon3 ) fa4c = 2; }
+        if ( fa4c == 2) { brn4 = brn4 - fa_t_cl_4_3; }
+        if ( brn4 <= 0 ) {brn4 = 0; ctn4b_3 = 0; kpr = 0; krl = 0;}
+        if ( tanso4_3 >= 21) {
           if ( stt_ts4 == 0 ){stt_ts4 = 1; analogWrite(led_4, brn4);}
           else {analogWrite(led_4, LOW); stt_ts4 = 0;}
         }
@@ -1426,9 +1444,10 @@ void effect_cac() {
     if ( ctn5b_3 == 1 ) {
       if(jikan - tg_ht5 >= tanso5_3) {
         tg_ht5 = millis();
-        brn5 -= fa_t_cl_5_3;
-        if ( brn5 <= 0 ) { brn5 = 0; ctn5b_3 = 0;}
-        if (tanso5_3 >= 21) {
+        if ( brn5 <= brnon3 && fa4c == 1 ) { brn5 = brn5 + (fa_c_cl_5_3 * 5); if ( brn5 >= brnon3 ) fa4c = 2; }
+        if ( fa4c == 2) { brn5 = brn5 - fa_t_cl_5_3; }
+        if ( brn5 <= 0 ) {brn5 = 0; ctn5b_3 = 0; kpr = 0; krl = 0;}
+        if ( tanso5_3 >= 21) {
           if ( stt_ts5 == 0 ){stt_ts5 = 1; analogWrite(led_5, brn5);}
           else {analogWrite(led_5, LOW); stt_ts5 = 0;}
         }
@@ -1440,9 +1459,10 @@ void effect_cac() {
     if ( ctn6b_3 == 1 ) {
       if(jikan - tg_ht6 >= tanso6_3) {
         tg_ht6 = millis();
-        brn6 -= fa_t_cl_6_3;
-        if ( brn6 <= 0 ) { brn6 = 0; ctn6b_3 = 0;}
-        if (tanso6_3 >= 21) {
+        if ( brn6 <= brnon3 && fa6c == 1 ) { brn6 = brn6 + (fa_c_cl_6_3 * 5); if ( brn6 >= brnon3 ) fa6c = 2; }
+        if ( fa6c == 2) { brn6 = brn6 - fa_t_cl_6_3; }
+        if ( brn6 <= 0 ) {brn6 = 0; ctn6b_3 = 0; kpr = 0; krl = 0;}
+        if ( tanso6_3 >= 21) {
           if ( stt_ts6 == 0 ){stt_ts6 = 1; analogWrite(led_6, brn6);}
           else {analogWrite(led_6, LOW); stt_ts6 = 0;}
         }
