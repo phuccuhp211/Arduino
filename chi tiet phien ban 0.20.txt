@@ -1,4 +1,0 @@
-- redefine value
-- optimize code
-- new effect added
-

@@ -466,13 +466,14 @@ void effect_cac() {
   //////////////////////////////   LINE 1   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if( line_qwe == 1 ) {
-    if (kpr == 20 || ctn1 == 1) { ctn1 =1;
-      if(jikan - tg_ht1 >= tanso1) {
+    if (kpr == 20) { ctn1 = 1; reset_eff_nor();}
+    if (ctn1 == 1) {
+      if( jikan - tg_ht1 >= tanso1 ) {
         tg_ht1 = millis();
         if ( brn1 <= brnon && fa1 == 1 ) { brn1 = brn1 + fa_c_cl_1; if ( brn1 >= brnon ) fa1 = 2; }
         if ( fa1 == 2) { brn1 = brn1 - fa_t_cl_1; }
         if ( brn1 <= 0 ) {brn1 = 0; ctn1 = 0; kpr = 0; krl = 0;}
-        if (tanso1 >= 21) {
+        if ( tanso1 >= 21) {
           if ( stt_ts1 == 0 ){stt_ts1 = 1; analogWrite(led_1, brn1);}
           else {analogWrite(led_1, LOW); stt_ts1 = 0;}
         }
@@ -484,8 +485,9 @@ void effect_cac() {
       brn1 = 0; ctn1 = 0; fa1 = 1;
       kpr = 0; krl = 0;
     }  
-  
-    if (kpr == 26 || ctn2 == 1) { ctn2 =1;
+
+    if (kpr == 26) { ctn2 = 1; reset_eff_nor();}
+    if (ctn2 == 1) {
       if(jikan - tg_ht2 >= tanso2) {
         tg_ht2 = millis();
         if ( brn2 <= brnon && fa2 == 1 ) { brn2 = brn2 + fa_c_cl_2; if ( brn2 >= brnon ) fa2 = 2; }
@@ -503,8 +505,9 @@ void effect_cac() {
       brn2 = 0; ctn2 = 0; fa2 = 1;
       kpr = 0; krl = 0;
     }
-  
-    if (kpr == 8 || ctn3 == 1) { ctn3 =1;
+
+    if (kpr == 8) { ctn3 = 1; reset_eff_nor();}
+    if (ctn3 == 1) {
       if(jikan - tg_ht3 >= tanso3) {
         tg_ht3 = millis();
         if ( brn3 <= brnon && fa3 == 1 ) { brn3 = brn3 + fa_c_cl_3; if ( brn3 >= brnon ) fa3 = 2; }
@@ -522,8 +525,9 @@ void effect_cac() {
       brn3 = 0; ctn3 = 0; fa3 = 1;
       kpr = 0; krl = 0;
     }
-  
-    if (kpr == 21 || ctn4 == 1) { ctn4 = 1;
+
+    if (kpr == 21) { ctn4 = 1; reset_eff_nor();}
+    if (ctn4 == 1) {;
       if(jikan - tg_ht4 >= tanso4) {
         tg_ht4 = millis();
         if ( brn4 <= brnon && fa4 == 1 ) { brn4 = brn4 + fa_c_cl_4; if ( brn4 >= brnon ) fa4 = 2; }
@@ -541,8 +545,9 @@ void effect_cac() {
       brn4 = 0; ctn4 = 0; fa4 = 1;
       kpr = 0; krl = 0;
     }
-  
-    if (kpr == 23 || ctn5 == 1) { ctn5 =1;
+
+    if (kpr == 23) { ctn5 = 1; reset_eff_nor();}
+    if (ctn5 == 1) {
       if(jikan - tg_ht5 >= tanso5) {  
         tg_ht5 = millis();
         if ( brn5 <= brnon && fa5 == 1 ) { brn5 = brn5 + fa_c_cl_5; if ( brn5 >= brnon ) fa5 = 2; }
@@ -561,8 +566,8 @@ void effect_cac() {
       kpr = 0; krl = 0;
     }
   
-
-    if (kpr == 28 || ctn6 == 1) { ctn6 =1;
+    if (kpr == 28) { ctn6 = 1; reset_eff_nor();}
+    if (ctn6 == 1) {
       if(jikan - tg_ht6 >= tanso6) { 
         tg_ht6 = millis();
         if ( brn6 <= brnon && fa6 == 1 ) { brn6 = brn6 + fa_c_cl_6; if ( brn6 >= brnon ) fa6 = 2; }
@@ -583,7 +588,7 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 2   //////////////////////////////
   if( line_qwe == 2 ) {
-    if ( kpr == 20 ) { ctn1b = 1; brn1 = brnoff; kpr = 0; krl = 0;}
+    if ( kpr == 20 ) { ctn1b = 1; reset_eff_nor(); brn1 = brnoff;}
     if ( ctn1b == 1 ) {
       if(jikan - tg_ht1 >= tanso1) {
         tg_ht1 = millis();
@@ -597,7 +602,7 @@ void effect_cac() {
       }
     }
     
-    if ( kpr == 26 ) { ctn2b = 1; brn2 = brnoff; kpr = 0; krl = 0;}
+    if ( kpr == 26 ) { ctn2b = 1; reset_eff_nor(); brn2 = brnoff;}
     if ( ctn2b == 1 ) {
       if(jikan - tg_ht2 >= tanso2) {
         tg_ht2 = millis();
@@ -611,7 +616,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 8 ) { ctn3b = 1; brn3 = brnoff; kpr = 0; krl = 0;}
+    if ( kpr == 8 ) { ctn3b = 1; reset_eff_nor(); brn3 = brnoff;}
     if ( ctn3b == 1 ) {
       if(jikan - tg_ht3 >= tanso3) {
         tg_ht3 = millis();
@@ -625,7 +630,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 21 ) { ctn4b = 1; brn4 = brnoff; kpr = 0; krl = 0;}
+    if ( kpr == 21 ) { ctn4b = 1; reset_eff_nor(); brn4 = brnoff;}
     if ( ctn4b == 1 ) {
       if(jikan - tg_ht4 >= tanso4) {
         tg_ht4 = millis();
@@ -639,7 +644,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 23 ) { ctn5b = 1; brn5 = brnoff; kpr = 0; krl = 0;}
+    if ( kpr == 23 ) { ctn5b = 1; reset_eff_nor(); brn5 = brnoff;}
     if ( ctn5b == 1 ) {
       if(jikan - tg_ht5 >= tanso5) {
         tg_ht5 = millis();
@@ -653,7 +658,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 28 ) { ctn6b = 1; brn6 = brnoff; kpr = 0; krl = 0;}
+    if ( kpr == 28 ) { ctn6b = 1; reset_eff_nor(); brn6 = brnoff;}
     if ( ctn6b == 1 ) {
       if(jikan - tg_ht6 >= tanso6) {
         tg_ht6 = millis();
@@ -669,7 +674,7 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 3   //////////////////////////////
   if( line_qwe == 3 ) {
-    if (kpr == 20 || ctn1c == 1) { ctn1c = 1; ctn1c2 = 0;}
+    if ( kpr == 20 ) { ctn1c = 1; ctn1c2 = 0; reset_eff_nor();}
     if ( ctn1c == 1 && ctn1c2 == 0) {
       if(jikan - tg_ht1 >= tanso1) { tg_ht1 = millis();
         if( brn1 <= brnon) {
@@ -684,22 +689,22 @@ void effect_cac() {
         else {analogWrite(led_1, brn1);}
       }
     }
-    if (krl == 20 || ctn1c2 == 1) { ctn1c = 0; ctn1c2 = 1;}
-    if (krl == 20) { kpr = 0; krl = 0; }
+    if ( krl == 20 ) { ctn1c = 0; ctn1c2 = 1;}
+    if ( krl == 20 ) { kpr = 0; krl = 0; }
     if ( ctn1c == 0 && ctn1c2 == 1 ) {
       if(jikan - tg_ht1 >= tanso1) { tg_ht1 = millis();
         brn1 = brn1 - fa_t_cl_1;
         if( brn1 < 0 ) { brn1 = 0; ctn1c = 0; ctn1c2 = 0; ctn1c3 = 0; kpr = 0; krl = 0; }
         if (tanso1 >= 21) {
-          if ( ctn1c3 == 0 ){ctn1c3 = 1;analogWrite(led_3, brn1);}
+          if ( ctn1c3 == 0 ){ctn1c3 = 1;analogWrite(led_1, brn1);}
           else {analogWrite(led_1, LOW); ctn1c3 = 0;}
         }
         else {analogWrite(led_1, brn1);}
       }
     }
   
-    if ( kpr == 26 || ctn2c == 1) { ctn2c = 1; ctn2c2 = 0; }
-    if ( kpr == 26 || ctn2c == 1 && ctn2c2 == 0) {
+    if ( kpr == 26 ) { ctn2c = 1; ctn2c2 = 0; reset_eff_nor();}
+    if ( ctn2c == 1 && ctn2c2 == 0) {
       if(jikan - tg_ht2 >= tanso2) { tg_ht2 = millis(); ctn2c = 1; ctn2c2 = 0;
         if( brn2 <= brnon) {
           brn2 = brn2 + fa_c_cl_2;
@@ -713,8 +718,8 @@ void effect_cac() {
         else {analogWrite(led_2, brn2);}
       }
     }
-    if ( krl == 26 || ctn2c2 == 1) { ctn2c = 0; ctn2c2 = 1;}
-    if ( krl == 26) { kpr = 0; krl = 0;}
+    if ( krl == 26 ) { ctn2c = 0; ctn2c2 = 1;}
+    if ( krl == 26 ) { kpr = 0; krl = 0;}
     if ( ctn2c == 0 && ctn2c2 == 1 ) {
       if(jikan - tg_ht2 >= tanso2) { tg_ht2 = millis(); ctn2c = 0; ctn2c2 = 1;
         brn2 = brn2 - fa_t_cl_2;
@@ -727,7 +732,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 8 || ctn3c == 1) { ctn3c = 1; ctn3c2 = 0;}
+    if ( kpr == 8 ) { ctn3c = 1; ctn3c2 = 0; reset_eff_nor();}
     if ( ctn3c == 1 && ctn3c2 == 0) {
       if(jikan - tg_ht3 >= tanso3) { tg_ht3 = millis();
         if( brn3 <= brnon) {
@@ -742,8 +747,8 @@ void effect_cac() {
         else {analogWrite(led_3, brn3);}
       }
     }
-    if (krl == 8 || ctn3c2 == 1) { ctn3c = 0; ctn3c2 = 1;}
-    if (krl == 8) { kpr = 0; krl = 0; }
+    if ( krl == 8 ) { ctn3c = 0; ctn3c2 = 1;}
+    if ( krl == 8 ) { kpr = 0; krl = 0; }
     if ( ctn3c == 0 && ctn3c2 == 1 ) {
       if(jikan - tg_ht3 >= tanso3) { tg_ht3 = millis();
         brn3 = brn3 - fa_t_cl_3;
@@ -756,7 +761,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 21 || ctn4c == 1) { ctn4c = 1; ctn4c2 = 0;}
+    if ( kpr == 21 ) { ctn4c = 1; ctn4c2 = 0; reset_eff_nor();}
     if ( ctn4c == 1 && ctn4c2 == 0) {
       if(jikan - tg_ht4 >= tanso4) { tg_ht4 = millis();
         if( brn4 <= brnon) {
@@ -771,8 +776,8 @@ void effect_cac() {
         else {analogWrite(led_4, brn4);}
       }
     }
-    if (krl == 21 || ctn4c2 == 1) { ctn4c = 0; ctn4c2 = 1;}
-    if (krl == 21) { kpr = 0; krl = 0; }
+    if ( krl == 21 ) { ctn4c = 0; ctn4c2 = 1;}
+    if ( krl == 21 ) { kpr = 0; krl = 0; }
     if ( ctn4c == 0 && ctn4c2 == 1 ) {
       if(jikan - tg_ht4 >= tanso4) { tg_ht4 = millis();
         brn4 = brn4 - fa_t_cl_4;
@@ -785,7 +790,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 23 || ctn5c == 1) { ctn5c = 1; ctn5c2 = 0;}
+    if ( kpr == 23 ) { ctn5c = 1; ctn5c2 = 0; reset_eff_nor();}
     if ( ctn5c == 1 && ctn5c2 == 0) {
       if(jikan - tg_ht5 >= tanso5) { tg_ht5 = millis();
         if( brn5 <= brnon) {
@@ -800,8 +805,8 @@ void effect_cac() {
         else {analogWrite(led_5, brn5);}
       }
     }
-    if (krl == 23 || ctn5c2 == 1) { ctn5c = 0; ctn5c2 = 1;}
-    if (krl == 23) { kpr = 0; krl = 0; }
+    if ( krl == 23 ) { ctn5c = 0; ctn5c2 = 1;}
+    if ( krl == 23 ) { kpr = 0; krl = 0; }
     if ( ctn5c == 0 && ctn5c2 == 1 ) {
       if(jikan - tg_ht5 >= tanso5) { tg_ht5 = millis();
         brn5 = brn5 - fa_t_cl_5;
@@ -814,7 +819,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 28 || ctn6c == 1) { ctn6c = 1; ctn6c2 = 0;}
+    if ( kpr == 28 ) { ctn6c = 1; ctn6c2 = 0; reset_eff_nor();}
     if ( ctn6c == 1 && ctn6c2 == 0) {
       if(jikan - tg_ht6 >= tanso6) { tg_ht6 = millis();
         if( brn6 <= brnon) {
@@ -829,8 +834,8 @@ void effect_cac() {
         else {analogWrite(led_6, brn6);}
       }
     }
-    if (krl == 28 || ctn6c2 == 1) { ctn6c = 0; ctn6c2 = 1;}
-    if (krl == 28) { kpr = 0; krl = 0; }
+    if ( krl == 28 ) { ctn6c = 0; ctn6c2 = 1;}
+    if ( krl == 28 ) { kpr = 0; krl = 0; }
     if ( ctn6c == 0 && ctn6c2 == 1 ) {
       if(jikan - tg_ht6 >= tanso6) { tg_ht6 = millis();
         brn6 = brn6 - fa_t_cl_6;
@@ -850,7 +855,8 @@ void effect_cac() {
   //////////////////////////////   LINE 2   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if( line_asd == 1 ) {
-    if (kpr == 4 || ctn1_2 == 1) { ctn1_2 =1;
+    if (kpr == 4 ) { ctn1_2 = 1; reset_eff_nor();}
+    if (ctn1_2 == 1) {
       if(jikan - tg_ht1 >= tanso1_2) {
         tg_ht1 = millis();
         if ( brn1 <= brnon2 && fa1 == 1 ) { brn1 = brn1 + fa_c_cl_1_2; if ( brn1 >= brnon2 ) fa1 = 2; }
@@ -863,13 +869,14 @@ void effect_cac() {
         else {analogWrite(led_1, brn1);}
       }
     }
-    if(krl == 4) {
+    if (krl == 4) {
       analogWrite(led_1, LOW);
       brn1 = 0; ctn1_2 = 0; fa1 = 1;
       kpr = 0; krl = 0;
     }
   
-    if (kpr == 22 || ctn2_2 == 1) { ctn2_2 =1;
+    if (kpr == 22 ) { ctn2_2 = 1; reset_eff_nor();}
+    if (ctn2_2 == 1) {
       if(jikan - tg_ht2 >= tanso2_2) {
         tg_ht2 = millis();
         if ( brn2 <= brnon2 && fa2 == 1 ) { brn2 = brn2 + fa_c_cl_2_2; if ( brn2 >= brnon2 ) fa2 = 2; }
@@ -882,13 +889,14 @@ void effect_cac() {
         else {analogWrite(led_2, brn2);}
       }
     }
-    if(krl == 22) {
+    if (krl == 22) {
       analogWrite(led_2, LOW);
       brn2 = 0; ctn2_2 = 0; fa2 = 1;
       kpr = 0; krl = 0;
     }
-  
-    if (kpr == 7 || ctn3_2 == 1) { ctn3_2 =1;
+    
+    if (kpr == 7 ) { ctn3_2 = 1; reset_eff_nor();}
+    if (ctn3_2 == 1) {
       if(jikan - tg_ht3 >= tanso3_2) {
         tg_ht3 = millis();
         if ( brn3 <= brnon2 && fa3 == 1 ) { brn3 = brn3 + fa_c_cl_3_2; if ( brn3 >= brnon2 ) fa3 = 2; }
@@ -901,13 +909,14 @@ void effect_cac() {
         else {analogWrite(led_3, brn3);}
       }
     }
-    if(krl == 7) {
+    if (krl == 7) {
       analogWrite(led_3, LOW);
       brn3 = 0; ctn3_2 = 0; fa3 = 1;
       kpr = 0; krl = 0;
     }
-  
-    if (kpr == 9 || ctn4_2 == 1) { ctn4_2 = 1;
+    
+    if (kpr == 9 ) { ctn4_2 = 1; reset_eff_nor();}
+    if (ctn4_2 == 1) {;
       if(jikan - tg_ht4 >= tanso4_2) {
         tg_ht4 = millis();
         if ( brn4 <= brnon2 && fa4 == 1 ) { brn4 = brn4 + fa_c_cl_4_2; if ( brn4 >= brnon2 ) fa4 = 2; }
@@ -920,13 +929,14 @@ void effect_cac() {
         else {analogWrite(led_4, brn4);}
       }
     }
-    if(krl == 9) {
+    if (krl == 9) {
       analogWrite(led_4, LOW);
       brn4 = 0; ctn4_2 = 0; fa4 = 1;
       kpr = 0; krl = 0;
     }
 
-    if (kpr == 10 || ctn5_2 == 1) { ctn5_2 =1;
+    if (kpr == 10 ) { ctn5_2 = 1; reset_eff_nor();}
+    if (ctn5_2 == 1) {
       if(jikan - tg_ht5 >= tanso5_2) {
         tg_ht5 = millis();
         if ( brn5 <= brnon2 && fa5 == 1 ) { brn5 = brn5 + fa_c_cl_5_2; if ( brn5 >= brnon2 ) fa5 = 2; }
@@ -939,13 +949,14 @@ void effect_cac() {
         else {analogWrite(led_5, brn5);}
       }
     }
-    if(krl == 10) {
+    if (krl == 10) {
       analogWrite(led_5, LOW);
       brn5 = 0; ctn5_2 = 0; fa5 = 1;
       kpr = 0; krl = 0;
     }
-  
-    if (kpr == 11 || ctn6_2 == 1) { ctn6_2 = 1;
+    
+    if (kpr == 11 ) { ctn6_2 = 1; reset_eff_nor();}
+    if (ctn6_2 == 1) {;
       if(jikan - tg_ht6 >= tanso6_2) {
         tg_ht6 = millis();
         if ( brn6 <= brnon2 && fa6 == 1 ) { brn6 = brn6 + fa_c_cl_6_2; if ( brn6 >= brnon2 ) fa6 = 2; }
@@ -958,7 +969,7 @@ void effect_cac() {
         else {analogWrite(led_6, brn6);}
       }
     }
-    if(krl == 11) {
+    if (krl == 11) {
       analogWrite(led_6, LOW);
       brn6 = 0; ctn6_2 = 0; fa6 = 1;
       kpr = 0; krl = 0;
@@ -966,7 +977,7 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 2   //////////////////////////////
   if( line_asd == 2 ) {
-    if ( kpr == 4 ) { ctn1b_2 = 1; brn1 = brnoff2; kpr = 0; krl = 0;}
+    if ( kpr == 4 ) { ctn1b_2 = 1; reset_eff_nor(); brn1 = brnoff2;}
     if ( ctn1b_2 == 1 ) {
       if(jikan - tg_ht1 >= tanso1_2) {
         tg_ht1 = millis();
@@ -980,7 +991,7 @@ void effect_cac() {
       }
     }
     
-    if ( kpr == 22 ) { ctn2b_2 = 1; brn2 = brnoff2; kpr = 0; krl = 0;}
+    if ( kpr == 22 ) { ctn2b_2 = 1; reset_eff_nor(); brn2 = brnoff2;}
     if ( ctn2b_2 == 1 ) {
       if(jikan - tg_ht2 >= tanso2_2) {
         tg_ht2 = millis();
@@ -994,7 +1005,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 7 ) { ctn3b_2 = 1; brn3 = brnoff2; kpr = 0; krl = 0;}
+    if ( kpr == 7 ) { ctn3b_2 = 1; reset_eff_nor(); brn3 = brnoff2;}
     if ( ctn3b_2 == 1 ) {
       if(jikan - tg_ht3 >= tanso3_2) {
         tg_ht3 = millis();
@@ -1008,7 +1019,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 9 ) { ctn4b_2 = 1; brn4 = brnoff2; kpr = 0; krl = 0;}
+    if ( kpr == 9 ) { ctn4b_2 = 1; reset_eff_nor(); brn4 = brnoff2;}
     if ( ctn4b_2 == 1 ) {
       if(jikan - tg_ht4 >= tanso4_2) {
         tg_ht4 = millis();
@@ -1022,7 +1033,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 10 ) { ctn5b_2 = 1; brn5 = brnoff2; kpr = 0; krl = 0;}
+    if ( kpr == 10 ) { ctn5b_2 = 1; reset_eff_nor(); brn5 = brnoff2;}
     if ( ctn5b_2 == 1 ) {
       if(jikan - tg_ht5 >= tanso5_2) {
         tg_ht5 = millis();
@@ -1036,7 +1047,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 11 ) { ctn6b_2 = 1; brn6 = brnoff2; kpr = 0; krl = 0;}
+    if ( kpr == 11 ) { ctn6b_2 = 1; reset_eff_nor(); brn6 = brnoff2;}
     if ( ctn6b_2 == 1 ) {
       if(jikan - tg_ht6 >= tanso6_2) {
         tg_ht6 = millis();
@@ -1052,7 +1063,7 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 3   //////////////////////////////
   if( line_asd == 3 ) {
-    if (kpr == 4 || ctn1c_2 == 1) { ctn1c_2 = 1; ctn1c2_2 = 0;}
+    if ( kpr == 4 ) { ctn1c_2 = 1; ctn1c2_2 = 0; reset_eff_nor();}
     if ( ctn1c_2 == 1 && ctn1c2_2 == 0) {
       if(jikan - tg_ht1 >= tanso1_2) { tg_ht1 = millis();
         if( brn1 <= brnon2) {
@@ -1067,8 +1078,8 @@ void effect_cac() {
         else {analogWrite(led_1, brn1);}
       }
     }
-    if (krl == 4 || ctn1c2_2 == 1) { ctn1c_2 = 0; ctn1c2_2 = 1;}
-    if (krl == 4) { kpr = 0; krl = 0; }
+    if ( krl == 4 ) { ctn1c_2 = 0; ctn1c2_2 = 1;}
+    if ( krl == 4 ) { kpr = 0; krl = 0; }
     if ( ctn1c_2 == 0 && ctn1c2_2 == 1 ) {
       if(jikan - tg_ht1 >= tanso1_2) { tg_ht1 = millis();
         brn1 = brn1 - fa_t_cl_1_2;
@@ -1081,7 +1092,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 22 || ctn2c_2 == 1) { ctn2c_2 = 1; ctn2c2_2 = 0;}
+    if ( kpr == 22 ) { ctn2c_2 = 1; ctn2c2_2 = 0; reset_eff_nor();}
     if ( ctn2c_2 == 1 && ctn2c2_2 == 0) {
       if(jikan - tg_ht2 >= tanso2_2) { tg_ht2 = millis();
         if( brn2 <= brnon2) {
@@ -1096,8 +1107,8 @@ void effect_cac() {
         else {analogWrite(led_2, brn2);}
       }
     }
-    if (krl == 22 || ctn2c2_2 == 1) { ctn2c_2 = 0; ctn2c2_2 = 1;}
-    if (krl == 22) { kpr = 0; krl = 0; }
+    if ( krl == 22 ) { ctn2c_2 = 0; ctn2c2_2 = 1;}
+    if ( krl == 22 ) { kpr = 0; krl = 0; }
     if ( ctn2c_2 == 0 && ctn2c2_2 == 1 ) {
       if(jikan - tg_ht2 >= tanso2_2) { tg_ht2 = millis();
         brn2 = brn2 - fa_t_cl_2_2;
@@ -1110,7 +1121,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 7 || ctn3c_2 == 1) { ctn3c_2 = 1; ctn3c2_2 = 0;}
+    if ( kpr == 7 ) { ctn3c_2 = 1; ctn3c2_2 = 0; reset_eff_nor();}
     if ( ctn3c_2 == 1 && ctn3c2_2 == 0) {
       if(jikan - tg_ht3 >= tanso3_2) { tg_ht3 = millis();
         if( brn3 <= brnon2) {
@@ -1125,8 +1136,8 @@ void effect_cac() {
         else {analogWrite(led_3, brn3);}
       }
     }
-    if (krl == 7 || ctn3c2_2 == 1) { ctn3c_2 = 0; ctn3c2_2 = 1;}
-    if (krl == 7) { kpr = 0; krl = 0; }
+    if ( krl == 7 ) { ctn3c_2 = 0; ctn3c2_2 = 1;}
+    if ( krl == 7 ) { kpr = 0; krl = 0; }
     if ( ctn3c_2 == 0 && ctn3c2_2 == 1 ) {
       if(jikan - tg_ht3 >= tanso3_2) { tg_ht3 = millis();
         brn3 = brn3 - fa_t_cl_3_2;
@@ -1139,7 +1150,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 9 || ctn4c_2 == 1) { ctn4c_2 = 1; ctn4c2_2 = 0;}
+    if ( kpr == 9 ) { ctn4c_2 = 1; ctn4c2_2 = 0; reset_eff_nor();}
     if ( ctn4c_2 == 1 && ctn4c2_2 == 0) {
       if(jikan - tg_ht4 >= tanso4_2) { tg_ht4 = millis();
         if( brn4 <= brnon2) {
@@ -1154,8 +1165,8 @@ void effect_cac() {
         else {analogWrite(led_4, brn4);}
       }
     }
-    if (krl == 9 || ctn4c2_2 == 1) { ctn4c_2 = 0; ctn4c2_2 = 1;}
-    if (krl == 9) { kpr = 0; krl = 0; }
+    if ( krl == 9 ) { ctn4c_2 = 0; ctn4c2_2 = 1;}
+    if ( krl == 9 ) { kpr = 0; krl = 0; }
     if ( ctn4c_2 == 0 && ctn4c2_2 == 1 ) {
       if(jikan - tg_ht4 >= tanso4_2) { tg_ht4 = millis();
         brn4 = brn4 - fa_t_cl_4_2;
@@ -1168,7 +1179,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 10 || ctn5c_2 == 1) { ctn5c_2 = 1; ctn5c2_2 = 0;}
+    if ( kpr == 10 ) { ctn5c_2 = 1; ctn5c2_2 = 0; reset_eff_nor();}
     if ( ctn5c_2 == 1 && ctn5c2_2 == 0) {
       if(jikan - tg_ht5 >= tanso5_2) { tg_ht5 = millis();
         if( brn5 <= brnon2) {
@@ -1183,8 +1194,8 @@ void effect_cac() {
         else {analogWrite(led_5, brn5);}
       }
     }
-    if (krl == 10 || ctn5c2_2 == 1) { ctn5c_2 = 0; ctn5c2_2 = 1;}
-    if (krl == 10) { kpr = 0; krl = 0; }
+    if ( krl == 10 ) { ctn5c_2 = 0; ctn5c2_2 = 1;}
+    if ( krl == 10 ) { kpr = 0; krl = 0; }
     if ( ctn5c_2 == 0 && ctn5c2_2 == 1 ) {
       if(jikan - tg_ht5 >= tanso5_2) { tg_ht5 = millis();
         brn5 = brn5 - fa_t_cl_5_2;
@@ -1197,7 +1208,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 11 || ctn6c_2 == 1) { ctn6c_2 = 1; ctn6c2_2 = 0;}
+    if ( kpr == 11 ) { ctn6c_2 = 1; ctn6c2_2 = 0; reset_eff_nor();}
     if ( ctn6c_2 == 1 && ctn6c2_2 == 0) {
       if(jikan - tg_ht6 >= tanso6_2) { tg_ht6 = millis();
         if( brn6 <= brnon2) {
@@ -1212,8 +1223,8 @@ void effect_cac() {
         else {analogWrite(led_6, brn6);}
       }
     }
-    if (krl == 11 || ctn6c2_2 == 1) { ctn6c_2 = 0; ctn6c2_2 = 1;}
-    if (krl == 11) { kpr = 0; krl = 0; }
+    if ( krl == 11 ) { ctn6c_2 = 0; ctn6c2_2 = 1;}
+    if ( krl == 11 ) { kpr = 0; krl = 0; }
     if ( ctn6c_2 == 0 && ctn6c2_2 == 1 ) {
       if(jikan - tg_ht6 >= tanso6_2) { tg_ht6 = millis();
         brn6 = brn6 - fa_t_cl_6_2;
@@ -1233,7 +1244,8 @@ void effect_cac() {
   //////////////////////////////   LINE 3   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if( line_zxc == 1 ) {
-    if (kpr == 29 || ctn1_3 == 1) { ctn1_3 = 1;
+    if (kpr == 29) { ctn1_3 = 1; reset_eff_nor();}
+    if (ctn1_3 == 1) {
       if(jikan - tg_ht1 >= tanso1_3) {
         tg_ht1 = millis();
         if ( brn1 <= brnon3 && fa1 == 1 ) { brn1 = brn1 + fa_c_cl_1_3; if ( brn1 >= brnon3 ) fa1 = 2; }
@@ -1246,13 +1258,14 @@ void effect_cac() {
         else {analogWrite(led_1, brn1);}
       }
     }
-    if(krl == 29) {
+    if (krl == 29) {
       analogWrite(led_1, LOW);
       brn1 = 0; ctn1_3 = 0; fa1 = 1;
       kpr = 0; krl = 0;
     }
   
-    if (kpr == 27 || ctn2_3 == 1) { ctn2_3 =1;
+    if (kpr == 27) { ctn2_3 = 1; reset_eff_nor();}
+    if (ctn2_3 == 1) {
       if(jikan - tg_ht2 >= tanso2_3) {
         tg_ht2 = millis();
         if ( brn2 <= brnon3 && fa2 == 1 ) { brn2 = brn2 + fa_c_cl_2_3; if ( brn2 >= brnon3 ) fa2 = 2; }
@@ -1265,13 +1278,14 @@ void effect_cac() {
         else {analogWrite(led_2, brn2);}
       }
     }
-    if(krl == 27) {
+    if (krl == 27) {
       analogWrite(led_2, LOW);
       brn2 = 0; ctn2_3 = 0; fa2 = 1;
       kpr = 0; krl = 0;
     }
   
-    if (kpr == 6 || ctn3_3 == 1) { ctn3_3 =1;
+    if (kpr == 6) { ctn3_3 = 1; reset_eff_nor();}
+    if (ctn3_3 == 1) {
       if(jikan - tg_ht3 >= tanso3_3) {
         tg_ht3 = millis();
         if ( brn3 <= brnon3 && fa3 == 1 ) { brn3 = brn3 + fa_c_cl_3_3; if ( brn3 >= brnon3 ) fa3 = 2; }
@@ -1284,13 +1298,14 @@ void effect_cac() {
         else {analogWrite(led_3, brn3);}
       }
     }
-    if(krl == 6) {
+    if (krl == 6) {
       analogWrite(led_3, LOW);
       brn3 = 0; ctn3_3 = 0; fa3 = 1;
       kpr = 0; krl = 0;
     }
   
-    if (kpr == 25 || ctn4_3 == 1) { ctn4_3 = 1;
+    if (kpr == 25) { ctn4_3 = 1; reset_eff_nor();}
+    if (ctn4_3 == 1) {
       if(jikan - tg_ht4 >= tanso4_3) {
         tg_ht4 = millis();
         if ( brn4 <= brnon3 && fa4 == 1 ) { brn4 = brn4 + fa_c_cl_4_3; if ( brn4 >= brnon3 ) fa4 = 2; }
@@ -1303,13 +1318,14 @@ void effect_cac() {
         else {analogWrite(led_4, brn4);}
       }
     }
-    if(krl == 25) {
+    if (krl == 25) {
       analogWrite(led_4, LOW);
       brn4 = 0; ctn4_3 = 0; fa4 = 1;
       kpr = 0; krl = 0;
     }
   
-    if (kpr == 5 || ctn5_3 == 1) { ctn5_3 = 1;
+    if (kpr == 5) { ctn5_3 = 1; reset_eff_nor();}
+    if (ctn5_3 == 1) {
       if(jikan - tg_ht5 >= tanso5_3) {
         tg_ht5 = millis();
         if ( brn5 <= brnon3 && fa5 == 1 ) { brn5 = brn5 + fa_c_cl_5_3; if ( brn5 >= brnon3 ) fa5 = 2; }
@@ -1322,13 +1338,14 @@ void effect_cac() {
         else {analogWrite(led_5, brn5);}
       }
     }
-    if(krl == 5 ) {
+    if (krl == 5 ) {
       analogWrite(led_5, LOW);
       brn5 = 0; ctn5_3 = 0; fa5 = 1;
       kpr = 0; krl = 0;
     }
   
-    if (kpr == 17 || ctn6_3 == 1) { ctn6_3 = 1;
+    if (kpr == 17) { ctn6_3 = 1; reset_eff_nor();}       
+    if (ctn6_3 == 1) {
       if(jikan - tg_ht6 >= tanso6_3) {
         tg_ht6 = millis();
         if ( brn6 <= brnon3 && fa6 == 1 ) { brn6 = brn6 + fa_c_cl_6_3; if ( brn6 >= brnon3 ) fa6 = 2; }
@@ -1341,7 +1358,7 @@ void effect_cac() {
         else {analogWrite(led_6, brn6);}
       }
     }
-    if(krl == 17) {
+    if (krl == 17) {
       analogWrite(led_6, LOW);
       brn6 = 0; ctn6_3 = 0; fa6 = 1;
       kpr = 0; krl = 0;
@@ -1349,7 +1366,7 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 2   //////////////////////////////
   if( line_zxc == 2 ) {
-    if ( kpr == 29 ) { ctn1b_3 = 1; brn1 = brnoff3; kpr = 0; krl = 0;}
+    if ( kpr == 29 ) { ctn1b_3 = 1; reset_eff_nor(); brn1 = brnoff3;}
     if ( ctn1b_3 == 1 ) {
       if(jikan - tg_ht1 >= tanso1_3) {
         tg_ht1 = millis();
@@ -1363,7 +1380,7 @@ void effect_cac() {
       }
     }
     
-    if ( kpr == 27 ) { ctn2b_3 = 1; brn2 = brnoff3; kpr = 0; krl = 0;}
+    if ( kpr == 27 ) { ctn2b_3 = 1; reset_eff_nor(); brn2 = brnoff3;}
     if ( ctn2b_3 == 1 ) {
       if(jikan - tg_ht2 >= tanso2_3) {
         tg_ht2 = millis();
@@ -1377,7 +1394,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 6 ) { ctn3b_3 = 1; brn3 = brnoff3; kpr = 0; krl = 0;}
+    if ( kpr == 6 ) { ctn3b_3 = 1; reset_eff_nor(); brn3 = brnoff3;}
     if ( ctn3b_3 == 1 ) {
       if(jikan - tg_ht3 >= tanso3_3) {
         tg_ht3 = millis();
@@ -1391,7 +1408,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 25 ) { ctn4b_3 = 1; brn4 = brnoff3; kpr = 0; krl = 0;}
+    if ( kpr == 25 ) { ctn4b_3 = 1; reset_eff_nor(); brn4 = brnoff3;}
     if ( ctn4b_3 == 1 ) {
       if(jikan - tg_ht4 >= tanso4_3) {
         tg_ht4 = millis();
@@ -1405,7 +1422,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 5 ) { ctn5b_3 = 1; brn5 = brnoff3; kpr = 0; krl = 0;}
+    if ( kpr == 5 ) { ctn5b_3 = 1; reset_eff_nor(); brn5 = brnoff3;}
     if ( ctn5b_3 == 1 ) {
       if(jikan - tg_ht5 >= tanso5_3) {
         tg_ht5 = millis();
@@ -1419,7 +1436,7 @@ void effect_cac() {
       }
     }
   
-    if ( kpr == 17 ) { ctn6b_3 = 1; brn6 = brnoff3; kpr = 0; krl = 0;}
+    if ( kpr == 17 ) { ctn6b_3 = 1; reset_eff_nor(); brn6 = brnoff3;}
     if ( ctn6b_3 == 1 ) {
       if(jikan - tg_ht6 >= tanso6_3) {
         tg_ht6 = millis();
@@ -1435,7 +1452,7 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 3   //////////////////////////////
   if( line_zxc == 3 ) {
-    if (kpr == 29 || ctn1c_3 == 1) { ctn1c_3 = 1; ctn1c2_3 = 0;}
+    if ( kpr == 29 ) { ctn1c_3 = 1; ctn1c2_3 = 0; reset_eff_nor();}
     if ( ctn1c_3 == 1 && ctn1c2_3 == 0) {
       if(jikan - tg_ht1 >= tanso1_3) { tg_ht1 = millis();
         if( brn1 <= brnon3) {
@@ -1450,8 +1467,8 @@ void effect_cac() {
         else {analogWrite(led_1, brn1);}
       }
     }
-    if (krl == 29 || ctn1c2_3 == 1) { ctn1c_3 = 0; ctn1c2_3 = 1;}
-    if (krl == 29) { kpr = 0; krl = 0; }
+    if ( krl == 29 ) { ctn1c_3 = 0; ctn1c2_3 = 1;}
+    if ( krl == 29 ) { kpr = 0; krl = 0; }
     if ( ctn1c_3 == 0 && ctn1c2_3 == 1 ) {
       if(jikan - tg_ht1 >= tanso1_3) { tg_ht1 = millis();
         brn1 = brn1 - fa_t_cl_1_3;
@@ -1464,7 +1481,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 27 || ctn2c_3 == 1) { ctn2c_3 = 1; ctn2c2_3 = 0;}
+    if ( kpr == 27 ) { ctn2c_3 = 1; ctn2c2_3 = 0; reset_eff_nor();}
     if ( ctn2c_3 == 1 && ctn2c2_3 == 0 ) {
       if(jikan - tg_ht2 >= tanso2_3) { tg_ht2 = millis();
         if( brn2 <= brnon3) {
@@ -1479,8 +1496,8 @@ void effect_cac() {
         else {analogWrite(led_2, brn2);}
       }
     }
-    if (krl == 27 || ctn2c2_3 == 1) { ctn2c_3 = 0; ctn2c2_3 = 1;}
-    if (krl == 27) { kpr = 0; krl = 0; }
+    if ( krl == 27 ) { ctn2c_3 = 0; ctn2c2_3 = 1;}
+    if ( krl == 27 ) { kpr = 0; krl = 0; }
     if ( ctn2c_3 == 0 && ctn2c2_3 == 1 ) {
       if(jikan - tg_ht2 >= tanso2_3) { tg_ht2 = millis();
         brn2 = brn2 - fa_t_cl_2_3;
@@ -1493,7 +1510,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 6 || ctn3c_3 == 1) { ctn3c_3 = 1; ctn3c2_3 = 0;}
+    if ( kpr == 6 ) { ctn3c_3 = 1; ctn3c2_3 = 0; reset_eff_nor();}
     if ( ctn3c_3 == 1 && ctn3c2_3 == 0 ) {
       if(jikan - tg_ht3 >= tanso3_3) { tg_ht3 = millis();
         if( brn3 <= brnon3) {
@@ -1508,8 +1525,8 @@ void effect_cac() {
         else {analogWrite(led_3, brn3);}
       } 
     }
-    if (krl == 6 || ctn3c2_3 == 1) { ctn3c_3 = 0; ctn3c2_3 = 1;}
-    if (krl == 6) { kpr = 0; krl = 0; }
+    if ( krl == 6 ) { ctn3c_3 = 0; ctn3c2_3 = 1;}
+    if ( krl == 6 ) { kpr = 0; krl = 0; }
     if ( ctn3c_3 == 0 && ctn3c2_3 == 1 ) {
       if(jikan - tg_ht3 >= tanso3_3) { tg_ht3 = millis();
         brn3 = brn3 - fa_t_cl_3_3;
@@ -1522,7 +1539,7 @@ void effect_cac() {
       }
     }
     
-    if (kpr == 25 || ctn4c_3 == 1) { ctn4c_3 = 1; ctn4c2_3 = 0;}
+    if ( kpr == 25 ) { ctn4c_3 = 1; ctn4c2_3 = 0; reset_eff_nor();}
     if ( ctn4c_3 == 1 && ctn4c2_3 == 0 ) {
       if(jikan - tg_ht4 >= tanso4_3) { tg_ht4 = millis();
         if( brn4 <= brnon3) {
@@ -1537,8 +1554,8 @@ void effect_cac() {
         else {analogWrite(led_4, brn4);}
       } 
     }
-    if (krl == 25 || ctn4c2_3 == 1) { ctn4c_3 = 0; ctn4c2_3 = 1;}
-    if (krl == 25) { kpr = 0; krl = 0; }
+    if ( krl == 25 ) { ctn4c_3 = 0; ctn4c2_3 = 1;}
+    if ( krl == 25 ) { kpr = 0; krl = 0; }
     if ( ctn4c_3 == 0 && ctn4c2_3 == 1 ) {
       if(jikan - tg_ht4 >= tanso4_3) { tg_ht4 = millis();
         brn4 = brn4 - fa_t_cl_4_3;
@@ -1551,7 +1568,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 5 || ctn5c_3 == 1) { ctn5c_3 = 1; ctn5c2_3 = 0;}
+    if ( kpr == 5 ) { ctn5c_3 = 1; ctn5c2_3 = 0; reset_eff_nor();}
     if ( ctn5c_3 == 1 && ctn5c2_3 == 0 ) {
       if(jikan - tg_ht5 >= tanso5_3) { tg_ht5 = millis();
         if( brn5 <= brnon3) {
@@ -1566,8 +1583,8 @@ void effect_cac() {
         else {analogWrite(led_5, brn5);}
       } 
     }
-    if (krl == 5 || ctn5c2_3 == 1) { ctn5c_3 = 0; ctn5c2_3 = 1;}
-    if (krl == 5) { kpr = 0; krl = 0; }
+    if ( krl == 5 ) { ctn5c_3 = 0; ctn5c2_3 = 1;}
+    if ( krl == 5 ) { kpr = 0; krl = 0; }
     if ( ctn5c_3 == 0 && ctn5c2_3 == 1 ) {
       if(jikan - tg_ht5 >= tanso5_3) { tg_ht5 = millis();
         brn5 = brn5 - fa_t_cl_5_3;
@@ -1580,7 +1597,7 @@ void effect_cac() {
       }
     }
   
-    if (kpr == 17 || ctn6c_3 == 1) { ctn6c_3 = 1; ctn6c2_3 = 0;}
+    if ( kpr == 17 ) { ctn6c_3 = 1; ctn6c2_3 = 0; reset_eff_nor();}
     if ( ctn6c_3 == 1 && ctn6c2_3 == 0 ) {
       if(jikan - tg_ht6 >= tanso6_3) { tg_ht6 = millis();
         if( brn6 <= brnon3) {
@@ -1595,8 +1612,8 @@ void effect_cac() {
         else {analogWrite(led_6, brn6);}
       }
     }
-    if (krl == 17 || ctn6c2_3 == 1) { ctn6c_3 = 0; ctn6c2_3 = 1;}
-    if (krl == 17) { kpr = 0; krl = 0; }
+    if ( krl == 17 ) { ctn6c_3 = 0; ctn6c2_3 = 1;}
+    if ( krl == 17 ) { kpr = 0; krl = 0; }
     if ( ctn6c_3 == 0 && ctn6c2_3 == 1 ) {
       if(jikan - tg_ht6 >= tanso6_3) { tg_ht6 = millis();
         brn6 = brn6 - fa_t_cl_6_3;
@@ -2117,8 +2134,9 @@ void effect_combo_multi() {
   //////////////////////////////   LINE 1   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if ( kpr == 48 ) {
-    ctn_ao_1 = 1;
     reset_eff_nor();
+    reset_val();
+    ctn_ao_1 = 1;
   }
   if ( ctn_ao_1 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
@@ -2132,7 +2150,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_1 != 0 ) {
+  if ( led_dc_1 != 0 && ctn_ao_1 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
       if ( led_dc_1 == 1) {
         if ( tanso1 >= 21) {
@@ -2226,25 +2244,421 @@ void effect_combo_multi() {
       }
     }
   }
-  if( krl == 48 ) {
-    analogWrite(led_1, LOW);
-    analogWrite(led_2, LOW);
-    analogWrite(led_3, LOW);
-    analogWrite(led_4, LOW);
-    analogWrite(led_5, LOW);
-    analogWrite(led_6, LOW);
-    kpr = 0; krl = 0;
-    led_dc_1 = 0;
-    ctn_ao_1 = 0;
-  }
+  if( krl == 48 ) { reset_val();}
 
+  if ( kpr == 19 ) {
+    reset_eff_nor();
+    reset_val();
+    ctn_ao_1_2 = 1;
+  }
+  if ( ctn_ao_1_2 == 1 ) {
+    if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_1 += 1;
+        if ( led_dc_1 == 7 ) led_dc_1 = 1;
+      }
+      else {
+        led_dc_1 -= 1;
+        if ( led_dc_1 == 0 ) led_dc_1 = 6;
+      }
+    }
+  }
+  if ( led_dc_1 != 0 && ctn_ao_1_2 == 1 ) {
+    if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
+      if ( led_dc_1 == 1) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 2) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 3) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 4) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 5) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 6) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+    }
+  }
+  if( krl == 19 ) { reset_val();}
+
+  if ( kpr == 47 ) {
+    reset_eff_nor();
+    reset_val();
+    ctn_ao_1_3 = 1;
+  }
+  if ( ctn_ao_1_3 == 1 ) {
+    if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_1 += 1;
+        if ( led_dc_1 == 7 ) led_dc_1 = 1;
+      }
+      else {
+        led_dc_1 -= 1;
+        if ( led_dc_1 == 0 ) led_dc_1 = 6;
+      }
+    }
+  }
+  if ( led_dc_1 != 0 && ctn_ao_1_3 == 1 ) {
+    if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
+      if ( led_dc_1 == 1) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 2) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 3) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 4) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+      if ( led_dc_1 == 5) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 6) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+    }
+  }
+  if( krl == 47 ) { reset_val();}
   
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 2   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if ( kpr == 52 ) {
-    ctn_ao_2 = 1;
     reset_eff_nor();
+    reset_val();
+    ctn_ao_2 = 1;
   }
   if ( ctn_ao_2 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
@@ -2258,7 +2672,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_2 != 0 ) {
+  if ( led_dc_2 != 0 && ctn_ao_2 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
       if ( led_dc_2 == 1) {
         if ( tanso2 >= 21) {
@@ -2352,26 +2766,421 @@ void effect_combo_multi() {
       }
     }
   }
-  if( krl == 52 ) {
-    analogWrite(led_1, LOW);
-    analogWrite(led_2, LOW);
-    analogWrite(led_3, LOW);
-    analogWrite(led_4, LOW);
-    analogWrite(led_5, LOW);
-    analogWrite(led_6, LOW);
-    kpr = 0; krl = 0;
-    led_dc_2 = 0;
-    ctn_ao_2 = 0;
-  }
+  if( krl == 52 ) { reset_val();}
   
+  if ( kpr == 15 ) {
+    reset_eff_nor();
+    reset_val();
+    ctn_ao_2_2 = 1;
+  }
+  if ( ctn_ao_2_2 == 1 ) {
+    if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_2 += 1;
+        if ( led_dc_2 == 7 ) led_dc_2 = 1;
+      }
+      else {
+        led_dc_2 -= 1;
+        if ( led_dc_2 == 0 ) led_dc_2 = 6;
+      }
+    }
+  }
+  if ( led_dc_2 != 0 && ctn_ao_2_2 == 1 ) {
+    if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
+      if ( led_dc_2 == 1) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 2) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 3) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 4) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 5) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 6) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+    }
+  }
+  if( krl == 15 ) { reset_val();}
 
+  if ( kpr == 51 ) {
+    reset_eff_nor();
+    reset_val();
+    ctn_ao_2_3 = 1;
+  }
+  if ( ctn_ao_2_3 == 1 ) {
+    if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_2 += 1;
+        if ( led_dc_2 == 7 ) led_dc_2 = 1;
+      }
+      else {
+        led_dc_2 -= 1;
+        if ( led_dc_2 == 0 ) led_dc_2 = 6;
+      }
+    }
+  }
+  if ( led_dc_2 != 0 && ctn_ao_2_3 == 1 ) {
+    if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
+      if ( led_dc_2 == 1) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 2) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 3) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 4) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+      if ( led_dc_2 == 5) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 6) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+    }
+  }
+  if( krl == 51 ) { reset_val();}
   
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 3   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if ( kpr == 56 ) {
-    ctn_ao_3 = 1;
     reset_eff_nor();
+    reset_val();
+    ctn_ao_3 = 1;
   }
   if ( ctn_ao_3 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
@@ -2479,17 +3288,413 @@ void effect_combo_multi() {
       }
     }
   }
-  if( krl == 56 ) {
-    analogWrite(led_1, LOW);
-    analogWrite(led_2, LOW);
-    analogWrite(led_3, LOW);
-    analogWrite(led_4, LOW);
-    analogWrite(led_5, LOW);
-    analogWrite(led_6, LOW);
-    kpr = 0; krl = 0;
-    led_dc_3 = 0;
-    ctn_ao_3 = 0;
+  if( krl == 56 ) { reset_val();}
+
+  if ( kpr == 54 ) {
+    reset_eff_nor();
+    reset_val();
+    ctn_ao_3_2 = 1;
   }
+  if ( ctn_ao_3_2 == 1 ) {
+    if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_3 += 1;
+        if ( led_dc_3 == 7 ) led_dc_3 = 1;
+      }
+      else {
+        led_dc_3 -= 1;
+        if ( led_dc_3 == 0 ) led_dc_3 = 6;
+      }
+    }
+  }
+  if ( led_dc_3 != 0 && ctn_ao_3_2 == 1 ) {
+    if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
+      if ( led_dc_3 == 1) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 2) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 3) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 4) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 5) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 6) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+    }
+  }
+  if( krl == 54 ) { reset_val();}
+
+  if ( kpr == 55 ) {
+    reset_eff_nor();
+    reset_val();
+    ctn_ao_3_3 = 1;
+  }
+  if ( ctn_ao_3_3 == 1 ) {
+    if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_3 += 1;
+        if ( led_dc_3 == 7 ) led_dc_3 = 1;
+      }
+      else {
+        led_dc_3 -= 1;
+        if ( led_dc_3 == 0 ) led_dc_3 = 6;
+      }
+    }
+  }
+  if ( led_dc_3 != 0 && ctn_ao_3_3 == 1 ) {
+    if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
+      if ( led_dc_3 == 1) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 2) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 3) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 4) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+      if ( led_dc_3 == 5) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 6) {
+        if ( tanso3 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+    }
+  }
+  if( krl == 55 ) { reset_val();}
 }
 
 void reset_val() {
@@ -2533,6 +3738,7 @@ void reset_val() {
 
   stt_ts1 = 0; stt_ts2 = 0; stt_ts3 = 0; stt_ts4 = 0; stt_ts5 = 0; stt_ts6 = 0;
   stt_ts_ao_1 = 0; stt_ts_ao_2 = 0; stt_ts_ao_3 = 0;
+  kpr = 0; krl = 0;
 
   analogWrite(led_1, LOW);
   analogWrite(led_2, LOW);
@@ -2543,24 +3749,115 @@ void reset_val() {
 }
 
 void reset_eff_nor() {
-  ctn1 = 0;     ctn2 = 0;     ctn3 = 0;     ctn4 = 0;     ctn5 = 0;     ctn6 = 0;
-  ctn1b = 0;    ctn2b = 0;    ctn3b = 0;    ctn4b = 0;    ctn5b = 0;    ctn6b = 0;
-  ctn1c = 0;    ctn2c = 0;    ctn3c = 0;    ctn4c = 0;    ctn5c = 0;    ctn6c = 0;
-  ctn1c2 = 0;   ctn2c2 = 0;   ctn3c2 = 0;   ctn4c2 = 0;   ctn5c2 = 0;   ctn6c2 = 0;
-  ctn1c3 = 0;   ctn2c3 = 0;   ctn3c3 = 0;   ctn4c3 = 0;   ctn5c3 = 0;   ctn6c3 = 0;
-  ctn1_2 = 0;   ctn2_2 = 0;   ctn3_2 = 0;   ctn4_2 = 0;   ctn5_2 = 0;   ctn6_2 = 0;
-  ctn1b_2 = 0;  ctn2b_2 = 0;  ctn3b_2 = 0;  ctn4b_2 = 0;  ctn5b_2 = 0;  ctn6b_2 = 0;
-  ctn1c_2 = 0;  ctn2c_2 = 0;  ctn3c_2 = 0;  ctn4c_2 = 0;  ctn5c_2 = 0;  ctn6c_2 = 0;
-  ctn1c2_2 = 0; ctn2c2_2 = 0; ctn3c2_2 = 0; ctn4c2_2 = 0; ctn5c2_2 = 0; ctn6c2_2 = 0;
-  ctn1c3_2 = 0; ctn2c3_2 = 0; ctn3c3_2 = 0; ctn4c3_2 = 0; ctn5c3_2 = 0; ctn6c3_2 = 0;
-  ctn1_3 = 0;   ctn2_3 = 0;   ctn3_3 = 0;   ctn4_3 = 0;   ctn5_3 = 0;   ctn6_3 = 0;
-  ctn1b_3 = 0;  ctn2b_3 = 0;  ctn3b_3 = 0;  ctn4b_3 = 0;  ctn5b_3 = 0;  ctn6b_3 = 0;
-  ctn1c_3 = 0;  ctn2c_3 = 0;  ctn3c_3 = 0;  ctn4c_3 = 0;  ctn5c_3 = 0;  ctn6c_3 = 0;
-  ctn1c2_3 = 0; ctn2c2_3 = 0; ctn3c2_3 = 0; ctn4c2_3 = 0; ctn5c2_3 = 0; ctn6c2_3 = 0;
-  ctn1c3_3 = 0; ctn2c3_3 = 0; ctn3c3_3 = 0; ctn4c3_3 = 0; ctn5c3_3 = 0; ctn6c3_3 = 0;
-
-  fa1 = 1; fa2 = 1; fa3 = 1; fa4 = 1; fa5 = 1; fa6 = 1;
-  brn1 = 0; brn2 = 0; brn3 = 0; brn4 = 0; brn5 = 0; brn6 = 0;
+  ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////   ROW 1   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 20 ) {
+    brn1 = 0;
+    ctn1_2 = ctn1b_2 = ctn1c_2 = ctn1c2_2 = ctn1c3_2 = 0;
+    ctn1_3 = ctn1b_3 = ctn1c_3 = ctn1c2_3 = ctn1c3_3 = 0;
+  }
+  if ( kpr == 4 ) {
+    brn1 = 0;
+    ctn1 = ctn1b = ctn1c = ctn1c2 = ctn1c3 = 0;
+    ctn1_3 = ctn1b_3 = ctn1c_3 = ctn1c2_3 = ctn1c3_3 = 0;
+  }
+  if ( kpr == 29 ) {
+    brn1 = 0;
+    ctn1_2 = ctn1b_2 = ctn1c_2 = ctn1c2_2 = ctn1c3_2 = 0;
+    ctn1 = ctn1b = ctn1c = ctn1c2 = ctn1c3 = 0;
+  }
+  ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////   ROW 2   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 26 ) {
+    brn2 = 0;
+    ctn2_2 = ctn2b_2 = ctn2c_2 = ctn2c2_2 = ctn2c3_2 = 0;
+    ctn2_3 = ctn2b_3 = ctn2c_3 = ctn2c2_3 = ctn2c3_3 = 0;
+  }
+  if ( kpr == 22 ) {
+    brn2 = 0;
+    ctn2 = ctn2b = ctn2c = ctn2c2 = ctn2c3 = 0;
+    ctn2_3 = ctn2b_3 = ctn2c_3 = ctn2c2_3 = ctn2c3_3 = 0;
+  }
+  if ( kpr == 27 ) {
+    brn2 = 0;
+    ctn2_2 = ctn2b_2 = ctn2c_2 = ctn2c2_2 = ctn2c3_2 = 0;
+    ctn2 = ctn2b = ctn2c = ctn2c2 = ctn2c3 = 0;
+  }
+  ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////   ROW 3   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 8 ) {
+    brn3 = 0;
+    ctn3_2 = ctn3b_2 = ctn3c_2 = ctn3c2_2 = ctn3c3_2 = 0;
+    ctn3_3 = ctn3b_3 = ctn3c_3 = ctn3c2_3 = ctn3c3_3 = 0;
+  }
+  if ( kpr == 7 ) {
+    brn3 = 0;
+    ctn3 = ctn3b = ctn3c = ctn3c2 = ctn3c3 = 0;
+    ctn3_3 = ctn3b_3 = ctn3c_3 = ctn3c2_3 = ctn3c3_3 = 0;
+  }
+  if ( kpr == 6 ) {
+    brn3 = 0;
+    ctn3_2 = ctn3b_2 = ctn3c_2 = ctn3c2_2 = ctn3c3_2 = 0;
+    ctn3 = ctn3b = ctn3c = ctn3c2 = ctn3c3 = 0;
+  }
+  ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////   ROW 4   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 21 ) {
+    brn4 = 0;
+    ctn4_2 = ctn4b_2 = ctn4c_2 = ctn4c2_2 = ctn4c3_2 = 0;
+    ctn4_3 = ctn4b_3 = ctn4c_3 = ctn4c2_3 = ctn4c3_3 = 0;
+  }
+  if ( kpr == 9 ) {
+    brn4 = 0;
+    ctn4 = ctn4b = ctn4c = ctn4c2 = ctn4c3 = 0;
+    ctn4_3 = ctn4b_3 = ctn4c_3 = ctn4c2_3 = ctn4c3_3 = 0;
+  }
+  if ( kpr == 25 ) {
+    brn4 = 0;
+    ctn4_2 = ctn4b_2 = ctn4c_2 = ctn4c2_2 = ctn4c3_2 = 0;
+    ctn4 = ctn4b = ctn4c = ctn4c2 = ctn4c3 = 0;
+  }
+  ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////   ROW 5   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 23 ) {
+    brn5 = 0;
+    ctn5_2 = ctn5b_2 = ctn5c_2 = ctn5c2_2 = ctn5c3_2 = 0;
+    ctn5_3 = ctn5b_3 = ctn5c_3 = ctn5c2_3 = ctn5c3_3 = 0;
+  }
+  if ( kpr == 10 ) {
+    brn5 = 0;
+    ctn5 = ctn5b = ctn5c = ctn5c2 = ctn5c3 = 0;
+    ctn5_3 = ctn5b_3 = ctn5c_3 = ctn5c2_3 = ctn5c3_3 = 0;
+  }
+  if ( kpr == 5 ) {
+    brn5 = 0;
+    ctn5_2 = ctn5b_2 = ctn5c_2 = ctn5c2_2 = ctn5c3_2 = 0;
+    ctn5 = ctn5b = ctn5c = ctn5c2 = ctn5c3 = 0;
+  }
+  ////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////   ROW 6   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 28 ) {
+    brn6 = 0;
+    ctn6_2 = ctn6b_2 = ctn6c_2 = ctn6c2_2 = ctn6c3_2 = 0;
+    ctn6_3 = ctn6b_3 = ctn6c_3 = ctn6c2_3 = ctn6c3_3 = 0;
+  }
+  if ( kpr == 11 ) {
+    brn6 = 0;
+    ctn6 = ctn6b = ctn6c = ctn6c2 = ctn6c3 = 0;
+    ctn6_3 = ctn6b_3 = ctn6c_3 = ctn6c2_3 = ctn6c3_3 = 0;
+  }
+  if ( kpr == 17 ) {
+    brn6 = 0;
+    ctn6_2 = ctn6b_2 = ctn6c_2 = ctn6c2_2 = ctn6c3_2 = 0;
+    ctn6 = ctn6b = ctn6c = ctn6c2 = ctn6c3 = 0;
+  }
 
   stt_ts1 = 0; stt_ts2 = 0; stt_ts3 = 0; stt_ts4 = 0; stt_ts5 = 0; stt_ts6 = 0;
+  kpr = 0; krl = 0;
 }

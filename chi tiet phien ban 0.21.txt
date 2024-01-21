@@ -1,0 +1,3 @@
+- Check status to before run any function
+- Add new function for reset "Running Effects"
+- Deploy new Structure
