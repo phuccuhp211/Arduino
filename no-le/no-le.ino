@@ -2,20 +2,28 @@
 unsigned long jikan;
 /* ---------------------------------------------------------------------------------------------------- */
 int tg_ht1,    tg_ht4,    tg_ht2,    tg_ht5,    tg_ht3,    tg_ht6;
+int tg_ht_ao_1,    tg_ht_ao_2,    tg_ht_ao_3;
+int tg_ht_ao_1a,   tg_ht_ao_2a,   tg_ht_ao_3a;
 float tanso1,    tanso2,    tanso3,    tanso4,    tanso5,    tanso6;
 float tanso1_2,  tanso2_2,  tanso3_2,  tanso4_2,  tanso5_2,  tanso6_2;
 float tanso1_3,  tanso2_3,  tanso3_3,  tanso4_3,  tanso5_3,  tanso6_3;
-int stt_ts1=0, stt_ts4=0, stt_ts2=0, stt_ts5=0, stt_ts3=0, stt_ts6=0;
+float tanso_ao_1,tanso_ao_2,tanso_ao_3;
+int stt_ts1 = 0, stt_ts2 = 0, stt_ts3 = 0, stt_ts4 = 0, stt_ts5 = 0, stt_ts6 = 0;
+int stt_ts_ao_1= 0, stt_ts_ao_2 = 0, stt_ts_ao_3 = 0;
+int led_dc_1 = 0, led_dc_2 = 0, led_dc_3 = 0;
 /* ---------------------------------------------------------------------------------------------------- */
 int line_qwe = 0, line_asd = 0, line_zxc = 0;
 int kpr = 0, krl = 0;
+int ctrl_combo = 0;
 int kpr_nole = 0, krl_nole = 0;
-float brnon, brnoff, brnon2, brnoff2, brnon3, brnoff3;
+float brnon, brnoff, brnon2, brnoff2, brnon3, brnoff3, brn_ao;
 /* ---------------------------------------------------------------------------------------------------- */ 
 int led_1 = 13, led_2 = 12, led_3 = 11, led_4 = 10, led_5 = 9, led_6 = 8;
 int fa1 = 1,    fa2 = 1,    fa3 = 1,    fa4 = 1,    fa5 = 1,   fa6 = 1;
+int fa_ao_1 = 1,fa_ao_2 = 1,fa_ao_3 = 1;
 /* ---------------------------------------------------------------------------------------------------- */
 float brn1 = 0,    brn2 = 0,    brn3 = 0,    brn4 = 0,    brn5 = 0,    brn6 = 0;
+float brn_ao_1 = 0,brn_ao_2 = 0,brn_ao_3 = 0;
 
 float brncl_1 = 0, brncl_2 = 0, brncl_3 = 0, brncl_4 = 0, brncl_5 = 0, brncl_6 = 0;
 float oncl_1 = 0,  oncl_2 = 0,  oncl_3 = 0,  oncl_4 = 0,  oncl_5 = 0,  oncl_6 = 0;
@@ -36,6 +44,24 @@ float fa_c_cl_1_3= 0,fa_c_cl_2_3= 0,fa_c_cl_3_3= 0,fa_c_cl_4_3= 0,fa_c_cl_5_3= 0
 float fa_t_cl_1_3= 0,fa_t_cl_2_3= 0,fa_t_cl_3_3= 0,fa_t_cl_4_3= 0,fa_t_cl_5_3= 0,fa_t_cl_6_3 = 0;
 
 float hsbx_1 = 0, hsbx_2 = 0, hsbx_3 = 0;
+/* ---------------------------------------------------------------------------------------------------- */
+int ctn_ao_1 = 0,     ctn_ao_2 = 0,     ctn_ao_3 = 0;
+int ctn_ao_1b = 0,    ctn_ao_2b = 0,    ctn_ao_3b = 0;
+int ctn_ao_1c = 0,    ctn_ao_2c = 0,    ctn_ao_3c = 0;
+int ctn_ao_1c2 = 0,   ctn_ao_2c2 = 0,   ctn_ao_3c2 = 0;
+int ctn_ao_1c3 = 0,   ctn_ao_2c3 = 0,   ctn_ao_3c3 = 0;
+/* ---------------------------------------------------------------------------------------------------- */
+int ctn_ao_1_2 = 0,     ctn_ao_2_2 = 0,     ctn_ao_3_2 = 0;
+int ctn_ao_1b_2 = 0,    ctn_ao_2b_2 = 0,    ctn_ao_3b_2 = 0;
+int ctn_ao_1c_2 = 0,    ctn_ao_2c_2 = 0,    ctn_ao_3c_2 = 0;
+int ctn_ao_1c2_2 = 0,   ctn_ao_2c2_2 = 0,   ctn_ao_3c2_2 = 0;
+int ctn_ao_1c3_2 = 0,   ctn_ao_2c3_2 = 0,   ctn_ao_3c3_2 = 0;
+/* ---------------------------------------------------------------------------------------------------- */
+int ctn_ao_1_3 = 0,     ctn_ao_2_3 = 0,     ctn_ao_3_3 = 0;
+int ctn_ao_1b_3 = 0,    ctn_ao_2b_3 = 0,    ctn_ao_3b_3 = 0;
+int ctn_ao_1c_3 = 0,    ctn_ao_2c_3 = 0,    ctn_ao_3c_3 = 0;
+int ctn_ao_1c2_3 = 0,   ctn_ao_2c2_3 = 0,   ctn_ao_3c2_3 = 0;
+int ctn_ao_1c3_3 = 0,   ctn_ao_2c3_3 = 0,   ctn_ao_3c3_3 = 0;
 /* ---------------------------------------------------------------------------------------------------- */
 int ctn1 = 0,   ctn2 = 0,   ctn3 = 0,   ctn4 = 0,   ctn5 = 0,   ctn6 = 0;
 int ctn1b = 0,  ctn2b = 0,  ctn3b = 0,  ctn4b = 0,  ctn5b = 0,  ctn6b = 0;
@@ -98,6 +124,15 @@ void loop() {
   if ( kpr == 89 ) {line_zxc = 1;}
   if ( kpr == 90 ) {line_zxc = 2;}
   if ( kpr == 91 ) {line_zxc = 3;}
+
+  if ( kpr == 44 ) {
+    ctrl_combo = 1;
+    //reset_val();
+  }
+  if ( krl == 44 ) {
+    ctrl_combo = 0;
+    //reset_val();
+  }
 
   get_pot_val();
 
@@ -168,51 +203,53 @@ void loop() {
   }
   
   effect_cac(); 
+  effect_combo_sigle();
+  effect_combo_multi();
 }
 
 void get_pot_val() {
   brntd = analogRead(pottd);
-  if ( brntd >= 1000 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 60;
-  else if ( brntd >= 950 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 58;
-  else if ( brntd >= 900 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 56;
-  else if ( brntd >= 850 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 54;
-  else if ( brntd >= 800 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 52;
-  else if ( brntd >= 750 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 50;
-  else if ( brntd >= 700 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 48;
-  else if ( brntd >= 650 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 46;
-  else if ( brntd >= 600 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 44;
-  else if ( brntd >= 550 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 42;
-  else if ( brntd >= 500 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 40;
-  else if ( brntd >= 450 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 38;
-  else if ( brntd >= 400 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 36;
-  else if ( brntd >= 350 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 34;
-  else if ( brntd >= 300 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 32;
-  else if ( brntd >= 250 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 30;
-  else if ( brntd >= 200 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 28;
-  else if ( brntd >= 150 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 26;
-  else if ( brntd >= 100 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 24;
-  else if ( brntd >= 50 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 22;
-  else if ( brntd >= 0 ) tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 20;
+  if ( brntd >= 1000 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 60; }
+  else if ( brntd >= 950 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 58; }
+  else if ( brntd >= 900 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 56; }
+  else if ( brntd >= 850 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 54; }
+  else if ( brntd >= 800 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 52; }
+  else if ( brntd >= 750 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 50; }
+  else if ( brntd >= 700 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 48; }
+  else if ( brntd >= 650 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 46; }
+  else if ( brntd >= 600 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 44; }
+  else if ( brntd >= 550 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 42; }
+  else if ( brntd >= 500 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 40; }
+  else if ( brntd >= 450 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 38; }
+  else if ( brntd >= 400 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 36; }
+  else if ( brntd >= 350 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 34; }
+  else if ( brntd >= 300 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 32; }
+  else if ( brntd >= 250 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 30; }
+  else if ( brntd >= 200 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 28; }
+  else if ( brntd >= 150 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 26; }
+  else if ( brntd >= 100 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 24; }
+  else if ( brntd >= 50 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 22; }
+  else if ( brntd >= 0 ) { tanso1 = tanso2 = tanso3 = tanso4 = tanso5 = tanso6 = 20; }
   mainbrn = analogRead(potbrn);
   mainbrn = mainbrn / 4;
-  if ( mainbrn >= 255) brnon = brnoff = 0;
-  else if ( mainbrn >= 240) brnon = brnoff = 10;
-  else if ( mainbrn >= 230) brnon = brnoff = 30;
-  else if ( mainbrn >= 220) brnon = brnoff = 50;
-  else if ( mainbrn >= 210) brnon = brnoff = 70;
-  else if ( mainbrn >= 200) brnon = brnoff = 90;
-  else if ( mainbrn >= 185) brnon = brnoff = 110;
-  else if ( mainbrn >= 170) brnon = brnoff = 125;
-  else if ( mainbrn >= 155) brnon = brnoff = 140;
-  else if ( mainbrn >= 140) brnon = brnoff = 155;
-  else if ( mainbrn >= 125) brnon = brnoff = 170;
-  else if ( mainbrn >= 110) brnon = brnoff = 185;
-  else if ( mainbrn >= 90) brnon = brnoff = 200;
-  else if ( mainbrn >= 70) brnon = brnoff = 210;
-  else if ( mainbrn >= 50) brnon = brnoff = 220;
-  else if ( mainbrn >= 30) brnon = brnoff = 230;
-  else if ( mainbrn >= 10) brnon = brnoff = 240;
-  else if ( mainbrn >= 0) brnon = brnoff = 250;
+  if ( mainbrn >= 255) { brnon = brnoff = 0; tanso_ao_1 = 10; }
+  else if ( mainbrn >= 240) { brnon = brnoff = 15; tanso_ao_1 = 30; }
+  else if ( mainbrn >= 225) { brnon = brnoff = 30; tanso_ao_1 = 50; }
+  else if ( mainbrn >= 210) { brnon = brnoff = 45; tanso_ao_1 = 70; }
+  else if ( mainbrn >= 195) { brnon = brnoff = 60; tanso_ao_1 = 90; }
+  else if ( mainbrn >= 180) { brnon = brnoff = 75; tanso_ao_1 = 110; }
+  else if ( mainbrn >= 165) { brnon = brnoff = 90; tanso_ao_1 = 130; }
+  else if ( mainbrn >= 150) { brnon = brnoff = 105; tanso_ao_1 = 130; }
+  else if ( mainbrn >= 135) { brnon = brnoff = 120; tanso_ao_1 = 150; }
+  else if ( mainbrn >= 120) { brnon = brnoff = 135; tanso_ao_1 = 170; }
+  else if ( mainbrn >= 105) { brnon = brnoff = 150; tanso_ao_1 = 190; }
+  else if ( mainbrn >= 90) { brnon = brnoff = 165; tanso_ao_1 = 210; }
+  else if ( mainbrn >= 75) { brnon = brnoff = 180; tanso_ao_1 = 230; }
+  else if ( mainbrn >= 60) { brnon = brnoff = 195; tanso_ao_1 = 250; }
+  else if ( mainbrn >= 45) { brnon = brnoff = 210; tanso_ao_1 = 270; }
+  else if ( mainbrn >= 30) { brnon = brnoff = 225; tanso_ao_1 = 310; }
+  else if ( mainbrn >= 15) { brnon = brnoff = 240; tanso_ao_1 = 340; }
+  else if ( mainbrn >= 0) { brnon = brnoff = 250; tanso_ao_1 = 400; }
   effhigh = analogRead(pothigh);
   effhigh = effhigh / 4;
   if (effhigh >= 255) fa_c1 = fa_c2 = fa_c3 = fa_c4 = fa_c5 = fa_c6 = 20;
@@ -256,47 +293,47 @@ void get_pot_val() {
 
   
   brntd_2 = analogRead(pottd2);
-  if ( brntd_2 >= 1000 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 60;
-  else if ( brntd_2 >= 950 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 58;
-  else if ( brntd_2 >= 900 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 56;
-  else if ( brntd_2 >= 850 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 54;
-  else if ( brntd_2 >= 800 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 52;
-  else if ( brntd_2 >= 750 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 50;
-  else if ( brntd_2 >= 700 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 48;
-  else if ( brntd_2 >= 650 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 46;
-  else if ( brntd_2 >= 600 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 44;
-  else if ( brntd_2 >= 550 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 42;
-  else if ( brntd_2 >= 500 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 40;
-  else if ( brntd_2 >= 450 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 38;
-  else if ( brntd_2 >= 400 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 36;
-  else if ( brntd_2 >= 350 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 34;
-  else if ( brntd_2 >= 300 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 32;
-  else if ( brntd_2 >= 250 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 30;
-  else if ( brntd_2 >= 200 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 28;
-  else if ( brntd_2 >= 150 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 26;
-  else if ( brntd_2 >= 100 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 24;
-  else if ( brntd_2 >= 50 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 22;
-  else if ( brntd_2 >= 0 ) tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 20;
+  if ( brntd_2 >= 1000 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 60; }
+  else if ( brntd_2 >= 950 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 58; }
+  else if ( brntd_2 >= 900 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 56; }
+  else if ( brntd_2 >= 850 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 54; }
+  else if ( brntd_2 >= 800 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 52; }
+  else if ( brntd_2 >= 750 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 50; }
+  else if ( brntd_2 >= 700 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 48; }
+  else if ( brntd_2 >= 650 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 46; }
+  else if ( brntd_2 >= 600 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 44; }
+  else if ( brntd_2 >= 550 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 42; }
+  else if ( brntd_2 >= 500 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 40; }
+  else if ( brntd_2 >= 450 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 38; }
+  else if ( brntd_2 >= 400 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 36; }
+  else if ( brntd_2 >= 350 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 34; }
+  else if ( brntd_2 >= 300 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 32; }
+  else if ( brntd_2 >= 250 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 30; }
+  else if ( brntd_2 >= 200 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 28; }
+  else if ( brntd_2 >= 150 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 26; }
+  else if ( brntd_2 >= 100 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 24; }
+  else if ( brntd_2 >= 50 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 22; }
+  else if ( brntd_2 >= 0 ) { tanso1_2 = tanso2_2 = tanso3_2 = tanso4_2 = tanso5_2 = tanso6_2 = 20; }
   mainbrn_2 = analogRead(potbrn2);
   mainbrn_2 = mainbrn_2 / 4;
-  if ( mainbrn_2 >= 255) brnon2 = brnoff2 = 0;
-  else if ( mainbrn_2 >= 240) brnon2 = brnoff2 = 10;
-  else if ( mainbrn_2 >= 230) brnon2 = brnoff2 = 30;
-  else if ( mainbrn_2 >= 220) brnon2 = brnoff2 = 50;
-  else if ( mainbrn_2 >= 210) brnon2 = brnoff2 = 70;
-  else if ( mainbrn_2 >= 200) brnon2 = brnoff2 = 90;
-  else if ( mainbrn_2 >= 185) brnon2 = brnoff2 = 110;
-  else if ( mainbrn_2 >= 170) brnon2 = brnoff2 = 125;
-  else if ( mainbrn_2 >= 155) brnon2 = brnoff2 = 140;
-  else if ( mainbrn_2 >= 140) brnon2 = brnoff2 = 155;
-  else if ( mainbrn_2 >= 125) brnon2 = brnoff2 = 170;
-  else if ( mainbrn_2 >= 110) brnon2 = brnoff2 = 185;
-  else if ( mainbrn_2 >= 90) brnon2 = brnoff2 = 200;
-  else if ( mainbrn_2 >= 70) brnon2 = brnoff2 = 210;
-  else if ( mainbrn_2 >= 50) brnon2 = brnoff2 = 220;
-  else if ( mainbrn_2 >= 30) brnon2 = brnoff2 = 230;
-  else if ( mainbrn_2 >= 10) brnon2 = brnoff2 = 240;
-  else if ( mainbrn_2 >= 0) brnon2 = brnoff2 = 250;
+  if ( mainbrn_2 >= 255) { brnon2 = brnoff2 = 0; tanso_ao_2 = 10; }
+  else if ( mainbrn_2 >= 240) { brnon2 = brnoff2 = 15; tanso_ao_2 = 30; }
+  else if ( mainbrn_2 >= 225) { brnon2 = brnoff2 = 30; tanso_ao_2 = 50; }
+  else if ( mainbrn_2 >= 210) { brnon2 = brnoff2 = 45; tanso_ao_2 = 70; }
+  else if ( mainbrn_2 >= 195) { brnon2 = brnoff2 = 60; tanso_ao_2 = 90; }
+  else if ( mainbrn_2 >= 180) { brnon2 = brnoff2 = 75; tanso_ao_2 = 110; }
+  else if ( mainbrn_2 >= 165) { brnon2 = brnoff2 = 90; tanso_ao_2 = 130; }
+  else if ( mainbrn_2 >= 150) { brnon2 = brnoff2 = 105; tanso_ao_2 = 130; }
+  else if ( mainbrn_2 >= 135) { brnon2 = brnoff2 = 120; tanso_ao_2 = 150; }
+  else if ( mainbrn_2 >= 120) { brnon2 = brnoff2 = 135; tanso_ao_2 = 170; }
+  else if ( mainbrn_2 >= 105) { brnon2 = brnoff2 = 150; tanso_ao_2 = 190; }
+  else if ( mainbrn_2 >= 90) { brnon2 = brnoff2 = 165; tanso_ao_2 = 210; }
+  else if ( mainbrn_2 >= 75) { brnon2 = brnoff2 = 180; tanso_ao_2 = 230; }
+  else if ( mainbrn_2 >= 60) { brnon2 = brnoff2 = 195; tanso_ao_2 = 250; }
+  else if ( mainbrn_2 >= 45) { brnon2 = brnoff2 = 210; tanso_ao_2 = 270; }
+  else if ( mainbrn_2 >= 30) { brnon2 = brnoff2 = 225; tanso_ao_2 = 310; }
+  else if ( mainbrn_2 >= 15) { brnon2 = brnoff2 = 240; tanso_ao_2 = 340; }
+  else if ( mainbrn_2 >= 0) { brnon2 = brnoff2 = 250; tanso_ao_2 = 400; }
   effhigh_2 = analogRead(pothigh2);
   effhigh_2 = effhigh_2 / 4;
   if (effhigh_2 >= 255) fa_c1_2 = fa_c2_2 = fa_c3_2 = fa_c4_2 = fa_c5_2 = fa_c6_2 = 20;
@@ -341,47 +378,47 @@ void get_pot_val() {
 
   
   brntd_3 = analogRead(pottd3);
-  if ( brntd_3 >= 1000 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 60;
-  else if ( brntd_3 >= 950 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 58;
-  else if ( brntd_3 >= 900 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 56;
-  else if ( brntd_3 >= 850 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 54;
-  else if ( brntd_3 >= 800 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 52;
-  else if ( brntd_3 >= 750 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 50;
-  else if ( brntd_3 >= 700 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 48;
-  else if ( brntd_3 >= 650 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 46;
-  else if ( brntd_3 >= 600 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 44;
-  else if ( brntd_3 >= 550 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 42;
-  else if ( brntd_3 >= 500 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 40;
-  else if ( brntd_3 >= 450 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 38;
-  else if ( brntd_3 >= 400 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 36;
-  else if ( brntd_3 >= 350 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 34;
-  else if ( brntd_3 >= 300 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 32;
-  else if ( brntd_3 >= 250 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 30;
-  else if ( brntd_3 >= 200 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 28;
-  else if ( brntd_3 >= 150 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 26;
-  else if ( brntd_3 >= 100 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 24;
-  else if ( brntd_3 >= 50 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 22;
-  else if ( brntd_3 >= 0 ) tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 20;
+  if ( brntd_3 >= 1000 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 60; }
+  else if ( brntd_3 >= 950 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 58; }
+  else if ( brntd_3 >= 900 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 56; }
+  else if ( brntd_3 >= 850 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 54; }
+  else if ( brntd_3 >= 800 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 52; }
+  else if ( brntd_3 >= 750 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 50; }
+  else if ( brntd_3 >= 700 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 48; }
+  else if ( brntd_3 >= 650 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 46; }
+  else if ( brntd_3 >= 600 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 44; }
+  else if ( brntd_3 >= 550 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 42; }
+  else if ( brntd_3 >= 500 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 40; }
+  else if ( brntd_3 >= 450 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 38; }
+  else if ( brntd_3 >= 400 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 36; }
+  else if ( brntd_3 >= 350 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 34; }
+  else if ( brntd_3 >= 300 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 32; }
+  else if ( brntd_3 >= 250 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 30; }
+  else if ( brntd_3 >= 200 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 28; }
+  else if ( brntd_3 >= 150 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 26; }
+  else if ( brntd_3 >= 100 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 24; }
+  else if ( brntd_3 >= 50 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 22; }
+  else if ( brntd_3 >= 0 ) { tanso1_3 = tanso2_3 = tanso3_3 = tanso4_3 = tanso5_3 = tanso6_3 = 20; }
   mainbrn_3 = analogRead(potbrn3);
   mainbrn_3 = mainbrn_3 / 4;
-  if ( mainbrn_3 >= 255) brnon3 = brnoff3 = 0;
-  else if ( mainbrn_3 >= 240) brnon3 = brnoff3 = 10;
-  else if ( mainbrn_3 >= 230) brnon3 = brnoff3 = 30;
-  else if ( mainbrn_3 >= 220) brnon3 = brnoff3 = 50;
-  else if ( mainbrn_3 >= 210) brnon3 = brnoff3 = 70;
-  else if ( mainbrn_3 >= 200) brnon3 = brnoff3 = 90;
-  else if ( mainbrn_3 >= 185) brnon3 = brnoff3 = 110;
-  else if ( mainbrn_3 >= 170) brnon3 = brnoff3 = 125;
-  else if ( mainbrn_3 >= 155) brnon3 = brnoff3 = 140;
-  else if ( mainbrn_3 >= 140) brnon3 = brnoff3 = 155;
-  else if ( mainbrn_3 >= 125) brnon3 = brnoff3 = 170;
-  else if ( mainbrn_3 >= 110) brnon3 = brnoff3 = 185;
-  else if ( mainbrn_3 >= 90) brnon3 = brnoff3 = 200;
-  else if ( mainbrn_3 >= 70) brnon3 = brnoff3 = 210;
-  else if ( mainbrn_3 >= 50) brnon3 = brnoff3 = 220;
-  else if ( mainbrn_3 >= 30) brnon3 = brnoff3 = 230;
-  else if ( mainbrn_3 >= 10) brnon3 = brnoff3 = 240;
-  else if ( mainbrn_3 >= 0) brnon3 = brnoff3 = 250;
+  if ( mainbrn_3 >= 255) { brnon3 = brnoff3 = 0; tanso_ao_3 = 10; }
+  else if ( mainbrn_3 >= 240) { brnon3 = brnoff3 = 15; tanso_ao_3 = 30; }
+  else if ( mainbrn_3 >= 225) { brnon3 = brnoff3 = 30; tanso_ao_3 = 50; }
+  else if ( mainbrn_3 >= 210) { brnon3 = brnoff3 = 45; tanso_ao_3 = 70; }
+  else if ( mainbrn_3 >= 195) { brnon3 = brnoff3 = 60; tanso_ao_3 = 90; }
+  else if ( mainbrn_3 >= 180) { brnon3 = brnoff3 = 75; tanso_ao_3 = 110; }
+  else if ( mainbrn_3 >= 165) { brnon3 = brnoff3 = 90; tanso_ao_3 = 130; }
+  else if ( mainbrn_3 >= 150) { brnon3 = brnoff3 = 105; tanso_ao_3 = 130; }
+  else if ( mainbrn_3 >= 135) { brnon3 = brnoff3 = 120; tanso_ao_3 = 150; }
+  else if ( mainbrn_3 >= 120) { brnon3 = brnoff3 = 135; tanso_ao_3 = 170; }
+  else if ( mainbrn_3 >= 105) { brnon3 = brnoff3 = 150; tanso_ao_3 = 190; }
+  else if ( mainbrn_3 >= 90) { brnon3 = brnoff3 = 165; tanso_ao_3 = 210; }
+  else if ( mainbrn_3 >= 75) { brnon3 = brnoff3 = 180; tanso_ao_3 = 230; }
+  else if ( mainbrn_3 >= 60) { brnon3 = brnoff3 = 195; tanso_ao_3 = 250; }
+  else if ( mainbrn_3 >= 45) { brnon3 = brnoff3 = 210; tanso_ao_3 = 270; }
+  else if ( mainbrn_3 >= 30) { brnon3 = brnoff3 = 225; tanso_ao_3 = 310; }
+  else if ( mainbrn_3 >= 15) { brnon3 = brnoff3 = 240; tanso_ao_3 = 340; }
+  else if ( mainbrn_3 >= 0) { brnon3 = brnoff3 = 250; tanso_ao_3 = 400; }
   effhigh_3 = analogRead(pothigh3);
   effhigh_3 = effhigh_3 / 4;
   if (effhigh_3 >= 255) fa_c1_3 = fa_c2_3 = fa_c3_3 = fa_c4_3 = fa_c5_3 = fa_c6_3 = 20;
@@ -632,9 +669,9 @@ void effect_cac() {
   }
   //////////////////////////////   MODE 3   //////////////////////////////
   if( line_qwe == 3 ) {
-    if ( kpr == 20 ) { ctn1c = 1; ctn1c2 = 0; kpr = 0; krl = 0;}
-    if ( kpr == 20 || ctn1c == 1 && ctn1c2 == 0) {
-      if(jikan - tg_ht1 >= tanso1) { tg_ht1 = millis(); ctn1c = 1; ctn1c2 = 0;
+    if (kpr == 20 || ctn1c == 1) { ctn1c = 1; ctn1c2 = 0;}
+    if ( ctn1c == 1 && ctn1c2 == 0) {
+      if(jikan - tg_ht1 >= tanso1) { tg_ht1 = millis();
         if( brn1 <= brnon) {
           brn1 = brn1 + fa_c_cl_1;
           if( brn1 >= brnon ) brn1 = brnon;
@@ -647,22 +684,21 @@ void effect_cac() {
         else {analogWrite(led_1, brn1);}
       }
     }
-    //if (krl == 20 || ctn1c2 == 1) { ctn1c = 0; ctn1c2 = 1;}
-    //if (krl == 20) { kpr = 0; krl = 0; }
-    if ( krl == 20 ) { ctn1c = 0; ctn1c2 = 1; kpr = 0; krl = 0;}
-    if ( krl == 20 || ctn1c == 0 && ctn1c2 == 1 ) {
-      if(jikan - tg_ht1 >= tanso1) { tg_ht1 = millis(); ctn1c = 0; ctn1c2 = 1;
+    if (krl == 20 || ctn1c2 == 1) { ctn1c = 0; ctn1c2 = 1;}
+    if (krl == 20) { kpr = 0; krl = 0; }
+    if ( ctn1c == 0 && ctn1c2 == 1 ) {
+      if(jikan - tg_ht1 >= tanso1) { tg_ht1 = millis();
         brn1 = brn1 - fa_t_cl_1;
-        if( brn1 <= 0 ) { brn1 = 0; ctn1c = 0; ctn1c2 = 0; ctn1c3 = 0; kpr = 0; krl = 0; }
+        if( brn1 < 0 ) { brn1 = 0; ctn1c = 0; ctn1c2 = 0; ctn1c3 = 0; kpr = 0; krl = 0; }
         if (tanso1 >= 21) {
-          if ( ctn1c3 == 0 ){ctn1c3 = 1;analogWrite(led_1, brn1);}
+          if ( ctn1c3 == 0 ){ctn1c3 = 1;analogWrite(led_3, brn1);}
           else {analogWrite(led_1, LOW); ctn1c3 = 0;}
         }
         else {analogWrite(led_1, brn1);}
       }
     }
   
-    if ( kpr == 26 ) { ctn2c = 1; ctn2c2 = 0; kpr = 0; krl = 0;}
+    if ( kpr == 26 || ctn2c == 1) { ctn2c = 1; ctn2c2 = 0; }
     if ( kpr == 26 || ctn2c == 1 && ctn2c2 == 0) {
       if(jikan - tg_ht2 >= tanso2) { tg_ht2 = millis(); ctn2c = 1; ctn2c2 = 0;
         if( brn2 <= brnon) {
@@ -677,10 +713,9 @@ void effect_cac() {
         else {analogWrite(led_2, brn2);}
       }
     }
-    //if (krl == 26 || ctn2c2 == 1) { ctn2c = 0; ctn2c2 = 1;}
-    //if (krl == 26) { kpr = 0; krl = 0; }
-    if ( krl == 26 ) { ctn2c = 0; ctn2c2 = 1; kpr = 0; krl = 0;}
-    if ( krl == 26 || ctn2c == 0 && ctn2c2 == 1 ) {
+    if ( krl == 26 || ctn2c2 == 1) { ctn2c = 0; ctn2c2 = 1;}
+    if ( krl == 26) { kpr = 0; krl = 0;}
+    if ( ctn2c == 0 && ctn2c2 == 1 ) {
       if(jikan - tg_ht2 >= tanso2) { tg_ht2 = millis(); ctn2c = 0; ctn2c2 = 1;
         brn2 = brn2 - fa_t_cl_2;
         if( brn2 <= 0 ) { brn2 = 0; ctn2c = 0; ctn2c2 = 0; ctn2c3 = 0; kpr = 0; krl = 0; }
@@ -1574,4 +1609,958 @@ void effect_cac() {
       }
     }
   }
+}
+
+void effect_combo_sigle() {
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////////////   LINE 1   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if( line_qwe == 1 ) {
+    if (kpr == 18 || ctn_ao_1 == 1) { ctn_ao_1 =1;
+      if(jikan - tg_ht_ao_1 >= tanso1) { 
+        tg_ht_ao_1 = millis();
+        if ( brn_ao_1 <= brnon && fa_ao_1 == 1 ) { brn_ao_1 = brn_ao_1 + fa_c_cl_1; if ( brn_ao_1 >= brnon ) fa_ao_1 = 2; }
+        if ( fa_ao_1 == 2) { brn_ao_1 = brn_ao_1 - fa_t_cl_1; }
+        if ( brn_ao_1 <= 0 ) {brn_ao_1 = 0; ctn_ao_1 = 0; kpr = 0; krl = 0; }
+        if (tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            stt_ts_ao_1 = 1;
+            analogWrite(led_1, brn_ao_1);
+            analogWrite(led_2, brn_ao_1);
+            analogWrite(led_3, brn_ao_1);
+            analogWrite(led_4, brn_ao_1);
+            analogWrite(led_5, brn_ao_1);
+            analogWrite(led_6, brn_ao_1);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, brn_ao_1);
+          analogWrite(led_2, brn_ao_1);
+          analogWrite(led_3, brn_ao_1);
+          analogWrite(led_4, brn_ao_1);
+          analogWrite(led_5, brn_ao_1);
+          analogWrite(led_6, brn_ao_1);
+        }
+      }
+    }
+    if(krl == 18) {
+      analogWrite(led_1, LOW);
+      analogWrite(led_2, LOW);
+      analogWrite(led_3, LOW);
+      analogWrite(led_4, LOW);
+      analogWrite(led_5, LOW);
+      analogWrite(led_6, LOW);
+      brn_ao = 0; ctn_ao_1 = 0; fa_ao_1 = 1;
+      kpr = 0; krl = 0;
+    }
+  }
+  //////////////////////////////   MODE 2   //////////////////////////////
+  if( line_qwe == 2 ) {
+    if ( kpr == 18 ) { ctn_ao_1b = 1; brn_ao_1 = brnoff; kpr = 0; krl = 0;}
+    if ( ctn_ao_1b == 1 ) {
+      if(jikan - tg_ht_ao_1 >= tanso1) {
+        tg_ht_ao_1 = millis();
+        brn_ao_1 -= fa_t_cl_1;
+        if ( brn_ao_1 <= 0 ) { brn_ao_1 = 0; ctn_ao_1b = 0;}
+        if (tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ){stt_ts_ao_1 = 1;
+            analogWrite(led_1, brn_ao_1);
+            analogWrite(led_2, brn_ao_1);
+            analogWrite(led_3, brn_ao_1);
+            analogWrite(led_4, brn_ao_1);
+            analogWrite(led_5, brn_ao_1);
+            analogWrite(led_6, brn_ao_1);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, brn_ao_1);
+          analogWrite(led_2, brn_ao_1);
+          analogWrite(led_3, brn_ao_1);
+          analogWrite(led_4, brn_ao_1);
+          analogWrite(led_5, brn_ao_1);
+          analogWrite(led_6, brn_ao_1);
+        }
+      }
+    }
+  }
+  //////////////////////////////   MODE 3   //////////////////////////////
+  if( line_qwe == 3 ) {
+    if (kpr == 18 || ctn_ao_1c == 1) { ctn_ao_1c = 1; ctn_ao_1c2 = 0;}
+    if ( ctn_ao_1c == 1 && ctn_ao_1c2 == 0) {
+      if(jikan - tg_ht_ao_1 >= tanso1) { tg_ht_ao_1 = millis();
+        if( brn_ao_1 <= brnon) {
+          brn_ao_1 = brn_ao_1 + fa_c_cl_1;
+          if( brn_ao_1 >= brnon ) brn_ao_1 = brnon;
+        }
+        if( brn_ao_1 >= brnon ) brn_ao_1 = brnon;
+        if (tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ){
+            stt_ts_ao_1 = 1; 
+            analogWrite(led_1, brn_ao_1);
+            analogWrite(led_2, brn_ao_1);
+            analogWrite(led_3, brn_ao_1);
+            analogWrite(led_4, brn_ao_1);
+            analogWrite(led_5, brn_ao_1);
+            analogWrite(led_6, brn_ao_1);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;}
+        }
+        else {
+          analogWrite(led_1, brn_ao_1);
+          analogWrite(led_2, brn_ao_1);
+          analogWrite(led_3, brn_ao_1);
+          analogWrite(led_4, brn_ao_1);
+          analogWrite(led_5, brn_ao_1);
+          analogWrite(led_6, brn_ao_1);
+        }
+      }
+    }
+    if (krl == 18 || ctn_ao_1c2 == 1) { ctn_ao_1c = 0; ctn_ao_1c2 = 1;}
+    if (krl == 18) { kpr = 0; krl = 0; }
+    if ( ctn_ao_1c == 0 && ctn_ao_1c2 == 1 ) {
+      if(jikan - tg_ht_ao_1 >= tanso1) { tg_ht_ao_1 = millis();
+        brn_ao_1 = brn_ao_1 - fa_t_cl_1;
+        if( brn_ao_1 < 0 ) { brn_ao_1 = 0; ctn_ao_1c = 0; ctn_ao_1c2 = 0; ctn_ao_1c3 = 0; kpr = 0; krl = 0; }
+        if (tanso1 >= 21) {
+          if ( ctn_ao_1c3 == 0 ){ctn_ao_1c3 = 1;
+            analogWrite(led_1, brn_ao_1);
+            analogWrite(led_2, brn_ao_1);
+            analogWrite(led_3, brn_ao_1);
+            analogWrite(led_4, brn_ao_1);
+            analogWrite(led_5, brn_ao_1);
+            analogWrite(led_6, brn_ao_1);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            ctn_ao_1c3 = 0;
+          }      
+        }
+        else {
+          analogWrite(led_1, brn_ao_1);
+          analogWrite(led_2, brn_ao_1);
+          analogWrite(led_3, brn_ao_1);
+          analogWrite(led_4, brn_ao_1);
+          analogWrite(led_5, brn_ao_1);
+          analogWrite(led_6, brn_ao_1);
+        }
+      }
+    }
+  }
+
+
+  
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////////////   LINE 2   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if( line_asd == 1 ) {
+    if (kpr == 14 || ctn_ao_1_2 == 1) { ctn_ao_1_2 =1;
+      if(jikan - tg_ht_ao_1 >= tanso1_2) { 
+        tg_ht_ao_1 = millis();
+        if ( brn_ao_2 <= brnon2 && fa_ao_1 == 1 ) { brn_ao_2 = brn_ao_2 + fa_c_cl_1_2; if ( brn_ao_2 >= brnon2 ) fa_ao_1 = 2; }
+        if ( fa_ao_1 == 2) { brn_ao_2 = brn_ao_2 - fa_t_cl_1_2; }
+        if ( brn_ao_2 <= 0 ) {brn_ao_2 = 0; ctn_ao_1_2 = 0; kpr = 0; krl = 0; }
+        if (tanso1_2 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            stt_ts_ao_1 = 1;
+            analogWrite(led_1, brn_ao_2);
+            analogWrite(led_2, brn_ao_2);
+            analogWrite(led_3, brn_ao_2);
+            analogWrite(led_4, brn_ao_2);
+            analogWrite(led_5, brn_ao_2);
+            analogWrite(led_6, brn_ao_2);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, brn_ao_2);
+          analogWrite(led_2, brn_ao_2);
+          analogWrite(led_3, brn_ao_2);
+          analogWrite(led_4, brn_ao_2);
+          analogWrite(led_5, brn_ao_2);
+          analogWrite(led_6, brn_ao_2);
+        }
+      }
+    }
+    if(krl == 14) {
+      analogWrite(led_1, LOW);
+      analogWrite(led_2, LOW);
+      analogWrite(led_3, LOW);
+      analogWrite(led_4, LOW);
+      analogWrite(led_5, LOW);
+      analogWrite(led_6, LOW);
+      brn_ao = 0; ctn_ao_1_2 = 0; fa_ao_1 = 1;
+      kpr = 0; krl = 0;
+    }
+  }
+  //////////////////////////////   MODE 2   //////////////////////////////
+  if( line_asd == 2 ) {
+    if ( kpr == 18 ) { ctn_ao_1b_2 = 1; brn_ao_2 = brnoff2; kpr = 0; krl = 0;}
+    if ( ctn_ao_1b_2 == 1 ) {
+      if(jikan - tg_ht_ao_1 >= tanso1_2) {
+        tg_ht_ao_1 = millis();
+        brn_ao_2 -= fa_t_cl_1_2;
+        if ( brn_ao_2 <= 0 ) { brn_ao_2 = 0; ctn_ao_1b_2 = 0;}
+        if (tanso1_2 >= 21) {
+          if ( stt_ts_ao_1 == 0 ){stt_ts_ao_1 = 1;
+            analogWrite(led_1, brn_ao_2);
+            analogWrite(led_2, brn_ao_2);
+            analogWrite(led_3, brn_ao_2);
+            analogWrite(led_4, brn_ao_2);
+            analogWrite(led_5, brn_ao_2);
+            analogWrite(led_6, brn_ao_2);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, brn_ao_2);
+          analogWrite(led_2, brn_ao_2);
+          analogWrite(led_3, brn_ao_2);
+          analogWrite(led_4, brn_ao_2);
+          analogWrite(led_5, brn_ao_2);
+          analogWrite(led_6, brn_ao_2);
+        }
+      }
+    }
+  }
+  //////////////////////////////   MODE 3   //////////////////////////////
+  if( line_asd == 3 ) {
+    if (kpr == 14 || ctn_ao_1c_2 == 1) { ctn_ao_1c_2 = 1; ctn_ao_1c2_2 = 0;}
+    if ( ctn_ao_1c_2 == 1 && ctn_ao_1c2_2 == 0) {
+      if(jikan - tg_ht_ao_1 >= tanso1_2) { tg_ht_ao_1 = millis();
+        if( brn_ao_2 <= brnon2) {
+          brn_ao_2 = brn_ao_2 + fa_c_cl_1_2;
+          if( brn_ao_2 >= brnon2 ) brn_ao_2 = brnon2;
+        }
+        if( brn_ao_2 >= brnon2 ) brn_ao_2 = brnon2;
+        if (tanso1_2 >= 21) {
+          if ( stt_ts_ao_1 == 0 ){
+            stt_ts_ao_1 = 1; 
+            analogWrite(led_1, brn_ao_2);
+            analogWrite(led_2, brn_ao_2);
+            analogWrite(led_3, brn_ao_2);
+            analogWrite(led_4, brn_ao_2);
+            analogWrite(led_5, brn_ao_2);
+            analogWrite(led_6, brn_ao_2);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;}
+        }
+        else {
+          analogWrite(led_1, brn_ao_2);
+          analogWrite(led_2, brn_ao_2);
+          analogWrite(led_3, brn_ao_2);
+          analogWrite(led_4, brn_ao_2);
+          analogWrite(led_5, brn_ao_2);
+          analogWrite(led_6, brn_ao_2);
+        }
+      }
+    }
+    if (krl == 14 || ctn_ao_1c2_2 == 1) { ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 1;}
+    if (krl == 14) { kpr = 0; krl = 0; }
+    if ( ctn_ao_1c_2 == 0 && ctn_ao_1c2_2 == 1 ) {
+      if(jikan - tg_ht_ao_1 >= tanso1_2) { tg_ht_ao_1 = millis();
+        brn_ao_2 = brn_ao_2 - fa_t_cl_1_2;
+        if( brn_ao_2 < 0 ) { brn_ao_2 = 0; ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 0; ctn_ao_1c3_2 = 0; kpr = 0; krl = 0; }
+        if (tanso1_2 >= 21) {
+          if ( ctn_ao_1c3_2 == 0 ){ctn_ao_1c3_2 = 1;
+            analogWrite(led_1, brn_ao_2);
+            analogWrite(led_2, brn_ao_2);
+            analogWrite(led_3, brn_ao_2);
+            analogWrite(led_4, brn_ao_2);
+            analogWrite(led_5, brn_ao_2);
+            analogWrite(led_6, brn_ao_2);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            ctn_ao_1c3_2 = 0;
+          }      
+        }
+        else {
+          analogWrite(led_1, brn_ao_2);
+          analogWrite(led_2, brn_ao_2);
+          analogWrite(led_3, brn_ao_2);
+          analogWrite(led_4, brn_ao_2);
+          analogWrite(led_5, brn_ao_2);
+          analogWrite(led_6, brn_ao_2);
+        }
+      }
+    }
+  }
+  
+
+  
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////////////   LINE 3   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if( line_zxc == 1 ) {
+    if (kpr == 16 || ctn_ao_1_3 == 1) { ctn_ao_1_3 =1;
+      if(jikan - tg_ht_ao_1 >= tanso1_3) { 
+        tg_ht_ao_1 = millis();
+        if ( brn_ao_3 <= brnon3 && fa_ao_1 == 1 ) { brn_ao_3 = brn_ao_3 + fa_c_cl_1_3; if ( brn_ao_3 >= brnon3 ) fa_ao_1 = 2; }
+        if ( fa_ao_1 == 2) { brn_ao_3 = brn_ao_3 - fa_t_cl_1_3; }
+        if ( brn_ao_3 <= 0 ) {brn_ao_3 = 0; ctn_ao_1_3 = 0; kpr = 0; krl = 0; }
+        if (tanso1_3 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            stt_ts_ao_1 = 1;
+            analogWrite(led_1, brn_ao_3);
+            analogWrite(led_2, brn_ao_3);
+            analogWrite(led_3, brn_ao_3);
+            analogWrite(led_4, brn_ao_3);
+            analogWrite(led_5, brn_ao_3);
+            analogWrite(led_6, brn_ao_3);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, brn_ao_3);
+          analogWrite(led_2, brn_ao_3);
+          analogWrite(led_3, brn_ao_3);
+          analogWrite(led_4, brn_ao_3);
+          analogWrite(led_5, brn_ao_3);
+          analogWrite(led_6, brn_ao_3);
+        }
+      }
+    }
+    if(krl == 16) {
+      analogWrite(led_1, LOW);
+      analogWrite(led_2, LOW);
+      analogWrite(led_3, LOW);
+      analogWrite(led_4, LOW);
+      analogWrite(led_5, LOW);
+      analogWrite(led_6, LOW);
+      brn_ao = 0; ctn_ao_1_3 = 0; fa_ao_1 = 1;
+      kpr = 0; krl = 0;
+    }
+  }
+  //////////////////////////////   MODE 2   //////////////////////////////
+  if( line_zxc == 2 ) {
+    if ( kpr == 16 ) { ctn_ao_1b_3 = 1; brn_ao_3 = brnoff3; kpr = 0; krl = 0;}
+    if ( ctn_ao_1b_3 == 1 ) {
+      if(jikan - tg_ht_ao_1 >= tanso1_3) {
+        tg_ht_ao_1 = millis();
+        brn_ao_3 -= fa_t_cl_1_3;
+        if ( brn_ao_3 <= 0 ) { brn_ao_3 = 0; ctn_ao_1b_3 = 0;}
+        if (tanso1_3 >= 21) {
+          if ( stt_ts_ao_1 == 0 ){stt_ts_ao_1 = 1;
+            analogWrite(led_1, brn_ao_3);
+            analogWrite(led_2, brn_ao_3);
+            analogWrite(led_3, brn_ao_3);
+            analogWrite(led_4, brn_ao_3);
+            analogWrite(led_5, brn_ao_3);
+            analogWrite(led_6, brn_ao_3);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, brn_ao_3);
+          analogWrite(led_2, brn_ao_3);
+          analogWrite(led_3, brn_ao_3);
+          analogWrite(led_4, brn_ao_3);
+          analogWrite(led_5, brn_ao_3);
+          analogWrite(led_6, brn_ao_3);
+        }
+      }
+    }
+  }
+  //////////////////////////////   MODE 3   //////////////////////////////
+  if( line_zxc == 3 ) {
+    if (kpr == 16 || ctn_ao_1c_3 == 1) { ctn_ao_1c_3 = 1; ctn_ao_1c2_3 = 0;}
+    if ( ctn_ao_1c_3 == 1 && ctn_ao_1c2_3 == 0) {
+      if(jikan - tg_ht_ao_1 >= tanso1_3) { tg_ht_ao_1 = millis();
+        if( brn_ao_3 <= brnon3) {
+          brn_ao_3 = brn_ao_3 + fa_c_cl_1_3;
+          if( brn_ao_3 >= brnon3 ) brn_ao_3 = brnon3;
+        }
+        if( brn_ao_3 >= brnon3 ) brn_ao_3 = brnon3;
+        if (tanso1_3 >= 21) {
+          if ( stt_ts_ao_1 == 0 ){
+            stt_ts_ao_1 = 1; 
+            analogWrite(led_1, brn_ao_3);
+            analogWrite(led_2, brn_ao_3);
+            analogWrite(led_3, brn_ao_3);
+            analogWrite(led_4, brn_ao_3);
+            analogWrite(led_5, brn_ao_3);
+            analogWrite(led_6, brn_ao_3);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;}
+        }
+        else {
+          analogWrite(led_1, brn_ao_3);
+          analogWrite(led_2, brn_ao_3);
+          analogWrite(led_3, brn_ao_3);
+          analogWrite(led_4, brn_ao_3);
+          analogWrite(led_5, brn_ao_3);
+          analogWrite(led_6, brn_ao_3);
+        }
+      }
+    }
+    if (krl == 16 || ctn_ao_1c2_3 == 1) { ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 1;}
+    if (krl == 16) { kpr = 0; krl = 0; }
+    if ( ctn_ao_1c_3 == 0 && ctn_ao_1c2_3 == 1 ) {
+      if(jikan - tg_ht_ao_1 >= tanso1_3) { tg_ht_ao_1 = millis();
+        brn_ao_3 = brn_ao_3 - fa_t_cl_1_3;
+        if( brn_ao_3 < 0 ) { brn_ao_3 = 0; ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 0; ctn_ao_1c3_3 = 0; kpr = 0; krl = 0; }
+        if (tanso1_3 >= 21) {
+          if ( ctn_ao_1c3_3 == 0 ){ctn_ao_1c3_3 = 1;
+            analogWrite(led_1, brn_ao_3);
+            analogWrite(led_2, brn_ao_3);
+            analogWrite(led_3, brn_ao_3);
+            analogWrite(led_4, brn_ao_3);
+            analogWrite(led_5, brn_ao_3);
+            analogWrite(led_6, brn_ao_3);
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            ctn_ao_1c3_3 = 0;
+          }      
+        }
+        else {
+          analogWrite(led_1, brn_ao_3);
+          analogWrite(led_2, brn_ao_3);
+          analogWrite(led_3, brn_ao_3);
+          analogWrite(led_4, brn_ao_3);
+          analogWrite(led_5, brn_ao_3);
+          analogWrite(led_6, brn_ao_3);
+        }
+      }
+    }
+  }
+}
+
+void effect_combo_multi() {
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////////////   LINE 1   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 48 ) {
+    ctn_ao_1 = 1;
+    reset_eff_nor();
+  }
+  if ( ctn_ao_1 == 1 ) {
+    if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_1 += 1;
+        if ( led_dc_1 == 4 ) led_dc_1 = 1;
+      }
+      else {
+        led_dc_1 -= 1;
+        if ( led_dc_1 == 0 ) led_dc_1 = 3;
+      }
+    }
+  }
+  if ( led_dc_1 != 0 ) {
+    if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
+      if ( led_dc_1 == 1) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+      if ( led_dc_1 == 2) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_1 == 3) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_1 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_1 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+    }
+  }
+  if( krl == 48 ) {
+    analogWrite(led_1, LOW);
+    analogWrite(led_2, LOW);
+    analogWrite(led_3, LOW);
+    analogWrite(led_4, LOW);
+    analogWrite(led_5, LOW);
+    analogWrite(led_6, LOW);
+    kpr = 0; krl = 0;
+    led_dc_1 = 0;
+    ctn_ao_1 = 0;
+  }
+
+  
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////////////   LINE 2   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 52 ) {
+    ctn_ao_2 = 1;
+    reset_eff_nor();
+  }
+  if ( ctn_ao_2 == 1 ) {
+    if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_2 += 1;
+        if ( led_dc_2 == 4 ) led_dc_2 = 1;
+      }
+      else {
+        led_dc_2 -= 1;
+        if ( led_dc_2 == 0 ) led_dc_2 = 3;
+      }
+    }
+  }
+  if ( led_dc_2 != 0 ) {
+    if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
+      if ( led_dc_2 == 1) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+      if ( led_dc_2 == 2) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_2 == 3) {
+        if ( tanso2 >= 21) {
+          if ( stt_ts_ao_2 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_2 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+    }
+  }
+  if( krl == 52 ) {
+    analogWrite(led_1, LOW);
+    analogWrite(led_2, LOW);
+    analogWrite(led_3, LOW);
+    analogWrite(led_4, LOW);
+    analogWrite(led_5, LOW);
+    analogWrite(led_6, LOW);
+    kpr = 0; krl = 0;
+    led_dc_2 = 0;
+    ctn_ao_2 = 0;
+  }
+  
+
+  
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////////////   LINE 3   //////////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  if ( kpr == 56 ) {
+    ctn_ao_3 = 1;
+    reset_eff_nor();
+  }
+  if ( ctn_ao_3 == 1 ) {
+    if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
+      if ( ctrl_combo != 1 ) {
+        led_dc_3 += 1;
+        if ( led_dc_3 == 4 ) led_dc_3 = 1;
+      }
+      else {
+        led_dc_3 -= 1;
+        if ( led_dc_3 == 0 ) led_dc_3 = 3;
+      }
+    }
+  }
+  if ( led_dc_3 != 0 ) {
+    if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
+      if ( led_dc_3 == 1) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, 255);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, 255);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, 255);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, 255);
+        }  
+      }
+      if ( led_dc_3 == 2) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, 255);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, 255);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, 255);
+          analogWrite(led_3, LOW);
+          analogWrite(led_4, LOW);
+          analogWrite(led_5, 255);
+          analogWrite(led_6, LOW);
+        }  
+      }
+      if ( led_dc_3 == 3) {
+        if ( tanso1 >= 21) {
+          if ( stt_ts_ao_3 == 0 ) {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, 255);
+            analogWrite(led_4, 255);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 1;
+          }
+          else {
+            analogWrite(led_1, LOW);
+            analogWrite(led_2, LOW);
+            analogWrite(led_3, LOW);
+            analogWrite(led_4, LOW);
+            analogWrite(led_5, LOW);
+            analogWrite(led_6, LOW);
+            stt_ts_ao_3 = 0;
+          }
+        }
+        else {
+          analogWrite(led_1, LOW);
+          analogWrite(led_2, LOW);
+          analogWrite(led_3, 255);
+          analogWrite(led_4, 255);
+          analogWrite(led_5, LOW);
+          analogWrite(led_6, LOW);
+        }  
+      }
+    }
+  }
+  if( krl == 56 ) {
+    analogWrite(led_1, LOW);
+    analogWrite(led_2, LOW);
+    analogWrite(led_3, LOW);
+    analogWrite(led_4, LOW);
+    analogWrite(led_5, LOW);
+    analogWrite(led_6, LOW);
+    kpr = 0; krl = 0;
+    led_dc_3 = 0;
+    ctn_ao_3 = 0;
+  }
+}
+
+void reset_val() {
+  ctn1 = 0;     ctn2 = 0;     ctn3 = 0;     ctn4 = 0;     ctn5 = 0;     ctn6 = 0;
+  ctn1b = 0;    ctn2b = 0;    ctn3b = 0;    ctn4b = 0;    ctn5b = 0;    ctn6b = 0;
+  ctn1c = 0;    ctn2c = 0;    ctn3c = 0;    ctn4c = 0;    ctn5c = 0;    ctn6c = 0;
+  ctn1c2 = 0;   ctn2c2 = 0;   ctn3c2 = 0;   ctn4c2 = 0;   ctn5c2 = 0;   ctn6c2 = 0;
+  ctn1c3 = 0;   ctn2c3 = 0;   ctn3c3 = 0;   ctn4c3 = 0;   ctn5c3 = 0;   ctn6c3 = 0;
+  ctn1_2 = 0;   ctn2_2 = 0;   ctn3_2 = 0;   ctn4_2 = 0;   ctn5_2 = 0;   ctn6_2 = 0;
+  ctn1b_2 = 0;  ctn2b_2 = 0;  ctn3b_2 = 0;  ctn4b_2 = 0;  ctn5b_2 = 0;  ctn6b_2 = 0;
+  ctn1c_2 = 0;  ctn2c_2 = 0;  ctn3c_2 = 0;  ctn4c_2 = 0;  ctn5c_2 = 0;  ctn6c_2 = 0;
+  ctn1c2_2 = 0; ctn2c2_2 = 0; ctn3c2_2 = 0; ctn4c2_2 = 0; ctn5c2_2 = 0; ctn6c2_2 = 0;
+  ctn1c3_2 = 0; ctn2c3_2 = 0; ctn3c3_2 = 0; ctn4c3_2 = 0; ctn5c3_2 = 0; ctn6c3_2 = 0;
+  ctn1_3 = 0;   ctn2_3 = 0;   ctn3_3 = 0;   ctn4_3 = 0;   ctn5_3 = 0;   ctn6_3 = 0;
+  ctn1b_3 = 0;  ctn2b_3 = 0;  ctn3b_3 = 0;  ctn4b_3 = 0;  ctn5b_3 = 0;  ctn6b_3 = 0;
+  ctn1c_3 = 0;  ctn2c_3 = 0;  ctn3c_3 = 0;  ctn4c_3 = 0;  ctn5c_3 = 0;  ctn6c_3 = 0;
+  ctn1c2_3 = 0; ctn2c2_3 = 0; ctn3c2_3 = 0; ctn4c2_3 = 0; ctn5c2_3 = 0; ctn6c2_3 = 0;
+  ctn1c3_3 = 0; ctn2c3_3 = 0; ctn3c3_3 = 0; ctn4c3_3 = 0; ctn5c3_3 = 0; ctn6c3_3 = 0;
+
+  fa1 = 1; fa2 = 1; fa3 = 1; fa4 = 1; fa5 = 1; fa6 = 1;
+  fa_ao_1 = 1; fa_ao_2 = 1; fa_ao_3 = 1;
+  brn1 = 0; brn2 = 0; brn3 = 0; brn4 = 0; brn5 = 0; brn6 = 0;
+  brn_ao_1 = 0; brn_ao_2 = 0; brn_ao_3 = 0;
+  led_dc_1 = 0; led_dc_2 = 0; led_dc_3 = 0;
+
+  ctn_ao_1 = 0;     ctn_ao_2 = 0;     ctn_ao_3 = 0;
+  ctn_ao_1b = 0;    ctn_ao_2b = 0;    ctn_ao_3b = 0;
+  ctn_ao_1c = 0;    ctn_ao_2c = 0;    ctn_ao_3c = 0;
+  ctn_ao_1c2 = 0;   ctn_ao_2c2 = 0;   ctn_ao_3c2 = 0;
+  ctn_ao_1c3 = 0;   ctn_ao_2c3 = 0;   ctn_ao_3c3 = 0;
+  ctn_ao_1_2 = 0;     ctn_ao_2_2 = 0;     ctn_ao_3_2 = 0;
+  ctn_ao_1b_2 = 0;    ctn_ao_2b_2 = 0;    ctn_ao_3b_2 = 0;
+  ctn_ao_1c_2 = 0;    ctn_ao_2c_2 = 0;    ctn_ao_3c_2 = 0;
+  ctn_ao_1c2_2 = 0;   ctn_ao_2c2_2 = 0;   ctn_ao_3c2_2 = 0;
+  ctn_ao_1c3_2 = 0;   ctn_ao_2c3_2 = 0;   ctn_ao_3c3_2 = 0;
+  ctn_ao_1_3 = 0;     ctn_ao_2_3 = 0;     ctn_ao_3_3 = 0;
+  ctn_ao_1b_3 = 0;    ctn_ao_2b_3 = 0;    ctn_ao_3b_3 = 0;
+  ctn_ao_1c_3 = 0;    ctn_ao_2c_3 = 0;    ctn_ao_3c_3 = 0;
+  ctn_ao_1c2_3 = 0;   ctn_ao_2c2_3 = 0;   ctn_ao_3c2_3 = 0;
+  ctn_ao_1c3_3 = 0;   ctn_ao_2c3_3 = 0;   ctn_ao_3c3_3 = 0;
+
+  stt_ts1 = 0; stt_ts2 = 0; stt_ts3 = 0; stt_ts4 = 0; stt_ts5 = 0; stt_ts6 = 0;
+  stt_ts_ao_1 = 0; stt_ts_ao_2 = 0; stt_ts_ao_3 = 0;
+
+  analogWrite(led_1, LOW);
+  analogWrite(led_2, LOW);
+  analogWrite(led_3, LOW);
+  analogWrite(led_4, LOW);
+  analogWrite(led_5, LOW);
+  analogWrite(led_6, LOW);
+}
+
+void reset_eff_nor() {
+  ctn1 = 0;     ctn2 = 0;     ctn3 = 0;     ctn4 = 0;     ctn5 = 0;     ctn6 = 0;
+  ctn1b = 0;    ctn2b = 0;    ctn3b = 0;    ctn4b = 0;    ctn5b = 0;    ctn6b = 0;
+  ctn1c = 0;    ctn2c = 0;    ctn3c = 0;    ctn4c = 0;    ctn5c = 0;    ctn6c = 0;
+  ctn1c2 = 0;   ctn2c2 = 0;   ctn3c2 = 0;   ctn4c2 = 0;   ctn5c2 = 0;   ctn6c2 = 0;
+  ctn1c3 = 0;   ctn2c3 = 0;   ctn3c3 = 0;   ctn4c3 = 0;   ctn5c3 = 0;   ctn6c3 = 0;
+  ctn1_2 = 0;   ctn2_2 = 0;   ctn3_2 = 0;   ctn4_2 = 0;   ctn5_2 = 0;   ctn6_2 = 0;
+  ctn1b_2 = 0;  ctn2b_2 = 0;  ctn3b_2 = 0;  ctn4b_2 = 0;  ctn5b_2 = 0;  ctn6b_2 = 0;
+  ctn1c_2 = 0;  ctn2c_2 = 0;  ctn3c_2 = 0;  ctn4c_2 = 0;  ctn5c_2 = 0;  ctn6c_2 = 0;
+  ctn1c2_2 = 0; ctn2c2_2 = 0; ctn3c2_2 = 0; ctn4c2_2 = 0; ctn5c2_2 = 0; ctn6c2_2 = 0;
+  ctn1c3_2 = 0; ctn2c3_2 = 0; ctn3c3_2 = 0; ctn4c3_2 = 0; ctn5c3_2 = 0; ctn6c3_2 = 0;
+  ctn1_3 = 0;   ctn2_3 = 0;   ctn3_3 = 0;   ctn4_3 = 0;   ctn5_3 = 0;   ctn6_3 = 0;
+  ctn1b_3 = 0;  ctn2b_3 = 0;  ctn3b_3 = 0;  ctn4b_3 = 0;  ctn5b_3 = 0;  ctn6b_3 = 0;
+  ctn1c_3 = 0;  ctn2c_3 = 0;  ctn3c_3 = 0;  ctn4c_3 = 0;  ctn5c_3 = 0;  ctn6c_3 = 0;
+  ctn1c2_3 = 0; ctn2c2_3 = 0; ctn3c2_3 = 0; ctn4c2_3 = 0; ctn5c2_3 = 0; ctn6c2_3 = 0;
+  ctn1c3_3 = 0; ctn2c3_3 = 0; ctn3c3_3 = 0; ctn4c3_3 = 0; ctn5c3_3 = 0; ctn6c3_3 = 0;
+
+  fa1 = 1; fa2 = 1; fa3 = 1; fa4 = 1; fa5 = 1; fa6 = 1;
+  brn1 = 0; brn2 = 0; brn3 = 0; brn4 = 0; brn5 = 0; brn6 = 0;
+
+  stt_ts1 = 0; stt_ts2 = 0; stt_ts3 = 0; stt_ts4 = 0; stt_ts5 = 0; stt_ts6 = 0;
 }
