@@ -1,2 +1,0 @@
-- Redefine and add new some value.
-- Change Effect 2nd.

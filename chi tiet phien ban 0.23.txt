@@ -1,0 +1,4 @@
+- Rebuild all structure
+- Redefine all value
+- Optimize code
+- Fix effect 2
