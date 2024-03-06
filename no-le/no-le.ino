@@ -70,9 +70,9 @@ int effhigh = 0,   efflow = 0,   mainbrn,   brntd = 0;
 int effhigh_2 = 0, efflow_2 = 0, mainbrn_2, brntd_2 = 0;
 int effhigh_3 = 0, efflow_3 = 0, mainbrn_3, brntd_3 = 0;
 /* ---------------------------------------------------------------------------------------------------- */
-const int pottd = A0;   const int potbrn = A1;    const int potlow = A2;    const int pothigh = A3;
-const int pottd2 = A4;  const int potbrn2 = A5;   const int potlow2 = A6;   const int pothigh2 = A7;
-const int pottd3 = A8;  const int potbrn3 = A9;   const int potlow3 = A10;  const int pothigh3 = A11;
+const int pottd = A2;   const int potbrn = A3;    const int potlow = A0;    const int pothigh = A1;
+const int pottd2 = A6;  const int potbrn2 = A7;   const int potlow2 = A4;   const int pothigh2 = A5;
+const int pottd3 = A10;  const int potbrn3 = A11;   const int potlow3 = A8;  const int pothigh3 = A9;
 /* ---------------------------------------------------------------------------------------------------- */
 
 void setup() {
@@ -393,34 +393,34 @@ void effect_cac() {
     if ( krl == 20 ) { kpr = 0; krl = 0; }
     if ( ctn1c == 0 && ctn1c2 == 1 ) eff_3_dec(jikan, tg_ht1, tanso1, brn1, fa_t_cl_1, stt_ts1, led_1, ctn1c, ctn1c2, kpr, krl);
 
-    if ( kpr == 20 ) { ctn2c = 1; ctn2c2 = 0; reset_eff_nor();}
+    if ( kpr == 26 ) { ctn2c = 1; ctn2c2 = 0; reset_eff_nor();}
     if ( ctn2c == 1 && ctn2c2 == 0) eff_3_inc(jikan, tg_ht2, tanso1, brn2, brnon, fa_c_cl_1, stt_ts2, led_2);
-    if ( krl == 20 ) { ctn2c = 0; ctn2c2 = 1; stt_ts2 = 0;}
-    if ( krl == 20 ) { kpr = 0; krl = 0; }
+    if ( krl == 26 ) { ctn2c = 0; ctn2c2 = 1; stt_ts2 = 0;}
+    if ( krl == 26 ) { kpr = 0; krl = 0; }
     if ( ctn2c == 0 && ctn2c2 == 1 ) eff_3_dec(jikan, tg_ht2, tanso1, brn2, fa_t_cl_1, stt_ts2, led_2, ctn2c, ctn2c2, kpr, krl);
 
-    if ( kpr == 20 ) { ctn3c = 1; ctn3c2 = 0; reset_eff_nor();}
+    if ( kpr == 8 ) { ctn3c = 1; ctn3c2 = 0; reset_eff_nor();}
     if ( ctn3c == 1 && ctn3c2 == 0) eff_3_inc(jikan, tg_ht3, tanso1, brn3, brnon, fa_c_cl_1, stt_ts3, led_3);
-    if ( krl == 20 ) { ctn3c = 0; ctn3c2 = 1; stt_ts3 = 0;}
-    if ( krl == 20 ) { kpr = 0; krl = 0; }
+    if ( krl == 8 ) { ctn3c = 0; ctn3c2 = 1; stt_ts3 = 0;}
+    if ( krl == 8 ) { kpr = 0; krl = 0; }
     if ( ctn3c == 0 && ctn3c2 == 1 ) eff_3_dec(jikan, tg_ht3, tanso1, brn3, fa_t_cl_1, stt_ts3, led_3, ctn3c, ctn3c2, kpr, krl);
 
-    if ( kpr == 20 ) { ctn4c = 1; ctn4c2 = 0; reset_eff_nor();}
+    if ( kpr == 21 ) { ctn4c = 1; ctn4c2 = 0; reset_eff_nor();}
     if ( ctn4c == 1 && ctn4c2 == 0) eff_3_inc(jikan, tg_ht4, tanso1, brn4, brnon, fa_c_cl_1, stt_ts4, led_4);
-    if ( krl == 20 ) { ctn4c = 0; ctn4c2 = 1; stt_ts4 = 0;}
-    if ( krl == 20 ) { kpr = 0; krl = 0; }
+    if ( krl == 21 ) { ctn4c = 0; ctn4c2 = 1; stt_ts4 = 0;}
+    if ( krl == 21 ) { kpr = 0; krl = 0; }
     if ( ctn4c == 0 && ctn4c2 == 1 ) eff_3_dec(jikan, tg_ht4, tanso1, brn4, fa_t_cl_1, stt_ts4, led_4, ctn4c, ctn4c2, kpr, krl);
 
-    if ( kpr == 20 ) { ctn5c = 1; ctn5c2 = 0; reset_eff_nor();}
+    if ( kpr == 23 ) { ctn5c = 1; ctn5c2 = 0; reset_eff_nor();}
     if ( ctn5c == 1 && ctn5c2 == 0) eff_3_inc(jikan, tg_ht5, tanso1, brn5, brnon, fa_c_cl_1, stt_ts5, led_5);
-    if ( krl == 20 ) { ctn5c = 0; ctn5c2 = 1; stt_ts5 = 0;}
-    if ( krl == 20 ) { kpr = 0; krl = 0; }
+    if ( krl == 23 ) { ctn5c = 0; ctn5c2 = 1; stt_ts5 = 0;}
+    if ( krl == 23 ) { kpr = 0; krl = 0; }
     if ( ctn5c == 0 && ctn5c2 == 1 ) eff_3_dec(jikan, tg_ht5, tanso1, brn5, fa_t_cl_1, stt_ts5, led_5, ctn5c, ctn5c2, kpr, krl);
   
-    if ( kpr == 20 ) { ctn6c = 1; ctn6c2 = 0; reset_eff_nor();}
+    if ( kpr == 28 ) { ctn6c = 1; ctn6c2 = 0; reset_eff_nor();}
     if ( ctn6c == 1 && ctn6c2 == 0) eff_3_inc(jikan, tg_ht6, tanso1, brn6, brnon, fa_c_cl_1, stt_ts6, led_6);
-    if ( krl == 20 ) { ctn6c = 0; ctn6c2 = 1; stt_ts6 = 0;}
-    if ( krl == 20 ) { kpr = 0; krl = 0; }
+    if ( krl == 28 ) { ctn6c = 0; ctn6c2 = 1; stt_ts6 = 0;}
+    if ( krl == 28 ) { kpr = 0; krl = 0; }
     if ( ctn6c == 0 && ctn6c2 == 1 ) eff_3_dec(jikan, tg_ht6, tanso1, brn6, fa_t_cl_1, stt_ts6, led_6, ctn6c, ctn6c2, kpr, krl);
   }
 
