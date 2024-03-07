@@ -3,17 +3,11 @@
 USBHost usb;
 KeyboardController keyboard(usb);
 
-unsigned long jikan;
-int delay_chophep = 10;
-int pass_time;
-
 /* ---------------------------------------------------------------------------------------------------- */
 int kpr_nole = 0, krl_nole = 0;
-int last_kpr = 9999;
-int last_krl = 9999;
 
 void keyPressed() {
-  Serial.println("Pressed:  "); 
+  Serial.println("Pressed"); 
   kpr_nole = keyboard.getOemKey();
   Wire.beginTransmission(1);
   Wire.write(kpr_nole);
@@ -21,7 +15,7 @@ void keyPressed() {
   Wire.endTransmission();
 }
 void keyReleased() {
- Serial.println("Released: "); 
+ Serial.println("Release"); 
   krl_nole = keyboard.getOemKey();
   kpr_nole = 0;
   Wire.beginTransmission(1);

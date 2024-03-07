@@ -1,5 +1,6 @@
 #include <Wire.h>
 unsigned long jikan;
+int uad;
 /* ---------------------------------------------------------------------------------------------------- */
 int tg_ht1,    tg_ht4,    tg_ht2,    tg_ht5,    tg_ht3,    tg_ht6;
 int tg_ht_ao_1,    tg_ht_ao_2,    tg_ht_ao_3;
@@ -206,55 +207,37 @@ int get_pot_val(String datatype, int namepot) {
     else if ( mainbrn >= 15) return 240;
     else if ( mainbrn >= 0) return 250;
   } 
-  else if (datatype.equals("fa_c")) {
-    if (namepot == 1) effhigh = analogRead(pothigh);
-    else if (namepot == 2) effhigh = analogRead(pothigh2);
-    else if (namepot == 3) effhigh = analogRead(pothigh3);
+  else if (datatype.equals("fa_c") || datatype.equals("fa_t")) {
+    if (datatype.equals("fa_c")) {
+      if (namepot == 1) uad = analogRead(pothigh);
+      else if (namepot == 2) uad = analogRead(pothigh2);
+      else if (namepot == 3) uad = analogRead(pothigh3);
+    }
+    else if (datatype.equals("fa_t")) {
+      if (namepot == 1) uad = analogRead(potlow);
+      else if (namepot == 2) uad = analogRead(potlow2);
+      else if (namepot == 3) uad = analogRead(potlow3);
+    }  
 
-    effhigh = effhigh / 4;
-    if (effhigh >= 255) return 20;
-    else if (effhigh >= 240) return 17;
-    else if (effhigh >= 225) return 16;
-    else if (effhigh >= 210) return 15;
-    else if (effhigh >= 195) return 14;
-    else if (effhigh >= 180) return 13;
-    else if (effhigh >= 165) return 12;
-    else if (effhigh >= 150) return 11;
-    else if (effhigh >= 135) return 10;
-    else if (effhigh >= 120) return 9;
-    else if (effhigh >= 105) return 8;
-    else if (effhigh >= 90) return 7;
-    else if (effhigh >= 75) return 6;
-    else if (effhigh >= 60) return 5;
-    else if (effhigh >= 45) return 4;
-    else if (effhigh >= 30) return 3;
-    else if (effhigh >= 15) return 2;
-    else if (effhigh >= 0) return 1;
-  }
-  else if (datatype.equals("fa_t")) {
-    if (namepot == 1) efflow = analogRead(potlow);
-    else if (namepot == 2) efflow = analogRead(potlow2);
-    else if (namepot == 3) efflow = analogRead(potlow3);
-
-    efflow = efflow /4;
-    if (efflow >= 255) return 20;
-    else if (efflow >= 240) return 17;
-    else if (efflow >= 225) return 16;
-    else if (efflow >= 210) return 15;
-    else if (efflow >= 195) return 14;
-    else if (efflow >= 180) return 13;
-    else if (efflow >= 165) return 12;
-    else if (efflow >= 150) return 11;
-    else if (efflow >= 135) return 10;
-    else if (efflow >= 120) return 9;
-    else if (efflow >= 105) return 8;
-    else if (efflow >= 90) return 7;
-    else if (efflow >= 75) return 6;
-    else if (efflow >= 60) return 5;
-    else if (efflow >= 45) return 4;
-    else if (efflow >= 30) return 3;
-    else if (efflow >= 15) return 2;
-    else if (efflow >= 0) return 1;
+    uad = uad / 4;
+    if (uad >= 255) return 20;
+    else if (uad >= 240) return 17;
+    else if (uad >= 225) return 16;
+    else if (uad >= 210) return 15;
+    else if (uad >= 195) return 14;
+    else if (uad >= 180) return 13;
+    else if (uad >= 165) return 12;
+    else if (uad >= 150) return 11;
+    else if (uad >= 135) return 10;
+    else if (uad >= 120) return 9;
+    else if (uad >= 105) return 8;
+    else if (uad >= 90) return 7;
+    else if (uad >= 75) return 6;
+    else if (uad >= 60) return 5;
+    else if (uad >= 45) return 4;
+    else if (uad >= 30) return 3;
+    else if (uad >= 15) return 2;
+    else if (uad >= 0) return 1;
   }
 }
 void calculator_val() {
@@ -282,60 +265,100 @@ void calculator_val() {
     else if ( brnon3 != 250 ) { brncl_3 = brnon3 / 250;   fa_c_cl_3 = fa_c3 * brncl_3 * hsbx_3;   fa_t_cl_3 = fa_t3 * brncl_3 * hsbx_3; }
   }
 }
-
-void eff_1_inc(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &brnon, float &fa_c, float &fa_t, int &ctn, int &fa, int &stt_ts, int &led, int &kpr, int &krl) {
+void led_control(int led, float brn = 0, int mode = 0, int led_dc = 0) {
+  if (mode == 0) {
+    if (led != 0) analogWrite(led, brn);
+    else {
+      analogWrite(led_1, brn);
+      analogWrite(led_2, brn);
+      analogWrite(led_3, brn);
+      analogWrite(led_4, brn);
+      analogWrite(led_5, brn);
+      analogWrite(led_6, brn);
+    }
+  }
+  else {
+    Serial.println(mode);
+    Serial.print(" | ");
+    Serial.print(led_dc);
+    if (mode == 1) {
+      analogWrite(led_1, (led_dc == 1) ? 255 : 0);
+      analogWrite(led_2, (led_dc == 2) ? 255 : 0);
+      analogWrite(led_3, (led_dc == 3) ? 255 : 0);
+      analogWrite(led_4, (led_dc == 3) ? 255 : 0);
+      analogWrite(led_5, (led_dc == 2) ? 255 : 0);
+      analogWrite(led_6, (led_dc == 1) ? 255 : 0);
+    }
+    else if (mode == 2) {
+      analogWrite(led_1, (led_dc == 1) ? 255 : 0);
+      analogWrite(led_2, (led_dc == 2) ? 255 : 0);
+      analogWrite(led_3, (led_dc == 3) ? 255 : 0);
+      analogWrite(led_4, (led_dc == 4) ? 255 : 0);
+      analogWrite(led_5, (led_dc == 5) ? 255 : 0);
+      analogWrite(led_6, (led_dc == 6) ? 255 : 0);
+    }
+    else if (mode == 3) {
+      analogWrite(led_1, (led_dc == 3) ? 255 : 0);
+      analogWrite(led_2, (led_dc == 2) ? 255 : 0);
+      analogWrite(led_3, (led_dc == 1) ? 255 : 0);
+      analogWrite(led_4, (led_dc == 4) ? 255 : 0);
+      analogWrite(led_5, (led_dc == 5) ? 255 : 0);
+      analogWrite(led_6, (led_dc == 6) ? 255 : 0);
+    }
+  }  
+}
+void eff_1_inc(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &brnon, float &fa_c, float &fa_t, int &ctn, int &fa, int &stt_ts, int led, int &kpr, int &krl) {
   if( jikan - tg_ht >= tanso ) {
     tg_ht = millis();
     if ( brn <= brnon && fa == 1 ) { brn = brn + fa_c; if ( brn >= brnon ) fa = 2; }
     if ( fa == 2) { brn = brn - fa_t; }
     if ( brn <= 0 ) {brn = 0; ctn = 0; kpr = 0; krl = 0;}
     if ( tanso >= 21) {
-      if ( stt_ts == 0 ){stt_ts = 1; analogWrite(led, brn);}
-      else {analogWrite(led, LOW); stt_ts = 0;}
+      if ( stt_ts == 0 ) { led_control(led, brn); stt_ts = 1;}
+      else { led_control(led); stt_ts = 0;}
     }
-    else {analogWrite(led, brn);}
+    else led_control(led, brn);
   }
 }
-void eff_1_dec(int &led, float &brn, int &ctn, int &fa, int &kpr, int &krl) {
-  analogWrite(led, LOW);
+void eff_1_dec(int led, float &brn, int &ctn, int &fa, int &kpr, int &krl) {
+  led_control(led);
   brn = 0; ctn = 0; fa = 1; kpr = 0; krl = 0;
 }
-void eff_2_iad(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &brnon, float &fa_c, float &fa_t, int &ctn, int &fa, int &stt_ts, int &led, int &kpr, int &krl) {
+void eff_2_iad(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &brnon, float &fa_c, float &fa_t, int &ctn, int &fa, int &stt_ts, int led, int &kpr, int &krl) {
   if(jikan - tg_ht >= tanso) {
     tg_ht = millis();
     if ( brn <= brnon && fa == 1 ) { brn = brn + (fa_c * 4); if ( brn >= brnon ) fa = 2; }
     if ( fa == 2) { brn = brn - fa_t; }
     if ( brn <= 0 ) {brn = 0; ctn = 0; kpr = 0; krl = 0;}
     if ( tanso >= 21) {
-      if ( stt_ts == 0 ){stt_ts = 1; analogWrite(led_1, brn);}
-      else {analogWrite(led, LOW); stt_ts = 0;}
+      if ( stt_ts == 0 ) { led_control(led, brn); stt_ts = 1; }
+      else { led_control(led, brn); stt_ts = 0; }
     }
-    else {analogWrite(led, brn);}
+    else led_control(led, brn);
   }
 }
-void eff_3_inc(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &brnon, float &fa_c, int &stt_ts, int &led) {
+void eff_3_inc(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &brnon, float &fa_c, int &stt_ts, int led) {
   if(jikan - tg_ht >= tanso) { tg_ht = millis();
     if( brn <= brnon) { brn = brn + fa_c; if( brn >= brnon ) brn = brnon; }
     if( brn >= brnon ) brn = brnon;
     if (tanso >= 21) {
-      if ( stt_ts == 0 ){stt_ts = 1; analogWrite(led, brn);}
-      else {analogWrite(led, LOW); stt_ts = 0;}
+      if ( stt_ts == 0 ) { led_control(led, brn); stt_ts = 1; }
+      else { led_control(led, brn); stt_ts = 0; }
     }
-    else {analogWrite(led, brn);}
+    else led_control(led, brn);
   }
 }
-void eff_3_dec(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &fa_t, int &stt_ts, int &led, int &ctn1, int &ctn2, int &kpr, int &krl) {
+void eff_3_dec(unsigned long &jikan, int &tg_ht, float &tanso, float &brn, float &fa_t, int &stt_ts, int led, int &ctn1, int &ctn2, int &kpr, int &krl) {
   if(jikan - tg_ht >= tanso) { tg_ht = millis();
     brn = brn - fa_t;
     if( brn < 0 ) { brn = 0; ctn1 = 0; ctn2 = 0; stt_ts = 0; kpr = 0; krl = 0; }
     if (tanso >= 21) {
-      if ( stt_ts == 0 ){stt_ts = 1;analogWrite(led, brn);}
-      else {analogWrite(led, LOW); stt_ts = 0;}
+      if ( stt_ts == 0 ) { led_control(led, brn); stt_ts = 1; }
+      else { led_control(led, brn); stt_ts = 0; }
     }
-    else {analogWrite(led, brn);}
+    else led_control(led, brn);
   }
 }
-
 void effect_cac() {
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 1   //////////////////////////////
@@ -365,7 +388,6 @@ void effect_cac() {
     if (ctn6 == 1) eff_1_inc(jikan, tg_ht6, tanso1, brn6, brnon, fa_c_cl_1, fa_t_cl_1, ctn6, fa6, stt_ts6, led_6, kpr, krl);
     if (krl == 28) eff_1_dec(led_6, brn6, ctn6, fa6, kpr, krl);
   }
-  //////////////////////////////   MODE 2   //////////////////////////////
   if( line_qwe == 2 ) {
     if ( kpr == 20 ) { ctn1b = 1; reset_eff_nor(); brn1 = brnoff;}
     if ( ctn1b == 1 ) eff_2_iad(jikan, tg_ht1, tanso1, brn1, brnon, fa_c_cl_1, fa_t_cl_1, ctn1b, fa1, stt_ts1, led_1, kpr, krl);
@@ -385,7 +407,6 @@ void effect_cac() {
     if ( kpr == 28 ) { ctn6b = 1; reset_eff_nor(); brn6 = brnoff;}
     if ( ctn6b == 1 ) eff_2_iad(jikan, tg_ht6, tanso1, brn6, brnon, fa_c_cl_1, fa_t_cl_1, ctn6b, fa6, stt_ts6, led_6, kpr, krl);
   }
-  //////////////////////////////   MODE 3   //////////////////////////////
   if( line_qwe == 3 ) {
     if ( kpr == 20 ) { ctn1c = 1; ctn1c2 = 0; reset_eff_nor();}
     if ( ctn1c == 1 && ctn1c2 == 0) eff_3_inc(jikan, tg_ht1, tanso1, brn1, brnon, fa_c_cl_1, stt_ts1, led_1);
@@ -450,11 +471,10 @@ void effect_cac() {
     if (ctn5_2 == 1) eff_1_inc(jikan, tg_ht5, tanso2, brn5, brnon2, fa_c_cl_2, fa_t_cl_2, ctn5_2, fa5, stt_ts5, led_5, kpr, krl);
     if (krl == 10) eff_1_dec(led_5, brn5, ctn5_2, fa5, kpr, krl);
 
-    if (kpr == 10) { ctn6_2 = 1; reset_eff_nor();}
+    if (kpr == 11) { ctn6_2 = 1; reset_eff_nor();}
     if (ctn6_2 == 1) eff_1_inc(jikan, tg_ht6, tanso2, brn6, brnon2, fa_c_cl_2, fa_t_cl_2, ctn6_2, fa6, stt_ts6, led_6, kpr, krl);
-    if (krl == 10) eff_1_dec(led_6, brn6, ctn6_2, fa6, kpr, krl);
+    if (krl == 11) eff_1_dec(led_6, brn6, ctn6_2, fa6, kpr, krl);
   }
-  //////////////////////////////   MODE 2   //////////////////////////////
   if( line_asd == 2 ) {
     if ( kpr == 4 ) { ctn1b_2 = 1; reset_eff_nor(); brn1 = brnoff2;}
     if ( ctn1b_2 == 1 ) eff_2_iad(jikan, tg_ht1, tanso2, brn1, brnon2, fa_c_cl_2, fa_t_cl_2, ctn1b_2, fa1, stt_ts1, led_1, kpr, krl);
@@ -474,7 +494,6 @@ void effect_cac() {
     if ( kpr == 11 ) { ctn6b_2 = 1; reset_eff_nor(); brn6 = brnoff2;}
     if ( ctn6b_2 == 1 ) eff_2_iad(jikan, tg_ht6, tanso2, brn6, brnon2, fa_c_cl_2, fa_t_cl_2, ctn6b_2, fa6, stt_ts6, led_6, kpr, krl);
   }
-  //////////////////////////////   MODE 3   //////////////////////////////
   if( line_asd == 3 ) {
     if ( kpr == 4 ) { ctn1c_2 = 1; ctn1c2_2 = 0; reset_eff_nor();}
     if ( ctn1c_2 == 1 && ctn1c2_2 == 0) eff_3_inc(jikan, tg_ht1, tanso2, brn1, brnon2, fa_c_cl_2, stt_ts1, led_1);
@@ -543,7 +562,6 @@ void effect_cac() {
     if (ctn6_3 == 1) eff_1_inc(jikan, tg_ht6, tanso3, brn6, brnon3, fa_c_cl_3, fa_t_cl_3, ctn6_3, fa6, stt_ts6, led_6, kpr, krl);
     if (krl == 17) eff_1_dec(led_6, brn6, ctn6_3, fa6, kpr, krl);
   }
-  //////////////////////////////   MODE 2   //////////////////////////////
   if( line_zxc == 2 ) {
     if ( kpr == 29 ) { ctn1b_3 = 1; reset_eff_nor(); brn1 = brnoff3;}
     if ( ctn1b_3 == 1 ) eff_2_iad(jikan, tg_ht1, tanso3, brn1, brnon3, fa_c_cl_3, fa_t_cl_3, ctn1b_3, fa1, stt_ts1, led_1, kpr, krl);
@@ -563,7 +581,6 @@ void effect_cac() {
     if ( kpr == 17 ) { ctn6b_3 = 1; reset_eff_nor(); brn6 = brnoff3;}
     if ( ctn6b_3 == 1 ) eff_2_iad(jikan, tg_ht6, tanso3, brn6, brnon3, fa_c_cl_3, fa_t_cl_3, ctn6b_3, fa6, stt_ts6, led_6, kpr, krl);
   }
-  //////////////////////////////   MODE 3   //////////////////////////////
   if( line_zxc == 3 ) {
     if ( kpr == 29 ) { ctn1c_3 = 1; ctn1c2_3 = 0; reset_eff_nor();}
     if ( ctn1c_3 == 1 && ctn1c2_3 == 0) eff_3_inc(jikan, tg_ht1, tanso3, brn1, brnon3, fa_c_cl_3, stt_ts1, led_1);
@@ -607,165 +624,20 @@ void effect_combo_sigle() {
   //////////////////////////////   LINE 1   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if( line_qwe == 1 ) {
-    if (kpr == 18 || ctn_ao_1 == 1) { ctn_ao_1 =1;
-      if(jikan - tg_ht_ao_1 >= tanso1) { 
-        tg_ht_ao_1 = millis();
-        if ( brn_ao_1 <= brnon && fa_ao_1 == 1 ) { brn_ao_1 = brn_ao_1 + fa_c_cl_1; if ( brn_ao_1 >= brnon ) fa_ao_1 = 2; }
-        if ( fa_ao_1 == 2) { brn_ao_1 = brn_ao_1 - fa_t_cl_1; }
-        if ( brn_ao_1 <= 0 ) {brn_ao_1 = 0; ctn_ao_1 = 0; kpr = 0; krl = 0; }
-        if (tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            stt_ts_ao_1 = 1;
-            analogWrite(led_1, brn_ao_1);
-            analogWrite(led_2, brn_ao_1);
-            analogWrite(led_3, brn_ao_1);
-            analogWrite(led_4, brn_ao_1);
-            analogWrite(led_5, brn_ao_1);
-            analogWrite(led_6, brn_ao_1);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, brn_ao_1);
-          analogWrite(led_2, brn_ao_1);
-          analogWrite(led_3, brn_ao_1);
-          analogWrite(led_4, brn_ao_1);
-          analogWrite(led_5, brn_ao_1);
-          analogWrite(led_6, brn_ao_1);
-        }
-      }
-    }
-    if(krl == 18) {
-      analogWrite(led_1, LOW);
-      analogWrite(led_2, LOW);
-      analogWrite(led_3, LOW);
-      analogWrite(led_4, LOW);
-      analogWrite(led_5, LOW);
-      analogWrite(led_6, LOW);
-      brn_ao = 0; ctn_ao_1 = 0; fa_ao_1 = 1;
-      kpr = 0; krl = 0;
-    }
+    if (kpr == 18) { reset_val(); ctn_ao_1 = 1;}
+    if (ctn_ao_1 == 1) eff_1_inc(jikan, tg_ht_ao_1, tanso1, brn_ao_1, brnon, fa_c_cl_1, fa_t_cl_1, ctn_ao_1, fa_ao_1, stt_ts_ao_1, 0, kpr, krl);
+    if (krl == 18) eff_1_dec(0, brn_ao_1, ctn_ao_1, fa_ao_1, kpr, krl);
   }
-  //////////////////////////////   MODE 2   //////////////////////////////
   if( line_qwe == 2 ) {
-    if ( kpr == 18 ) { ctn_ao_1b = 1; brn_ao_1 = brnoff; kpr = 0; krl = 0;}
-    if ( ctn_ao_1b == 1 ) {
-      if(jikan - tg_ht_ao_1 >= tanso1) {
-        tg_ht_ao_1 = millis();
-        brn_ao_1 -= fa_t_cl_1;
-        if ( brn_ao_1 <= 0 ) { brn_ao_1 = 0; ctn_ao_1b = 0;}
-        if (tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ){stt_ts_ao_1 = 1;
-            analogWrite(led_1, brn_ao_1);
-            analogWrite(led_2, brn_ao_1);
-            analogWrite(led_3, brn_ao_1);
-            analogWrite(led_4, brn_ao_1);
-            analogWrite(led_5, brn_ao_1);
-            analogWrite(led_6, brn_ao_1);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, brn_ao_1);
-          analogWrite(led_2, brn_ao_1);
-          analogWrite(led_3, brn_ao_1);
-          analogWrite(led_4, brn_ao_1);
-          analogWrite(led_5, brn_ao_1);
-          analogWrite(led_6, brn_ao_1);
-        }
-      }
-    }
+    if ( kpr == 18 ) { reset_val(); ctn_ao_1b = 1; brn_ao_1 = brnoff;}
+    if ( ctn_ao_1b == 1 ) eff_2_iad(jikan, tg_ht_ao_1, tanso1, brn_ao_1, brnon, fa_c_cl_1, fa_t_cl_1, ctn_ao_1b, fa_ao_1, stt_ts_ao_1, 0, kpr, krl);
   }
-  //////////////////////////////   MODE 3   //////////////////////////////
   if( line_qwe == 3 ) {
-    if (kpr == 18 || ctn_ao_1c == 1) { ctn_ao_1c = 1; ctn_ao_1c2 = 0;}
-    if ( ctn_ao_1c == 1 && ctn_ao_1c2 == 0) {
-      if(jikan - tg_ht_ao_1 >= tanso1) { tg_ht_ao_1 = millis();
-        if( brn_ao_1 <= brnon) {
-          brn_ao_1 = brn_ao_1 + fa_c_cl_1;
-          if( brn_ao_1 >= brnon ) brn_ao_1 = brnon;
-        }
-        if( brn_ao_1 >= brnon ) brn_ao_1 = brnon;
-        if (tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ){
-            stt_ts_ao_1 = 1; 
-            analogWrite(led_1, brn_ao_1);
-            analogWrite(led_2, brn_ao_1);
-            analogWrite(led_3, brn_ao_1);
-            analogWrite(led_4, brn_ao_1);
-            analogWrite(led_5, brn_ao_1);
-            analogWrite(led_6, brn_ao_1);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;}
-        }
-        else {
-          analogWrite(led_1, brn_ao_1);
-          analogWrite(led_2, brn_ao_1);
-          analogWrite(led_3, brn_ao_1);
-          analogWrite(led_4, brn_ao_1);
-          analogWrite(led_5, brn_ao_1);
-          analogWrite(led_6, brn_ao_1);
-        }
-      }
-    }
-    if (krl == 18 || ctn_ao_1c2 == 1) { ctn_ao_1c = 0; ctn_ao_1c2 = 1;}
-    if (krl == 18) { kpr = 0; krl = 0; }
-    if ( ctn_ao_1c == 0 && ctn_ao_1c2 == 1 ) {
-      if(jikan - tg_ht_ao_1 >= tanso1) { tg_ht_ao_1 = millis();
-        brn_ao_1 = brn_ao_1 - fa_t_cl_1;
-        if( brn_ao_1 < 0 ) { brn_ao_1 = 0; ctn_ao_1c = 0; ctn_ao_1c2 = 0; ctn_ao_1c3 = 0; kpr = 0; krl = 0; }
-        if (tanso1 >= 21) {
-          if ( ctn_ao_1c3 == 0 ){ctn_ao_1c3 = 1;
-            analogWrite(led_1, brn_ao_1);
-            analogWrite(led_2, brn_ao_1);
-            analogWrite(led_3, brn_ao_1);
-            analogWrite(led_4, brn_ao_1);
-            analogWrite(led_5, brn_ao_1);
-            analogWrite(led_6, brn_ao_1);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            ctn_ao_1c3 = 0;
-          }      
-        }
-        else {
-          analogWrite(led_1, brn_ao_1);
-          analogWrite(led_2, brn_ao_1);
-          analogWrite(led_3, brn_ao_1);
-          analogWrite(led_4, brn_ao_1);
-          analogWrite(led_5, brn_ao_1);
-          analogWrite(led_6, brn_ao_1);
-        }
-      }
-    }
+    if ( kpr == 18 ) { reset_val(); ctn_ao_1c = 1; ctn_ao_1c2 = 0;}
+    if ( ctn_ao_1c == 1 && ctn_ao_1c2 == 0) eff_3_inc(jikan, tg_ht_ao_1, tanso1, brn_ao_1, brnon, fa_c_cl_1, stt_ts_ao_1, 0);
+    if ( krl == 18 ) { ctn_ao_1c = 0; ctn_ao_1c2 = 1; stt_ts1 = 0;}
+    if ( krl == 18 ) { kpr = 0; krl = 0; }
+    if ( ctn_ao_1c == 0 && ctn_ao_1c2 == 1 ) eff_3_dec(jikan, tg_ht_ao_1, tanso1, brn_ao_1, fa_t_cl_1, stt_ts_ao_1, 0, ctn_ao_1c, ctn_ao_1c2, kpr, krl);
   }
 
 
@@ -774,165 +646,20 @@ void effect_combo_sigle() {
   //////////////////////////////   LINE 2   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if( line_asd == 1 ) {
-    if (kpr == 14 || ctn_ao_1_2 == 1) { ctn_ao_1_2 =1;
-      if(jikan - tg_ht_ao_1 >= tanso2) { 
-        tg_ht_ao_1 = millis();
-        if ( brn_ao_2 <= brnon2 && fa_ao_1 == 1 ) { brn_ao_2 = brn_ao_2 + fa_c_cl_2; if ( brn_ao_2 >= brnon2 ) fa_ao_1 = 2; }
-        if ( fa_ao_1 == 2) { brn_ao_2 = brn_ao_2 - fa_t_cl_2; }
-        if ( brn_ao_2 <= 0 ) {brn_ao_2 = 0; ctn_ao_1_2 = 0; kpr = 0; krl = 0; }
-        if (tanso2 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            stt_ts_ao_1 = 1;
-            analogWrite(led_1, brn_ao_2);
-            analogWrite(led_2, brn_ao_2);
-            analogWrite(led_3, brn_ao_2);
-            analogWrite(led_4, brn_ao_2);
-            analogWrite(led_5, brn_ao_2);
-            analogWrite(led_6, brn_ao_2);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, brn_ao_2);
-          analogWrite(led_2, brn_ao_2);
-          analogWrite(led_3, brn_ao_2);
-          analogWrite(led_4, brn_ao_2);
-          analogWrite(led_5, brn_ao_2);
-          analogWrite(led_6, brn_ao_2);
-        }
-      }
-    }
-    if(krl == 14) {
-      analogWrite(led_1, LOW);
-      analogWrite(led_2, LOW);
-      analogWrite(led_3, LOW);
-      analogWrite(led_4, LOW);
-      analogWrite(led_5, LOW);
-      analogWrite(led_6, LOW);
-      brn_ao = 0; ctn_ao_1_2 = 0; fa_ao_1 = 1;
-      kpr = 0; krl = 0;
-    }
+    if (kpr == 14) { reset_val(); ctn_ao_1_2 = 1;}
+    if (ctn_ao_1_2 == 1) eff_1_inc(jikan, tg_ht_ao_2, tanso2, brn_ao_2, brnon2, fa_c_cl_2, fa_t_cl_2, ctn_ao_1_2, fa_ao_1, stt_ts_ao_2, 0, kpr, krl);
+    if (krl == 14) eff_1_dec(0, brn_ao_2, ctn_ao_1_2, fa_ao_1, kpr, krl);
   }
-  //////////////////////////////   MODE 2   //////////////////////////////
   if( line_asd == 2 ) {
-    if ( kpr == 18 ) { ctn_ao_1b_2 = 1; brn_ao_2 = brnoff2; kpr = 0; krl = 0;}
-    if ( ctn_ao_1b_2 == 1 ) {
-      if(jikan - tg_ht_ao_1 >= tanso2) {
-        tg_ht_ao_1 = millis();
-        brn_ao_2 -= fa_t_cl_2;
-        if ( brn_ao_2 <= 0 ) { brn_ao_2 = 0; ctn_ao_1b_2 = 0;}
-        if (tanso2 >= 21) {
-          if ( stt_ts_ao_1 == 0 ){stt_ts_ao_1 = 1;
-            analogWrite(led_1, brn_ao_2);
-            analogWrite(led_2, brn_ao_2);
-            analogWrite(led_3, brn_ao_2);
-            analogWrite(led_4, brn_ao_2);
-            analogWrite(led_5, brn_ao_2);
-            analogWrite(led_6, brn_ao_2);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, brn_ao_2);
-          analogWrite(led_2, brn_ao_2);
-          analogWrite(led_3, brn_ao_2);
-          analogWrite(led_4, brn_ao_2);
-          analogWrite(led_5, brn_ao_2);
-          analogWrite(led_6, brn_ao_2);
-        }
-      }
-    }
+    if ( kpr == 14 ) { reset_val(); ctn_ao_1b_2 = 1; brn_ao_2 = brnoff2;}
+    if ( ctn_ao_1b_2 == 1 ) eff_2_iad(jikan, tg_ht_ao_2, tanso2, brn_ao_2, brnon2, fa_c_cl_2, fa_t_cl_2, ctn_ao_1b_2, fa_ao_1, stt_ts_ao_2, 0, kpr, krl);
   }
-  //////////////////////////////   MODE 3   //////////////////////////////
   if( line_asd == 3 ) {
-    if (kpr == 14 || ctn_ao_1c_2 == 1) { ctn_ao_1c_2 = 1; ctn_ao_1c2_2 = 0;}
-    if ( ctn_ao_1c_2 == 1 && ctn_ao_1c2_2 == 0) {
-      if(jikan - tg_ht_ao_1 >= tanso2) { tg_ht_ao_1 = millis();
-        if( brn_ao_2 <= brnon2) {
-          brn_ao_2 = brn_ao_2 + fa_c_cl_2;
-          if( brn_ao_2 >= brnon2 ) brn_ao_2 = brnon2;
-        }
-        if( brn_ao_2 >= brnon2 ) brn_ao_2 = brnon2;
-        if (tanso2 >= 21) {
-          if ( stt_ts_ao_1 == 0 ){
-            stt_ts_ao_1 = 1; 
-            analogWrite(led_1, brn_ao_2);
-            analogWrite(led_2, brn_ao_2);
-            analogWrite(led_3, brn_ao_2);
-            analogWrite(led_4, brn_ao_2);
-            analogWrite(led_5, brn_ao_2);
-            analogWrite(led_6, brn_ao_2);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;}
-        }
-        else {
-          analogWrite(led_1, brn_ao_2);
-          analogWrite(led_2, brn_ao_2);
-          analogWrite(led_3, brn_ao_2);
-          analogWrite(led_4, brn_ao_2);
-          analogWrite(led_5, brn_ao_2);
-          analogWrite(led_6, brn_ao_2);
-        }
-      }
-    }
-    if (krl == 14 || ctn_ao_1c2_2 == 1) { ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 1;}
-    if (krl == 14) { kpr = 0; krl = 0; }
-    if ( ctn_ao_1c_2 == 0 && ctn_ao_1c2_2 == 1 ) {
-      if(jikan - tg_ht_ao_1 >= tanso2) { tg_ht_ao_1 = millis();
-        brn_ao_2 = brn_ao_2 - fa_t_cl_2;
-        if( brn_ao_2 < 0 ) { brn_ao_2 = 0; ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 0; ctn_ao_1c3_2 = 0; kpr = 0; krl = 0; }
-        if (tanso2 >= 21) {
-          if ( ctn_ao_1c3_2 == 0 ){ctn_ao_1c3_2 = 1;
-            analogWrite(led_1, brn_ao_2);
-            analogWrite(led_2, brn_ao_2);
-            analogWrite(led_3, brn_ao_2);
-            analogWrite(led_4, brn_ao_2);
-            analogWrite(led_5, brn_ao_2);
-            analogWrite(led_6, brn_ao_2);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            ctn_ao_1c3_2 = 0;
-          }      
-        }
-        else {
-          analogWrite(led_1, brn_ao_2);
-          analogWrite(led_2, brn_ao_2);
-          analogWrite(led_3, brn_ao_2);
-          analogWrite(led_4, brn_ao_2);
-          analogWrite(led_5, brn_ao_2);
-          analogWrite(led_6, brn_ao_2);
-        }
-      }
-    }
+    if ( kpr == 14 ) { reset_val(); ctn_ao_1c_2 = 1; ctn_ao_1c2_2 = 0;}
+    if ( ctn_ao_1c_2 == 1 && ctn_ao_1c2_2 == 0) eff_3_inc(jikan, tg_ht_ao_2, tanso2, brn_ao_2, brnon2, fa_c_cl_2, stt_ts_ao_2, 0);
+    if ( krl == 14 ) { ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 1; stt_ts1 = 0;}
+    if ( krl == 14 ) { kpr = 0; krl = 0; }
+    if ( ctn_ao_1c_2 == 0 && ctn_ao_1c2_2 == 1 ) eff_3_dec(jikan, tg_ht_ao_2, tanso2, brn_ao_2, fa_t_cl_2, stt_ts_ao_2, 0, ctn_ao_1c_2, ctn_ao_1c2_2, kpr, krl);
   }
   
 
@@ -941,176 +668,27 @@ void effect_combo_sigle() {
   //////////////////////////////   LINE 3   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
   if( line_zxc == 1 ) {
-    if (kpr == 16 || ctn_ao_1_3 == 1) { ctn_ao_1_3 =1;
-      if(jikan - tg_ht_ao_1 >= tanso3) { 
-        tg_ht_ao_1 = millis();
-        if ( brn_ao_3 <= brnon3 && fa_ao_1 == 1 ) { brn_ao_3 = brn_ao_3 + fa_c_cl_3; if ( brn_ao_3 >= brnon3 ) fa_ao_1 = 2; }
-        if ( fa_ao_1 == 2) { brn_ao_3 = brn_ao_3 - fa_t_cl_3; }
-        if ( brn_ao_3 <= 0 ) {brn_ao_3 = 0; ctn_ao_1_3 = 0; kpr = 0; krl = 0; }
-        if (tanso3 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            stt_ts_ao_1 = 1;
-            analogWrite(led_1, brn_ao_3);
-            analogWrite(led_2, brn_ao_3);
-            analogWrite(led_3, brn_ao_3);
-            analogWrite(led_4, brn_ao_3);
-            analogWrite(led_5, brn_ao_3);
-            analogWrite(led_6, brn_ao_3);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, brn_ao_3);
-          analogWrite(led_2, brn_ao_3);
-          analogWrite(led_3, brn_ao_3);
-          analogWrite(led_4, brn_ao_3);
-          analogWrite(led_5, brn_ao_3);
-          analogWrite(led_6, brn_ao_3);
-        }
-      }
-    }
-    if(krl == 16) {
-      analogWrite(led_1, LOW);
-      analogWrite(led_2, LOW);
-      analogWrite(led_3, LOW);
-      analogWrite(led_4, LOW);
-      analogWrite(led_5, LOW);
-      analogWrite(led_6, LOW);
-      brn_ao = 0; ctn_ao_1_3 = 0; fa_ao_1 = 1;
-      kpr = 0; krl = 0;
-    }
+    if (kpr == 16) { reset_val(); ctn_ao_1_3 = 1;}
+    if (ctn_ao_1_3 == 1) eff_1_inc(jikan, tg_ht_ao_3, tanso3, brn_ao_3, brnon3, fa_c_cl_3, fa_t_cl_3, ctn_ao_1_3, fa_ao_1, stt_ts_ao_3, 0, kpr, krl);
+    if (krl == 16) eff_1_dec(0, brn_ao_3, ctn_ao_1_3, fa_ao_1, kpr, krl);
   }
-  //////////////////////////////   MODE 2   //////////////////////////////
   if( line_zxc == 2 ) {
-    if ( kpr == 16 ) { ctn_ao_1b_3 = 1; brn_ao_3 = brnoff3; kpr = 0; krl = 0;}
-    if ( ctn_ao_1b_3 == 1 ) {
-      if(jikan - tg_ht_ao_1 >= tanso3) {
-        tg_ht_ao_1 = millis();
-        brn_ao_3 -= fa_t_cl_3;
-        if ( brn_ao_3 <= 0 ) { brn_ao_3 = 0; ctn_ao_1b_3 = 0;}
-        if (tanso3 >= 21) {
-          if ( stt_ts_ao_1 == 0 ){stt_ts_ao_1 = 1;
-            analogWrite(led_1, brn_ao_3);
-            analogWrite(led_2, brn_ao_3);
-            analogWrite(led_3, brn_ao_3);
-            analogWrite(led_4, brn_ao_3);
-            analogWrite(led_5, brn_ao_3);
-            analogWrite(led_6, brn_ao_3);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, brn_ao_3);
-          analogWrite(led_2, brn_ao_3);
-          analogWrite(led_3, brn_ao_3);
-          analogWrite(led_4, brn_ao_3);
-          analogWrite(led_5, brn_ao_3);
-          analogWrite(led_6, brn_ao_3);
-        }
-      }
-    }
+    if ( kpr == 16 ) { reset_val(); ctn_ao_1b_3 = 1; brn_ao_3 = brnoff3;}
+    if ( ctn_ao_1b_3 == 1 ) eff_2_iad(jikan, tg_ht_ao_3, tanso3, brn_ao_3, brnon3, fa_c_cl_3, fa_t_cl_3, ctn_ao_1b_3, fa_ao_1, stt_ts_ao_3, 0, kpr, krl);
   }
-  //////////////////////////////   MODE 3   //////////////////////////////
   if( line_zxc == 3 ) {
-    if (kpr == 16 || ctn_ao_1c_3 == 1) { ctn_ao_1c_3 = 1; ctn_ao_1c2_3 = 0;}
-    if ( ctn_ao_1c_3 == 1 && ctn_ao_1c2_3 == 0) {
-      if(jikan - tg_ht_ao_1 >= tanso3) { tg_ht_ao_1 = millis();
-        if( brn_ao_3 <= brnon3) {
-          brn_ao_3 = brn_ao_3 + fa_c_cl_3;
-          if( brn_ao_3 >= brnon3 ) brn_ao_3 = brnon3;
-        }
-        if( brn_ao_3 >= brnon3 ) brn_ao_3 = brnon3;
-        if (tanso3 >= 21) {
-          if ( stt_ts_ao_1 == 0 ){
-            stt_ts_ao_1 = 1; 
-            analogWrite(led_1, brn_ao_3);
-            analogWrite(led_2, brn_ao_3);
-            analogWrite(led_3, brn_ao_3);
-            analogWrite(led_4, brn_ao_3);
-            analogWrite(led_5, brn_ao_3);
-            analogWrite(led_6, brn_ao_3);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;}
-        }
-        else {
-          analogWrite(led_1, brn_ao_3);
-          analogWrite(led_2, brn_ao_3);
-          analogWrite(led_3, brn_ao_3);
-          analogWrite(led_4, brn_ao_3);
-          analogWrite(led_5, brn_ao_3);
-          analogWrite(led_6, brn_ao_3);
-        }
-      }
-    }
-    if (krl == 16 || ctn_ao_1c2_3 == 1) { ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 1;}
-    if (krl == 16) { kpr = 0; krl = 0; }
-    if ( ctn_ao_1c_3 == 0 && ctn_ao_1c2_3 == 1 ) {
-      if(jikan - tg_ht_ao_1 >= tanso3) { tg_ht_ao_1 = millis();
-        brn_ao_3 = brn_ao_3 - fa_t_cl_3;
-        if( brn_ao_3 < 0 ) { brn_ao_3 = 0; ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 0; ctn_ao_1c3_3 = 0; kpr = 0; krl = 0; }
-        if (tanso3 >= 21) {
-          if ( ctn_ao_1c3_3 == 0 ){ctn_ao_1c3_3 = 1;
-            analogWrite(led_1, brn_ao_3);
-            analogWrite(led_2, brn_ao_3);
-            analogWrite(led_3, brn_ao_3);
-            analogWrite(led_4, brn_ao_3);
-            analogWrite(led_5, brn_ao_3);
-            analogWrite(led_6, brn_ao_3);
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            ctn_ao_1c3_3 = 0;
-          }      
-        }
-        else {
-          analogWrite(led_1, brn_ao_3);
-          analogWrite(led_2, brn_ao_3);
-          analogWrite(led_3, brn_ao_3);
-          analogWrite(led_4, brn_ao_3);
-          analogWrite(led_5, brn_ao_3);
-          analogWrite(led_6, brn_ao_3);
-        }
-      }
-    }
+    if ( kpr == 16 ) { reset_val(); ctn_ao_1c_3 = 1; ctn_ao_1c2_3 = 0;}
+    if ( ctn_ao_1c_3 == 1 && ctn_ao_1c2_3 == 0) eff_3_inc(jikan, tg_ht_ao_3, tanso3, brn_ao_3, brnon3, fa_c_cl_3, stt_ts_ao_3, 0);
+    if ( krl == 16 ) { ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 1; stt_ts1 = 0;}
+    if ( krl == 16 ) { kpr = 0; krl = 0; }
+    if ( ctn_ao_1c_3 == 0 && ctn_ao_1c2_3 == 1 ) eff_3_dec(jikan, tg_ht_ao_3, tanso3, brn_ao_3, fa_t_cl_3, stt_ts_ao_3, 0, ctn_ao_1c_3, ctn_ao_1c2_3, kpr, krl);
   }
 }
 void effect_combo_multi() {
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 1   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 48 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_1 = 1;
-  }
+  if ( kpr == 19 ) { reset_val(); ctn_ao_1 = 1; }
   if ( ctn_ao_1 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
       if ( ctrl_combo != 1 ) {
@@ -1125,105 +703,17 @@ void effect_combo_multi() {
   }
   if ( led_dc_1 != 0 && ctn_ao_1 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
-      if ( led_dc_1 == 1) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
+      if ( tanso1 >= 21) {
+        if ( stt_ts_ao_1 == 0 ) { led_control(0,0,1,led_dc_1); stt_ts_ao_1 = 1; }
+        else { led_control(0,0,1,0); stt_ts_ao_1 = 0; }
       }
-      if ( led_dc_1 == 2) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 3) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
+      else led_control(0,0,1,led_dc_1);
     }
   }
-  if( krl == 48 ) { reset_val();}
+  if( krl == 19 ) reset_val();
 
-  if ( kpr == 19 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_1_2 = 1;
-  }
+
+  if ( kpr == 47 ) { reset_val(); ctn_ao_1_2 = 1; }
   if ( ctn_ao_1_2 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
       if ( ctrl_combo != 1 ) {
@@ -1238,195 +728,17 @@ void effect_combo_multi() {
   }
   if ( led_dc_1 != 0 && ctn_ao_1_2 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
-      if ( led_dc_1 == 1) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
+      if ( tanso1 >= 21) {
+        if ( stt_ts_ao_1 == 0 ) { led_control(0,0,2,led_dc_1); stt_ts_ao_1 = 1; }
+        else { led_control(0,0,2,0); stt_ts_ao_1 = 0; }
       }
-      if ( led_dc_1 == 2) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 3) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 4) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 5) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 6) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
-      }
+      else led_control(0,0,2,led_dc_1);
     }
   }
-  if( krl == 19 ) { reset_val();}
+  if( krl == 47 ) reset_val();
 
-  if ( kpr == 47 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_1_3 = 1;
-  }
+
+  if ( kpr == 48 ) { reset_val(); ctn_ao_1_3 = 1; }
   if ( ctn_ao_1_3 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
       if ( ctrl_combo != 1 ) {
@@ -1441,198 +753,19 @@ void effect_combo_multi() {
   }
   if ( led_dc_1 != 0 && ctn_ao_1_3 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
-      if ( led_dc_1 == 1) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
+      if ( tanso1 >= 21) {
+        if ( stt_ts_ao_1 == 0 ) { led_control(0,0,3,led_dc_1); stt_ts_ao_1 = 1; }
+        else { led_control(0,0,3,0); stt_ts_ao_1 = 0; }
       }
-      if ( led_dc_1 == 2) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 3) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 4) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
-      }
-      if ( led_dc_1 == 5) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_1 == 6) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_1 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_1 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
+      else led_control(0,0,3,led_dc_1);
     }
   }
-  if( krl == 47 ) { reset_val();}
+  if( krl == 48 ) reset_val();
   
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 2   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 52 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_2 = 1;
-  }
+  if ( kpr == 15 ) { reset_val(); ctn_ao_2 = 1; }
   if ( ctn_ao_2 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
       if ( ctrl_combo != 1 ) {
@@ -1647,105 +780,17 @@ void effect_combo_multi() {
   }
   if ( led_dc_2 != 0 && ctn_ao_2 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
-      if ( led_dc_2 == 1) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
+      if ( tanso2 >= 21) {
+        if ( stt_ts_ao_2 == 0 ) { led_control(0,0,1,led_dc_2); stt_ts_ao_2 = 1; }
+        else { led_control(0,0,1,0); stt_ts_ao_2 = 0; }
       }
-      if ( led_dc_2 == 2) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 3) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
+      else led_control(0,0,1,led_dc_2);
     }
   }
-  if( krl == 52 ) { reset_val();}
+  if( krl == 15 ) reset_val();
   
-  if ( kpr == 15 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_2_2 = 1;
-  }
+
+  if ( kpr == 51 ) { reset_val(); ctn_ao_2_2 = 1; }
   if ( ctn_ao_2_2 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
       if ( ctrl_combo != 1 ) {
@@ -1760,195 +805,17 @@ void effect_combo_multi() {
   }
   if ( led_dc_2 != 0 && ctn_ao_2_2 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
-      if ( led_dc_2 == 1) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
+      if ( tanso2 >= 21) {
+        if ( stt_ts_ao_2 == 0 ) { led_control(0,0,2,led_dc_2); stt_ts_ao_2 = 1; }
+        else { led_control(0,0,2,0); stt_ts_ao_2 = 0; }
       }
-      if ( led_dc_2 == 2) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 3) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 4) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 5) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 6) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
-      }
+      else led_control(0,0,2,led_dc_2); 
     }
   }
-  if( krl == 15 ) { reset_val();}
+  if( krl == 51 ) reset_val();
 
-  if ( kpr == 51 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_2_3 = 1;
-  }
+
+  if ( kpr == 52 ) { reset_val(); ctn_ao_2_3 = 1; }
   if ( ctn_ao_2_3 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
       if ( ctrl_combo != 1 ) {
@@ -1963,198 +830,19 @@ void effect_combo_multi() {
   }
   if ( led_dc_2 != 0 && ctn_ao_2_3 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
-      if ( led_dc_2 == 1) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
+      if ( tanso2 >= 21) {
+        if ( stt_ts_ao_2 == 0 ) { led_control(0,0,3,led_dc_2); stt_ts_ao_2 = 1; }
+        else { led_control(0,0,3,0); stt_ts_ao_2 = 0; }
       }
-      if ( led_dc_2 == 2) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 3) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 4) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
-      }
-      if ( led_dc_2 == 5) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_2 == 6) {
-        if ( tanso2 >= 21) {
-          if ( stt_ts_ao_2 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_2 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
+      else led_control(0,0,3,led_dc_2);
     }
   }
-  if( krl == 51 ) { reset_val();}
+  if( krl == 52 ) reset_val();
   
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 3   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 56 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_3 = 1;
-  }
+  if ( kpr == 54 ) { reset_val(); ctn_ao_3 = 1; }
   if ( ctn_ao_3 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
       if ( ctrl_combo != 1 ) {
@@ -2169,105 +857,16 @@ void effect_combo_multi() {
   }
   if ( led_dc_3 != 0 ) {
     if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
-      if ( led_dc_3 == 1) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
+      if ( tanso1 >= 21) {
+        if ( stt_ts_ao_3 == 0 ) { led_control(0,0,1,led_dc_3); stt_ts_ao_3 = 1; }
+        else { led_control(0,0,1,0); stt_ts_ao_3 = 0; }
       }
-      if ( led_dc_3 == 2) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 3) {
-        if ( tanso1 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
+      else led_control(0,0,1,led_dc_3);
     }
   }
-  if( krl == 56 ) { reset_val();}
+  if( krl == 54 ) reset_val();
 
-  if ( kpr == 54 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_3_2 = 1;
-  }
+  if ( kpr == 55 ) { reset_val(); ctn_ao_3_2 = 1; }
   if ( ctn_ao_3_2 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
       if ( ctrl_combo != 1 ) {
@@ -2282,195 +881,16 @@ void effect_combo_multi() {
   }
   if ( led_dc_3 != 0 && ctn_ao_3_2 == 1 ) {
     if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
-      if ( led_dc_3 == 1) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
+      if ( tanso3 >= 21) {
+        if ( stt_ts_ao_3 == 0 ) { led_control(0,0,2,led_dc_3); stt_ts_ao_3 = 1; }
+        else { led_control(0,0,2,0); stt_ts_ao_3 = 0; }
       }
-      if ( led_dc_3 == 2) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 3) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 4) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 5) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 6) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
-      }
+      else led_control(0,0,2,led_dc_3);
     }
   }
-  if( krl == 54 ) { reset_val();}
+  if( krl == 55 ) reset_val();
 
-  if ( kpr == 55 ) {
-    reset_eff_nor();
-    reset_val();
-    ctn_ao_3_3 = 1;
-  }
+  if ( kpr == 56 ) { reset_val(); ctn_ao_3_3 = 1; }
   if ( ctn_ao_3_3 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
       if ( ctrl_combo != 1 ) {
@@ -2485,189 +905,14 @@ void effect_combo_multi() {
   }
   if ( led_dc_3 != 0 && ctn_ao_3_3 == 1 ) {
     if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
-      if ( led_dc_3 == 1) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, 255);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, 255);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
+      if ( tanso3 >= 21) {
+        if ( stt_ts_ao_3 == 0 ) { led_control(0,0,3,led_dc_3); stt_ts_ao_3 = 1; }
+        else { led_control(0,0,3,0); stt_ts_ao_3 = 0; }
       }
-      if ( led_dc_3 == 2) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, 255);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, 255);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 3) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, 255);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, 255);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 4) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, 255);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, 255);
-        }  
-      }
-      if ( led_dc_3 == 5) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, 255);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, LOW);
-          analogWrite(led_3, 255);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
-      if ( led_dc_3 == 6) {
-        if ( tanso3 >= 21) {
-          if ( stt_ts_ao_3 == 0 ) {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, 255);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 1;
-          }
-          else {
-            analogWrite(led_1, LOW);
-            analogWrite(led_2, LOW);
-            analogWrite(led_3, LOW);
-            analogWrite(led_4, LOW);
-            analogWrite(led_5, LOW);
-            analogWrite(led_6, LOW);
-            stt_ts_ao_3 = 0;
-          }
-        }
-        else {
-          analogWrite(led_1, LOW);
-          analogWrite(led_2, 255);
-          analogWrite(led_3, LOW);
-          analogWrite(led_4, LOW);
-          analogWrite(led_5, LOW);
-          analogWrite(led_6, LOW);
-        }  
-      }
+      else led_control(0,0,3,led_dc_3);
     }
   }
-  if( krl == 55 ) { reset_val();}
+  if( krl == 56 ) reset_val();
 }
 void reset_val() {
   ctn1 = 0;     ctn2 = 0;     ctn3 = 0;     ctn4 = 0;     ctn5 = 0;     ctn6 = 0;
