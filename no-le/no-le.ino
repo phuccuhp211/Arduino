@@ -90,7 +90,6 @@ void loop() {
   if ( kpr == 89 ) {line_zxc = 1;}
   if ( kpr == 90 ) {line_zxc = 2;}
   if ( kpr == 91 ) {line_zxc = 3;}
-
   if ( kpr == 44 ) ctrl_combo = 1;
   if ( krl == 44 ) ctrl_combo = 0;
 
