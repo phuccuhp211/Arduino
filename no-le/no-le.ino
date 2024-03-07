@@ -31,23 +31,13 @@ float fa_c_cl_1= 0,fa_c_cl_2= 0,fa_c_cl_3= 0;
 float fa_t_cl_1= 0,fa_t_cl_2= 0,fa_t_cl_3= 0;
 float hsbx_1 = 0, hsbx_2 = 0, hsbx_3 = 0;
 /* ---------------------------------------------------------------------------------------------------- */
-int ctn_ao_1 = 0,     ctn_ao_2 = 0,     ctn_ao_3 = 0;
-int ctn_ao_1b = 0,    ctn_ao_2b = 0,    ctn_ao_3b = 0;
-int ctn_ao_1c = 0,    ctn_ao_2c = 0,    ctn_ao_3c = 0;
-int ctn_ao_1c2 = 0,   ctn_ao_2c2 = 0,   ctn_ao_3c2 = 0;
-int ctn_ao_1c3 = 0,   ctn_ao_2c3 = 0,   ctn_ao_3c3 = 0;
-/* ---------------------------------------------------------------------------------------------------- */
-int ctn_ao_1_2 = 0,     ctn_ao_2_2 = 0,     ctn_ao_3_2 = 0;
-int ctn_ao_1b_2 = 0,    ctn_ao_2b_2 = 0,    ctn_ao_3b_2 = 0;
-int ctn_ao_1c_2 = 0,    ctn_ao_2c_2 = 0,    ctn_ao_3c_2 = 0;
-int ctn_ao_1c2_2 = 0,   ctn_ao_2c2_2 = 0,   ctn_ao_3c2_2 = 0;
-int ctn_ao_1c3_2 = 0,   ctn_ao_2c3_2 = 0,   ctn_ao_3c3_2 = 0;
-/* ---------------------------------------------------------------------------------------------------- */
-int ctn_ao_1_3 = 0,     ctn_ao_2_3 = 0,     ctn_ao_3_3 = 0;
-int ctn_ao_1b_3 = 0,    ctn_ao_2b_3 = 0,    ctn_ao_3b_3 = 0;
-int ctn_ao_1c_3 = 0,    ctn_ao_2c_3 = 0,    ctn_ao_3c_3 = 0;
-int ctn_ao_1c2_3 = 0,   ctn_ao_2c2_3 = 0,   ctn_ao_3c2_3 = 0;
-int ctn_ao_1c3_3 = 0,   ctn_ao_2c3_3 = 0,   ctn_ao_3c3_3 = 0;
+int ctn_ao_1 = 0, ctn_ao_1b = 0, ctn_ao_1c = 0, ctn_ao_1c2 = 0;
+int ctn_ao_1_2 = 0, ctn_ao_1b_2 = 0, ctn_ao_1c_2 = 0, ctn_ao_1c2_2 = 0;
+int ctn_ao_1_3 = 0, ctn_ao_1b_3 = 0, ctn_ao_1c_3 = 0, ctn_ao_1c2_3 = 0;
+
+int ctn_ao_2 = 0, ctn_ao_2_2 = 0, ctn_ao_2_3 = 0;
+int ctn_ao_3 = 0, ctn_ao_3_2 = 0, ctn_ao_3_3 = 0;
+int ctn_ao_4 = 0, ctn_ao_4_2 = 0, ctn_ao_4_3 = 0;
 /* ---------------------------------------------------------------------------------------------------- */
 int ctn1 = 0,   ctn2 = 0,   ctn3 = 0,   ctn4 = 0,   ctn5 = 0,   ctn6 = 0;
 int ctn1b = 0,  ctn2b = 0,  ctn3b = 0,  ctn4b = 0,  ctn5b = 0,  ctn6b = 0;
@@ -688,8 +678,8 @@ void effect_combo_multi() {
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 1   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 19 ) { reset_val(); ctn_ao_1 = 1; }
-  if ( ctn_ao_1 == 1 ) {
+  if ( kpr == 19 ) { reset_val(); ctn_ao_2 = 1; }
+  if ( ctn_ao_2 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_1 += 1;
@@ -701,7 +691,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_1 != 0 && ctn_ao_1 == 1 ) {
+  if ( led_dc_1 != 0 && ctn_ao_2 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
       if ( tanso1 >= 21) {
         if ( stt_ts_ao_1 == 0 ) { led_control(0,0,1,led_dc_1); stt_ts_ao_1 = 1; }
@@ -713,8 +703,8 @@ void effect_combo_multi() {
   if( krl == 19 ) reset_val();
 
 
-  if ( kpr == 47 ) { reset_val(); ctn_ao_1_2 = 1; }
-  if ( ctn_ao_1_2 == 1 ) {
+  if ( kpr == 47 ) { reset_val(); ctn_ao_2_2 = 1; }
+  if ( ctn_ao_2_2 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_1 += 1;
@@ -726,7 +716,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_1 != 0 && ctn_ao_1_2 == 1 ) {
+  if ( led_dc_1 != 0 && ctn_ao_2_2 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
       if ( tanso1 >= 21) {
         if ( stt_ts_ao_1 == 0 ) { led_control(0,0,2,led_dc_1); stt_ts_ao_1 = 1; }
@@ -738,8 +728,8 @@ void effect_combo_multi() {
   if( krl == 47 ) reset_val();
 
 
-  if ( kpr == 48 ) { reset_val(); ctn_ao_1_3 = 1; }
-  if ( ctn_ao_1_3 == 1 ) {
+  if ( kpr == 48 ) { reset_val(); ctn_ao_2_3 = 1; }
+  if ( ctn_ao_2_3 == 1 ) {
     if ( jikan - tg_ht_ao_1 >= tanso_ao_1 * 2 ) { tg_ht_ao_1 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_1 += 1;
@@ -751,7 +741,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_1 != 0 && ctn_ao_1_3 == 1 ) {
+  if ( led_dc_1 != 0 && ctn_ao_2_3 == 1 ) {
     if ( jikan - tg_ht_ao_1a >= tanso1 ) { tg_ht_ao_1a = millis();
       if ( tanso1 >= 21) {
         if ( stt_ts_ao_1 == 0 ) { led_control(0,0,3,led_dc_1); stt_ts_ao_1 = 1; }
@@ -765,8 +755,8 @@ void effect_combo_multi() {
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 2   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 15 ) { reset_val(); ctn_ao_2 = 1; }
-  if ( ctn_ao_2 == 1 ) {
+  if ( kpr == 15 ) { reset_val(); ctn_ao_3 = 1; }
+  if ( ctn_ao_3 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_2 += 1;
@@ -778,7 +768,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_2 != 0 && ctn_ao_2 == 1 ) {
+  if ( led_dc_2 != 0 && ctn_ao_3 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
       if ( tanso2 >= 21) {
         if ( stt_ts_ao_2 == 0 ) { led_control(0,0,1,led_dc_2); stt_ts_ao_2 = 1; }
@@ -790,8 +780,8 @@ void effect_combo_multi() {
   if( krl == 15 ) reset_val();
   
 
-  if ( kpr == 51 ) { reset_val(); ctn_ao_2_2 = 1; }
-  if ( ctn_ao_2_2 == 1 ) {
+  if ( kpr == 51 ) { reset_val(); ctn_ao_3_2 = 1; }
+  if ( ctn_ao_3_2 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_2 += 1;
@@ -803,7 +793,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_2 != 0 && ctn_ao_2_2 == 1 ) {
+  if ( led_dc_2 != 0 && ctn_ao_3_2 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
       if ( tanso2 >= 21) {
         if ( stt_ts_ao_2 == 0 ) { led_control(0,0,2,led_dc_2); stt_ts_ao_2 = 1; }
@@ -815,8 +805,8 @@ void effect_combo_multi() {
   if( krl == 51 ) reset_val();
 
 
-  if ( kpr == 52 ) { reset_val(); ctn_ao_2_3 = 1; }
-  if ( ctn_ao_2_3 == 1 ) {
+  if ( kpr == 52 ) { reset_val(); ctn_ao_3_3 = 1; }
+  if ( ctn_ao_3_3 == 1 ) {
     if ( jikan - tg_ht_ao_2 >= tanso_ao_2 * 2 ) { tg_ht_ao_2 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_2 += 1;
@@ -828,7 +818,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_2 != 0 && ctn_ao_2_3 == 1 ) {
+  if ( led_dc_2 != 0 && ctn_ao_3_3 == 1 ) {
     if ( jikan - tg_ht_ao_2a >= tanso2 ) { tg_ht_ao_2a = millis();
       if ( tanso2 >= 21) {
         if ( stt_ts_ao_2 == 0 ) { led_control(0,0,3,led_dc_2); stt_ts_ao_2 = 1; }
@@ -842,8 +832,8 @@ void effect_combo_multi() {
   ////////////////////////////////////////////////////////////////////////
   //////////////////////////////   LINE 3   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 54 ) { reset_val(); ctn_ao_3 = 1; }
-  if ( ctn_ao_3 == 1 ) {
+  if ( kpr == 54 ) { reset_val(); ctn_ao_4 = 1; }
+  if ( ctn_ao_4 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_3 += 1;
@@ -855,7 +845,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_3 != 0 ) {
+  if ( led_dc_3 != 0 && ctn_ao_4 == 1) {
     if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
       if ( tanso1 >= 21) {
         if ( stt_ts_ao_3 == 0 ) { led_control(0,0,1,led_dc_3); stt_ts_ao_3 = 1; }
@@ -866,8 +856,8 @@ void effect_combo_multi() {
   }
   if( krl == 54 ) reset_val();
 
-  if ( kpr == 55 ) { reset_val(); ctn_ao_3_2 = 1; }
-  if ( ctn_ao_3_2 == 1 ) {
+  if ( kpr == 55 ) { reset_val(); ctn_ao_4_2 = 1; }
+  if ( ctn_ao_4_2 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_3 += 1;
@@ -879,7 +869,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_3 != 0 && ctn_ao_3_2 == 1 ) {
+  if ( led_dc_3 != 0 && ctn_ao_4_2 == 1 ) {
     if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
       if ( tanso3 >= 21) {
         if ( stt_ts_ao_3 == 0 ) { led_control(0,0,2,led_dc_3); stt_ts_ao_3 = 1; }
@@ -890,8 +880,8 @@ void effect_combo_multi() {
   }
   if( krl == 55 ) reset_val();
 
-  if ( kpr == 56 ) { reset_val(); ctn_ao_3_3 = 1; }
-  if ( ctn_ao_3_3 == 1 ) {
+  if ( kpr == 56 ) { reset_val(); ctn_ao_4_3 = 1; }
+  if ( ctn_ao_4_3 == 1 ) {
     if ( jikan - tg_ht_ao_3 >= tanso_ao_3 * 2 ) { tg_ht_ao_3 = millis();
       if ( ctrl_combo != 1 ) {
         led_dc_3 += 1;
@@ -903,7 +893,7 @@ void effect_combo_multi() {
       }
     }
   }
-  if ( led_dc_3 != 0 && ctn_ao_3_3 == 1 ) {
+  if ( led_dc_3 != 0 && ctn_ao_4_3 == 1 ) {
     if ( jikan - tg_ht_ao_3a >= tanso3 ) { tg_ht_ao_3a = millis();
       if ( tanso3 >= 21) {
         if ( stt_ts_ao_3 == 0 ) { led_control(0,0,3,led_dc_3); stt_ts_ao_3 = 1; }
@@ -934,32 +924,19 @@ void reset_val() {
   brn_ao_1 = 0; brn_ao_2 = 0; brn_ao_3 = 0;
   led_dc_1 = 0; led_dc_2 = 0; led_dc_3 = 0;
 
-  ctn_ao_1 = 0;     ctn_ao_2 = 0;     ctn_ao_3 = 0;
-  ctn_ao_1b = 0;    ctn_ao_2b = 0;    ctn_ao_3b = 0;
-  ctn_ao_1c = 0;    ctn_ao_2c = 0;    ctn_ao_3c = 0;
-  ctn_ao_1c2 = 0;   ctn_ao_2c2 = 0;   ctn_ao_3c2 = 0;
-  ctn_ao_1c3 = 0;   ctn_ao_2c3 = 0;   ctn_ao_3c3 = 0;
-  ctn_ao_1_2 = 0;     ctn_ao_2_2 = 0;     ctn_ao_3_2 = 0;
-  ctn_ao_1b_2 = 0;    ctn_ao_2b_2 = 0;    ctn_ao_3b_2 = 0;
-  ctn_ao_1c_2 = 0;    ctn_ao_2c_2 = 0;    ctn_ao_3c_2 = 0;
-  ctn_ao_1c2_2 = 0;   ctn_ao_2c2_2 = 0;   ctn_ao_3c2_2 = 0;
-  ctn_ao_1c3_2 = 0;   ctn_ao_2c3_2 = 0;   ctn_ao_3c3_2 = 0;
-  ctn_ao_1_3 = 0;     ctn_ao_2_3 = 0;     ctn_ao_3_3 = 0;
-  ctn_ao_1b_3 = 0;    ctn_ao_2b_3 = 0;    ctn_ao_3b_3 = 0;
-  ctn_ao_1c_3 = 0;    ctn_ao_2c_3 = 0;    ctn_ao_3c_3 = 0;
-  ctn_ao_1c2_3 = 0;   ctn_ao_2c2_3 = 0;   ctn_ao_3c2_3 = 0;
-  ctn_ao_1c3_3 = 0;   ctn_ao_2c3_3 = 0;   ctn_ao_3c3_3 = 0;
+  ctn_ao_1 = 0; ctn_ao_1b = 0; ctn_ao_1c = 0; ctn_ao_1c2 = 0;
+  ctn_ao_1_2 = 0; ctn_ao_1b_2 = 0; ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 0;
+  ctn_ao_1_3 = 0; ctn_ao_1b_3 = 0; ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 0;
+
+  ctn_ao_2 = 0; ctn_ao_2_2 = 0; ctn_ao_2_3 = 0;
+  ctn_ao_3 = 0; ctn_ao_3_2 = 0; ctn_ao_3_3 = 0;
+  ctn_ao_4 = 0; ctn_ao_4_2 = 0; ctn_ao_4_3 = 0;
 
   stt_ts1 = 0; stt_ts2 = 0; stt_ts3 = 0; stt_ts4 = 0; stt_ts5 = 0; stt_ts6 = 0;
   stt_ts_ao_1 = 0; stt_ts_ao_2 = 0; stt_ts_ao_3 = 0;
   kpr = 0; krl = 0;
 
-  analogWrite(led_1, LOW);
-  analogWrite(led_2, LOW);
-  analogWrite(led_3, LOW);
-  analogWrite(led_4, LOW);
-  analogWrite(led_5, LOW);
-  analogWrite(led_6, LOW);
+  led_control(0,0);
 }
 void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
