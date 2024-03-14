@@ -609,9 +609,6 @@ void effect_cac() {
   }
 }
 void effect_combo_sigle() {
-  ////////////////////////////////////////////////////////////////////////
-  //////////////////////////////   LINE 1   //////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
   if( line_qwe == 1 ) {
     if (kpr == 18) { reset_val(); ctn_ao_1 = 1;}
     if (ctn_ao_1 == 1) eff_1_inc(jikan, tg_ht_ao_1, tanso1, brn_ao_1, brnon, fa_c_cl_1, fa_t_cl_1, ctn_ao_1, fa_ao_1, stt_ts_ao_1, 0, kpr, krl);
@@ -631,9 +628,6 @@ void effect_combo_sigle() {
 
 
   
-  ////////////////////////////////////////////////////////////////////////
-  //////////////////////////////   LINE 2   //////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
   if( line_asd == 1 ) {
     if (kpr == 14) { reset_val(); ctn_ao_1_2 = 1;}
     if (ctn_ao_1_2 == 1) eff_1_inc(jikan, tg_ht_ao_2, tanso2, brn_ao_2, brnon2, fa_c_cl_2, fa_t_cl_2, ctn_ao_1_2, fa_ao_1, stt_ts_ao_2, 0, kpr, krl);
@@ -653,9 +647,6 @@ void effect_combo_sigle() {
   
 
   
-  ////////////////////////////////////////////////////////////////////////
-  //////////////////////////////   LINE 3   //////////////////////////////
-  ////////////////////////////////////////////////////////////////////////
   if( line_zxc == 1 ) {
     if (kpr == 16) { reset_val(); ctn_ao_1_3 = 1;}
     if (ctn_ao_1_3 == 1) eff_1_inc(jikan, tg_ht_ao_3, tanso3, brn_ao_3, brnon3, fa_c_cl_3, fa_t_cl_3, ctn_ao_1_3, fa_ao_1, stt_ts_ao_3, 0, kpr, krl);
@@ -941,17 +932,17 @@ void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
   ///////////////////////////////   ROW 1   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 20 ) {
+  if ( kpr == 20 ) { fa1 = 1; stt_ts1 = 0;
     brn1 = stt_ts1 = 0;
     ctn1_2 = ctn1b_2 = ctn1c_2 = ctn1c2_2 = 0;
     ctn1_3 = ctn1b_3 = ctn1c_3 = ctn1c2_3 = 0;
   }
-  if ( kpr == 4 ) {
+  if ( kpr == 4 ) { fa1 = 1; stt_ts1 = 0;
     brn1 = stt_ts1 = 0;
     ctn1 = ctn1b = ctn1c = ctn1c2 = 0;
     ctn1_3 = ctn1b_3 = ctn1c_3 = ctn1c2_3 = 0;
   }
-  if ( kpr == 29 ) {
+  if ( kpr == 29 ) { fa1 = 1; stt_ts1 = 0;
     brn1 = stt_ts1 = 0;
     ctn1_2 = ctn1b_2 = ctn1c_2 = ctn1c2_2 = 0;
     ctn1 = ctn1b = ctn1c = ctn1c2 = 0;
@@ -959,17 +950,17 @@ void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
   ///////////////////////////////   ROW 2   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 26 ) {
+  if ( kpr == 26 ) { fa2 = 1; stt_ts2 = 0;
     brn2 = stt_ts2 = 0;
     ctn2_2 = ctn2b_2 = ctn2c_2 = ctn2c2_2 = 0;
     ctn2_3 = ctn2b_3 = ctn2c_3 = ctn2c2_3 = 0;
   }
-  if ( kpr == 22 ) {
+  if ( kpr == 22 ) { fa2 = 1; stt_ts2 = 0;
     brn2 = stt_ts2 = 0;
     ctn2 = ctn2b = ctn2c = ctn2c2 = 0;
     ctn2_3 = ctn2b_3 = ctn2c_3 = ctn2c2_3 = 0;
   }
-  if ( kpr == 27 ) {
+  if ( kpr == 27 ) { fa2 = 1; stt_ts2 = 0;
     brn2 = stt_ts2 = 0;
     ctn2_2 = ctn2b_2 = ctn2c_2 = ctn2c2_2 = 0;
     ctn2 = ctn2b = ctn2c = ctn2c2 = 0;
@@ -977,17 +968,17 @@ void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
   ///////////////////////////////   ROW 3   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 8 ) {
+  if ( kpr == 8 ) { fa3 = 1; stt_ts3 = 0;
     brn3 = stt_ts3 = 0;
     ctn3_2 = ctn3b_2 = ctn3c_2 = ctn3c2_2 = 0;
     ctn3_3 = ctn3b_3 = ctn3c_3 = ctn3c2_3 = 0;
   }
-  if ( kpr == 7 ) {
+  if ( kpr == 7 ) { fa3 = 1; stt_ts3 = 0;
     brn3 = stt_ts3 = 0;
     ctn3 = ctn3b = ctn3c = ctn3c2 = 0;
     ctn3_3 = ctn3b_3 = ctn3c_3 = ctn3c2_3 = 0;
   }
-  if ( kpr == 6 ) {
+  if ( kpr == 6 ) { fa3 = 1; stt_ts3 = 0;
     brn3 = stt_ts3 = 0;
     ctn3_2 = ctn3b_2 = ctn3c_2 = ctn3c2_2 = 0;
     ctn3 = ctn3b = ctn3c = ctn3c2 = 0;
@@ -995,17 +986,17 @@ void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
   ///////////////////////////////   ROW 4   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 21 ) {
+  if ( kpr == 21 ) { fa4 = 1; stt_ts4 = 0;
     brn4 = stt_ts4 = 0;
     ctn4_2 = ctn4b_2 = ctn4c_2 = ctn4c2_2 = 0;
     ctn4_3 = ctn4b_3 = ctn4c_3 = ctn4c2_3 = 0;
   }
-  if ( kpr == 9 ) {
+  if ( kpr == 9 ) { fa4 = 1; stt_ts4 = 0;
     brn4 = stt_ts4 = 0;
     ctn4 = ctn4b = ctn4c = ctn4c2 = 0;
     ctn4_3 = ctn4b_3 = ctn4c_3 = ctn4c2_3 = 0;
   }
-  if ( kpr == 25 ) {
+  if ( kpr == 25 ) { fa4 = 1; stt_ts4 = 0;
     brn4 = stt_ts4 = 0;
     ctn4_2 = ctn4b_2 = ctn4c_2 = ctn4c2_2 = 0;
     ctn4 = ctn4b = ctn4c = ctn4c2 = 0;
@@ -1013,17 +1004,17 @@ void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
   ///////////////////////////////   ROW 5   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 23 ) {
+  if ( kpr == 23 ) { fa5 = 1; stt_ts5 = 0;
     brn5 = stt_ts5 = 0;
     ctn5_2 = ctn5b_2 = ctn5c_2 = ctn5c2_2 = 0;
     ctn5_3 = ctn5b_3 = ctn5c_3 = ctn5c2_3 = 0;
   }
-  if ( kpr == 10 ) {
+  if ( kpr == 10 ) { fa5 = 1; stt_ts5 = 0;
     brn5 = stt_ts5 = 0;
     ctn5 = ctn5b = ctn5c = ctn5c2 = 0;
     ctn5_3 = ctn5b_3 = ctn5c_3 = ctn5c2_3 = 0;
   }
-  if ( kpr == 5 ) {
+  if ( kpr == 5 ) { fa5 = 1; stt_ts5 = 0;
     brn5 = stt_ts5 = 0;
     ctn5_2 = ctn5b_2 = ctn5c_2 = ctn5c2_2 = 0;
     ctn5 = ctn5b = ctn5c = ctn5c2 = 0;
@@ -1031,20 +1022,32 @@ void reset_eff_nor() {
   ////////////////////////////////////////////////////////////////////////
   ///////////////////////////////   ROW 6   //////////////////////////////
   ////////////////////////////////////////////////////////////////////////
-  if ( kpr == 28 ) {
+  if ( kpr == 28 ) { fa6 = 1; stt_ts6 = 0;
     brn6 = stt_ts6 = 0;
     ctn6_2 = ctn6b_2 = ctn6c_2 = ctn6c2_2 = 0;
     ctn6_3 = ctn6b_3 = ctn6c_3 = ctn6c2_3 = 0;
   }
-  if ( kpr == 11 ) {
+  if ( kpr == 11 ) { fa6 = 1; stt_ts6 = 0;
     brn6 = stt_ts6 = 0;
     ctn6 = ctn6b = ctn6c = ctn6c2 = 0;
     ctn6_3 = ctn6b_3 = ctn6c_3 = ctn6c2_3 = 0;
   }
-  if ( kpr == 17 ) {
+  if ( kpr == 17 ) { fa6 = 1; stt_ts6 = 0;
     brn6 = stt_ts6 = 0;
     ctn6_2 = ctn6b_2 = ctn6c_2 = ctn6c2_2 = 0;
     ctn6 = ctn6b = ctn6c = ctn6c2 = 0;
   }
+  
+  fa_ao_1 = 1; fa_ao_2 = 1; fa_ao_3 = 1;
+  brn_ao_1 = 0; brn_ao_2 = 0; brn_ao_3 = 0;
+  led_dc_1 = 0; led_dc_2 = 0; led_dc_3 = 0;
+  ctn_ao_1 = 0; ctn_ao_1b = 0; ctn_ao_1c = 0; ctn_ao_1c2 = 0;
+  ctn_ao_1_2 = 0; ctn_ao_1b_2 = 0; ctn_ao_1c_2 = 0; ctn_ao_1c2_2 = 0;
+  ctn_ao_1_3 = 0; ctn_ao_1b_3 = 0; ctn_ao_1c_3 = 0; ctn_ao_1c2_3 = 0;
+  ctn_ao_2 = 0; ctn_ao_2_2 = 0; ctn_ao_2_3 = 0;
+  ctn_ao_3 = 0; ctn_ao_3_2 = 0; ctn_ao_3_3 = 0;
+  ctn_ao_4 = 0; ctn_ao_4_2 = 0; ctn_ao_4_3 = 0;
+
+  stt_ts_ao_1 = 0; stt_ts_ao_2 = 0; stt_ts_ao_3 = 0;
   kpr = 0; krl = 0;
 }
